@@ -9,6 +9,10 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+    /* Fallback for browsers that don't support text-wrap */
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 

@@ -24,14 +24,14 @@ export default function Header({ activeSection = "", onSectionClick }: HeaderPro
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 pointer-events-none">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 relative pointer-events-auto">
+    <header className="fixed top-4 md:top-4 left-0 right-0 z-50 pointer-events-none">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 relative pointer-events-auto mt-4 md:mt-0">
         {/* Logo */}
         <div
-          className="flex items-center space-x-2 cursor-pointer absolute left-4"
+          className="flex items-center space-x-2 cursor-pointer absolute left-4 top-1 md:top-0"
           onClick={() => onSectionClick?.("home")}
         >
-          <div className="w-11 h-11 bg-white rounded-xl p-2 shadow-md">
+          <div className="w-11 h-11 rounded-xl backdrop-blur-sm bg-white/5 shadow-md flex items-center justify-center p-2">
             <Logo />
           </div>
         </div>
@@ -56,8 +56,10 @@ export default function Header({ activeSection = "", onSectionClick }: HeaderPro
 
         {/* Hamburger Button */}
         <button
-          className="md:hidden absolute right-4 p-2 rounded-full text-white hover:bg-white/10 transition"
+          className="md:hidden absolute right-4 top-1 p-2 rounded-full text-white hover:bg-white/10 transition"
           onClick={() => setIsMobileMenuOpen(true)}
+          title="Open Menu"
+          aria-label="Open Menu"
         >
           <Menu className="h-6 w-6" />
         </button>
@@ -74,6 +76,8 @@ export default function Header({ activeSection = "", onSectionClick }: HeaderPro
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="absolute top-4 right-4 text-white"
+                title="Close Menu"
+                aria-label="Close Menu"
               >
                 <X className="h-6 w-6" />
               </button>

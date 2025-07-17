@@ -63,19 +63,14 @@ export default function ContactSection() {
             <span className="text-sm font-semibold text-blue-400 uppercase tracking-wider">Get In Touch</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Let's Connect &{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 ml-3">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
               Collaborate
             </span>
           </h2>
 
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            I'm always interested in discussing new opportunities, collaborating on projects, or simply connecting with
-            fellow developers. Feel free to reach out through any of these channels!
-          </p>
-
-          <div className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-6" />
+          <div className="h-[1px] bg-gradient-to-r from-transparent via-gray-600 to-transparent mx-auto mt-4" />
         </div>
 
         {/* Content Grid */}
