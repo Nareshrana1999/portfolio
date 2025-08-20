@@ -130,7 +130,7 @@ export default function AboutSection() {
                       <div className="text-sm text-gray-400">Years Experience</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl sm:text-3xl font-bold text-green-400">15+</div>
+                      <div className="text-2xl sm:text-3xl font-bold text-green-400">10+</div>
                       <div className="text-sm text-gray-400">Projects Completed</div>
                     </div>
                     <div className="text-center">
