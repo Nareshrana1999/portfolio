@@ -1,6 +1,14 @@
 "use client"
 
-import { Calendar, Award, ExternalLink, GraduationCap } from "lucide-react"
+import { motion } from "framer-motion"
+import { GraduationCap, Award, Calendar, ExternalLink } from 'lucide-react'
+import dynamic from 'next/dynamic'
+
+// Dynamically import MapPin to prevent hydration issues
+const MapPin = dynamic(() => import('lucide-react').then(mod => mod.MapPin), { 
+  ssr: false,
+  loading: () => <div className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
+})
 
 const education = [
   {
@@ -9,7 +17,8 @@ const education = [
     institution: "Brindavan College of Engineering",
     location: "Bangalore, Karnataka",
     period: "2022-2025",
-    grade: "CGPA: 8.42",
+    grade: "CGPA: 8.31",
+    credentialLink: "https://drive.google.com/file/d/1I48OSUV4-6sCYFySYjDTiaCyE-dUA4Vd/view?usp=drive_link",
     color: "from-blue-500 to-blue-600",
     icon: <GraduationCap className="h-5 w-5" />,
     iconColor: "text-blue-400",
@@ -24,6 +33,7 @@ const education = [
     location: "Bangalore, Karnataka",
     period: "2016-2019",
     grade: "Percentage: 75%",
+    credentialLink: "https://drive.google.com/file/d/1gd9vI3Z1BxBlV8rqduqTXRoEKViUEIDi/view?usp=drive_link",
     color: "from-green-500 to-green-600",
     icon: <GraduationCap className="h-5 w-5" />,
     iconColor: "text-emerald-400",
@@ -38,6 +48,7 @@ const education = [
     location: "Bangalore, Karnataka",
     period: "2015",
     grade: "Percentage: 68%",
+    credentialLink: "https://drive.google.com/file/d/1sDTILH8Lk82Fx1n2iMF137TdU2w-lwx2/view?usp=drive_link",
     color: "from-purple-500 to-purple-600",
     icon: <GraduationCap className="h-5 w-5" />,
     iconColor: "text-violet-400",
@@ -102,6 +113,7 @@ const certifications = [
     dotColor: "from-violet-400 to-violet-600",
     borderColor: "border-violet-500/20",
     calendarColor: "text-violet-300 bg-violet-900/30 border-violet-800/50",
+    credentialLink: "https://drive.google.com/file/d/1CKB4SLUTQFdhZEKt666Zf9Nc2YmSWjcW/view?usp=drive_link"
   },
 ]
 
@@ -137,19 +149,24 @@ const itemVariants = {
 
 const EducationItem = ({ item, index }: { item: any; index: number }) => {
   return (
-    <div className="relative mb-8 last:mb-0">
-      {/* Timeline dot */}
-      <div className={`absolute left-4 md:left-6 top-6 h-3 w-3 rounded-full z-10 bg-gradient-to-br ${item.dotColor}`} />
+    <div className="relative mb-10 group">
+      {/* Timeline dot with animation */}
+      <div 
+        className={`absolute left-4 md:left-6 top-7 h-3.5 w-3.5 rounded-full z-10 bg-gradient-to-br ${item.dotColor} transition-all duration-300 group-hover:scale-125`}
+      />
 
-      {/* Timeline line */}
-      <div
-        className={`absolute left-5 md:left-7 top-6 bottom-0 w-0.5 bg-gradient-to-b ${item.dotColor.replace("from-", "from-").replace("to-", "to-")}/20`}
-      ></div>
+      {/* Animated timeline line */}
+      <div 
+        className={`absolute left-4.5 md:left-[26px] top-7 bottom-0 w-[3px] bg-gradient-to-b ${item.dotColor.replace("from-", "from-").replace("to-", "to-")}/20 transition-all duration-500`}
+      />
 
-      <div
-        className={`ml-12 md:ml-16 bg-gray-800/40 backdrop-blur-sm rounded-xl p-4 md:p-6 border ${item.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-lg`}
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className={`ml-14 md:ml-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 md:p-7 border ${item.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10`}
       >
-        {/* Mobile-optimized layout */}
         <div className="space-y-3">
           {/* Header with icon and degree */}
           <div className="flex items-start gap-3">
@@ -157,37 +174,55 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
               <GraduationCap className={`h-5 w-5 ${item.iconColor}`} />
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="font-bold text-white text-base md:text-lg leading-tight">{item.degree}</h4>
-              <p className="text-sm md:text-base text-gray-300 mt-1 leading-tight">{item.institution}</p>
+              <h4 className="font-bold text-white text-lg md:text-xl leading-tight">
+                {item.degree}
+              </h4>
+              <p className="text-sm text-gray-300 mt-1 leading-tight">{item.institution}</p>
+              
+              {/* Location and Grade in a single line */}
+              <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
+                <div className="flex items-center text-gray-400">
+                  <MapPin className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
+                  <span>{item.location}</span>
+                </div>
+                
+                <div className="flex items-center text-gray-400">
+                  <Award className="h-3.5 w-3.5 mr-1.5 text-green-400" />
+                  <span>{item.grade}</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Details section - Single line layout */}
-          <div className="ml-11 md:ml-0">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <div className="flex items-center gap-2 text-sm mb-2 sm:mb-0">
-                <span className="text-orange-400">{item.location}</span>
-                <span className="text-gray-500">•</span>
-                <span className="text-green-400 font-medium">{item.grade}</span>
-              </div>
-
-              <div
-                className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${item.calendarColor} w-fit`}
+          {/* View Credential and Date */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-2">
+            {item.credentialLink && (
+              <a 
+                href={item.credentialLink} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`inline-flex items-center text-sm ${item.iconColor} hover:text-white transition-colors px-3 py-1.5 rounded-lg border ${item.iconColor.replace("text-", "border-")}/20 hover:border-${item.iconColor.replace("text-", "")}/40 bg-${item.iconColor.replace("text-", "")}/5 hover:bg-${item.iconColor.replace("text-", "")}/10 w-fit`}
+                onClick={(e) => e.stopPropagation()}
               >
-                <Calendar className="h-3.5 w-3.5 opacity-70" />
-                <span className="font-mono">{item.period}</span>
-              </div>
+                View Credential
+                <ExternalLink className="h-3.5 w-3.5 ml-2" />
+              </a>
+            )}
+
+            <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${item.calendarColor} w-fit transition-colors hover:bg-gray-800/50`}>
+              <Calendar className="h-3.5 w-3.5 opacity-80" />
+              <span className="font-mono text-xs">{item.period}</span>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }
 
 const CertificationItem = ({ cert, index }: { cert: any; index: number }) => {
   return (
-    <div className="relative mb-8 last:mb-0">
+    <div className="relative mb-8">
       {/* Timeline dot */}
       <div className={`absolute left-4 md:left-6 top-6 h-3 w-3 rounded-full z-10 bg-gradient-to-br ${cert.dotColor}`} />
 
@@ -243,7 +278,7 @@ const EducationSection = () => {
   return (
     <section
       id="education"
-      className="py-16 bg-gradient-to-b from-gray-900 to-gray-900/95 relative overflow-hidden scroll-mt-20"
+      className="py-20 pb-24 bg-gradient-to-b from-gray-900 to-gray-900/95 relative overflow-hidden scroll-mt-20"
     >
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800/90"></div>
@@ -258,50 +293,30 @@ const EducationSection = () => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Education Section */}
-            <div className="bg-gray-800/20 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-gray-700/50 shadow-lg hover:shadow-blue-500/10 transition-all duration-500">
-              <div className="flex items-center mb-6">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mr-3 md:mr-4">
-                  <GraduationCap className="h-5 w-5 md:h-6 md:w-6 text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white">Education</h3>
-                  <p className="text-xs md:text-sm text-gray-400">Academic journey</p>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div>
-                  <div className="space-y-0">
-                    {education.map((edu, index) => (
-                      <EducationItem key={edu.id} item={edu} index={index} />
-                    ))}
-                  </div>
-                </div>
+            <div className="space-y-8">
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <GraduationCap className="h-5 w-5 text-blue-400" />
+                Education
+              </h3>
+              <div className="space-y-8">
+                {education.map((item, index) => (
+                  <EducationItem key={index} item={item} index={index} />
+                ))}
               </div>
             </div>
 
             {/* Certifications Section */}
-            <div className="bg-gray-800/20 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-gray-700/50 shadow-lg hover:shadow-purple-500/10 transition-all duration-500">
-              <div className="flex items-center mb-6">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mr-3 md:mr-4">
-                  <Award className="h-5 w-5 md:h-6 md:w-6 text-purple-400" />
-                </div>
-                <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white">Certifications</h3>
-                  <p className="text-xs md:text-sm text-gray-400">Professional credentials</p>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div>
-                  <div className="space-y-0">
-                    {certifications.map((cert, index) => (
-                      <CertificationItem key={cert.id} cert={cert} index={index} />
-                    ))}
-                  </div>
-                </div>
+            <div className="space-y-8 w-full">
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <Award className="h-5 w-5 text-purple-400" />
+                Certifications
+              </h3>
+              <div className="space-y-6 w-full">
+                {certifications.map((cert, index) => (
+                  <CertificationItem key={index} cert={cert} index={index} />
+                ))}
               </div>
             </div>
           </div>

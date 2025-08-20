@@ -80,7 +80,7 @@ const projects: Project[] = [
     title: "Fisherman Safety System",
     description: "Arduino-based emergency system with GPS and GSM modules for real-time location tracking.",
     technologies: ["Arduino", "GPS", "GSM", "IoT", "Embedded Systems"],
-    githubLink: "https://www.instructables.com/Fishermen-Border-Alert-System-Using-GPS-and-Arduin/",
+    githubLink: "https://github.com/Nareshrana1999/Fishing-Boat-Safety-System",
     liveLink: "",
     image: "https://worldoceanreview.com/en/files/2013/04/wor2_c3c-s80_3-28_fisheries_monitoring_centre-500x461.jpg",
     category: "iot",
