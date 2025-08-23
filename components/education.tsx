@@ -18,7 +18,7 @@ const education = [
     location: "Bangalore, Karnataka",
     period: "2022-2025",
     grade: "CGPA: 8.31",
-    credentialLink: "https://drive.google.com/file/d/1I48OSUV4-6sCYFySYjDTiaCyE-dUA4Vd/view?usp=drive_link",
+    credentialLink: "https://drive.google.com/file/d/1V4r9oJ6nTtAB-a4KThvIzGH7L7919EJT/view?usp=drive_link",
     color: "from-blue-500 to-blue-600",
     icon: <GraduationCap className="h-5 w-5" />,
     iconColor: "text-blue-400",
