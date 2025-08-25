@@ -1,6 +1,6 @@
 "use client"
 
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
@@ -129,7 +129,7 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
 
               <AnimatePresence>
                 {isOpen && (
-                  <div
+                  <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -174,7 +174,7 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
                         </div>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 )}
               </AnimatePresence>
 
