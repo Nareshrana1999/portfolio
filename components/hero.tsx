@@ -155,7 +155,7 @@ export default function HeroSection() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="text-lg text-gray-300 max-w-2xl mx-auto mb-10"
           >
-            Computer Science graduate with expertise in Full-Stack Development, Artificial Intelligence, Machine
+            Computer Science and Engineering graduate with expertise in Full-Stack Development, Artificial Intelligence, Machine
             Learning, and DevOps. Passionate about building scalable applications and delivering innovative solutions.
           </motion.p>
 
