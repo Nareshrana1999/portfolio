@@ -11,12 +11,12 @@ export const metadata: Metadata = {
     { media: '(prefers-color-scheme: dark)', color: '#000000' },
   ],
   icons: {
-    icon: '/components/logo.tsx',
-    apple: '/components/logo.tsx',
-    shortcut: '/components/logo.tsx',
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+    shortcut: '/favicon.svg',
     other: {
       rel: 'icon',
-      url: '/components/logo.tsx',
+      url: '/favicon.svg',
     }
   },
   appleWebApp: {
