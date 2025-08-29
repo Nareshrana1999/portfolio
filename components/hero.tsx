@@ -79,7 +79,7 @@ export default function HeroSection() {
                   <div className="absolute inset-1 rounded-full overflow-hidden">
                     <div className="w-full h-full overflow-hidden rounded-full">
                       <Image
-                        src="/images/Profile.jpg"
+                        src="/images/Profile.jpeg"
                         alt="Naresh Rana"
                         width={300}
                         height={400}
