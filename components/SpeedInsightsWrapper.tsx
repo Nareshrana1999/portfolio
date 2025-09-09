@@ -1,19 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { SpeedInsights as SpeedInsightsBase } from '@vercel/speed-insights/next';
 
 export function SpeedInsights() {
-  useEffect(() => {
-    // This will be executed only on the client side
-    const script = document.createElement('script');
-    script.src = '/_vercel/speed-insights/script.js';
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
-
-  return null; // This component doesn't render anything
+  // Only render in production
+  if (process.env.NODE_ENV !== 'production') {
+    return null;
+  }
+  
+  return <SpeedInsightsBase />;
 }
