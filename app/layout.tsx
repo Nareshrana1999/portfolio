@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { SpeedInsights } from '@/components/SpeedInsightsWrapper'
 
 export const metadata: Metadata = {
   title: 'Portfolio',
@@ -33,7 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   )
 }
