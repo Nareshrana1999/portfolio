@@ -79,13 +79,16 @@ export default function HeroSection() {
                   <div className="absolute inset-1 rounded-full overflow-hidden">
                     <div className="w-full h-full overflow-hidden rounded-full">
                       <Image
-                        src="/images/Profile.jpeg"
+                        src="/images/profile.webp"
                         alt="Naresh Rana"
-                        width={300}
-                        height={400}
+                        width={600}
+                        height={800}
                         className="w-full h-full object-cover"
                         style={{ objectPosition: 'top' }}
                         priority
+                        loading="eager"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        quality={80}
                       />
                     </div>
                   </div>

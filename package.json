@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint",
-    "start": "next start"
+    "analyze": "node scripts/analyze.js",
+    "analyze:bundle": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env ANALYZE=server next build",
+    "analyze:browser": "cross-env ANALYZE=browser next build",
+    "export": "next build && next export",
+    "optimize-images": "node scripts/optimize-images.js",
+    "perf": "lighthouse http://localhost:3000 --output-path=./lighthouse-report.html --view"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -48,6 +55,12 @@
     "input-otp": "latest",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
+    "@next/bundle-analyzer": "^15.2.4",
+    "cross-env": "^7.0.3",
+    "sharp": "^0.33.3",
+    "webpack-bundle-analyzer": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "critters": "^0.0.20",
     "next-themes": "latest",
     "react": "^19",
     "react-day-picker": "latest",
@@ -60,6 +73,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
+    "web-vitals": "^3.5.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {

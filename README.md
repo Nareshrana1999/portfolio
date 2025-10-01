@@ -6,7 +6,7 @@ A professional portfolio website built with modern web technologies.
 
 A modern, responsive portfolio website showcasing professional experience, skills, and projects. Built with Next.js and enhanced with modern UI components.
 
-### Features
+## Performance Optimizations
 
 - 🎨 Modern UI with Dark/Light mode support
 - 📱 Fully responsive design
