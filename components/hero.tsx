@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, ExternalLink, Linkedin } from "lucide-react"
+import { ArrowRight, ExternalLink, Linkedin, Mail } from "lucide-react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useState } from "react"
@@ -169,9 +169,9 @@ export default function HeroSection() {
             <Button
               size="lg"
               onClick={() => window.open("https://linkedin.com/in/nareshrana1999", "_blank")}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
             >
-              <Linkedin className="mr-2 h-4 w-4" />
+              <Linkedin className="h-4 w-4" />
               LinkedIn
             </Button>
 
@@ -183,26 +183,27 @@ export default function HeroSection() {
                   "_blank"
                 )
               }
-              className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
             >
-              <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+              <ExternalLink className="h-4 w-4 group-hover:scale-110 transition-transform" />
               View Resume
             </Button>
 
             <Button
               size="lg"
               onClick={() => scrollToSection("projects")}
-              className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
             >
               View My Work
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
 
             <Button
               size="lg"
               onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
             >
+              <Mail className="h-4 w-4" />
               Get In Touch
             </Button>
           </motion.div>
