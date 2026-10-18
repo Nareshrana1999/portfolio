@@ -8,7 +8,7 @@ const contactInfo = [
     icon: Mail,
     title: "Email",
     value: "nareshrana1999@outlook.com",
-    href: "mailto:nareshrana1999@outlook.com",
+    href: "mailto:nareshrana2.nr@gmail.com",
     color: "from-blue-500 to-blue-600",
     bgColor: "bg-blue-500/10",
     borderColor: "border-blue-500/20",
