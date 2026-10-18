@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { GraduationCap, Award, Calendar, ExternalLink } from 'lucide-react'
+import { GraduationCap, Award, Calendar } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
 // Dynamically import MapPin to prevent hydration issues
@@ -18,7 +18,6 @@ const education = [
     location: "Bengaluru, India",
     period: "Feb 2022 – Jul 2025",
     grade: "CGPA: 8.31/10.0",
-    credentialLink: "https://drive.google.com/file/d/1V4r9oJ6nTtAB-a4KThvIzGH7L7919EJT/view?usp=drive_link",
     color: "from-blue-500 to-blue-600",
     icon: <GraduationCap className="h-5 w-5" />,
     iconColor: "text-blue-400",
@@ -33,7 +32,6 @@ const education = [
     location: "Bengaluru, India",
     period: "Aug 2016 – May 2020",
     grade: "CGPA: 7.5/10.0",
-    credentialLink: "https://drive.google.com/file/d/1gd9vI3Z1BxBlV8rqduqTXRoEKViUEIDi/view?usp=drive_link",
     color: "from-green-500 to-green-600",
     icon: <GraduationCap className="h-5 w-5" />,
     iconColor: "text-emerald-400",
@@ -163,7 +161,7 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className={`ml-14 md:ml-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 md:p-7 border ${item.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10`}
+        className={`ml-14 md:ml-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-7 border ${item.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10`}
       >
         <div className="space-y-3">
           {/* Header with icon and degree */}
@@ -192,24 +190,10 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
             </div>
           </div>
 
-          {/* View Credential and Date */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-2">
-            {item.credentialLink && (
-              <a 
-                href={item.credentialLink} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={`inline-flex items-center text-sm ${item.iconColor} hover:text-white transition-colors px-3 py-1.5 rounded-lg border ${item.iconColor.replace("text-", "border-")}/20 hover:border-${item.iconColor.replace("text-", "")}/40 bg-${item.iconColor.replace("text-", "")}/5 hover:bg-${item.iconColor.replace("text-", "")}/10 w-fit`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                View Credential
-                <ExternalLink className="h-3.5 w-3.5 ml-2" />
-              </a>
-            )}
-
-            <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${item.calendarColor} w-fit transition-colors hover:bg-gray-800/50`}>
+          <div className="flex justify-end mt-3">
+            <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${item.calendarColor} max-w-full transition-colors hover:bg-gray-800/50`}>
               <Calendar className="h-3.5 w-3.5 opacity-80" />
-              <span className="font-mono text-xs">{item.period}</span>
+              <span className="font-mono text-xs whitespace-nowrap">{item.period}</span>
             </div>
           </div>
         </div>
