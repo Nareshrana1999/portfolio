@@ -117,7 +117,6 @@ export default function AboutSection() {
               </div>
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold text-white">Languages</h3>
-                <p className="text-sm text-gray-400">Communication across teams and communities</p>
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
