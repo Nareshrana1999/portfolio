@@ -166,18 +166,21 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
         className={`ml-14 md:ml-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-7 border ${item.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10`}
       >
         <div className="space-y-3">
-          {/* Header with icon and degree */}
           <div className="flex items-start gap-3">
             <div className={`mt-1 p-2 rounded-lg ${item.iconColor.replace("text-", "bg-")}/10 flex-shrink-0`}>
               <GraduationCap className={`h-5 w-5 ${item.iconColor}`} />
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="font-bold text-white text-lg md:text-xl leading-tight">
-                {item.degree}
-              </h4>
-              <p className="text-sm text-gray-300 mt-1 leading-tight">{item.institution}</p>
-              
-              {/* Location and Grade in a single line */}
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div className="min-w-0">
+                  <h4 className="font-bold text-white text-lg md:text-xl leading-tight">{item.degree}</h4>
+                  <p className="text-sm text-gray-300 mt-1 leading-tight">{item.institution}</p>
+                </div>
+                <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${item.calendarColor} w-fit shrink-0`}>
+                  <Calendar className="h-3.5 w-3.5 opacity-80" />
+                  <span className="font-mono text-xs whitespace-nowrap">{item.period}</span>
+                </div>
+              </div>
               <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
                 <div className="flex items-center text-gray-400">
                   <MapPin className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
@@ -192,7 +195,7 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-3">
+          <div className="flex justify-end mt-3">
             <a
               href={item.credentialLink}
               target="_blank"
@@ -203,10 +206,6 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
               View Credential
               <ExternalLink className="h-3.5 w-3.5 ml-2" />
             </a>
-            <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${item.calendarColor} max-w-full transition-colors hover:bg-gray-800/50`}>
-              <Calendar className="h-3.5 w-3.5 opacity-80" />
-              <span className="font-mono text-xs whitespace-nowrap">{item.period}</span>
-            </div>
           </div>
         </div>
       </motion.div>
@@ -230,25 +229,20 @@ const CertificationItem = ({ cert, index }: { cert: any; index: number }) => {
       >
         {/* Mobile-optimized layout */}
         <div className="space-y-3">
-          {/* Header with icon and title */}
           <div className="flex items-start gap-3">
             <div className={`mt-1 p-2 rounded-lg ${cert.iconColor.replace("text-", "bg-")}/10 flex-shrink-0`}>
               <Award className={`h-5 w-5 ${cert.iconColor}`} />
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="font-bold text-white text-base md:text-lg leading-tight">{cert.title}</h4>
-              <p className="text-sm md:text-base text-gray-300 mt-1 leading-tight">{cert.issuer}</p>
-            </div>
-          </div>
-
-          {/* Certification date */}
-          <div className="flex justify-end">
-            <div className="flex">
-              <div
-                className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${cert.calendarColor} w-fit`}
-              >
-                <Calendar className="h-3.5 w-3.5 opacity-70" />
-                <span className="font-mono">{cert.period}</span>
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div className="min-w-0">
+                  <h4 className="font-bold text-white text-base md:text-lg leading-tight">{cert.title}</h4>
+                  <p className="text-sm md:text-base text-gray-300 mt-1 leading-tight">{cert.issuer}</p>
+                </div>
+                <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${cert.calendarColor} w-fit shrink-0`}>
+                  <Calendar className="h-3.5 w-3.5 opacity-70" />
+                  <span className="font-mono whitespace-nowrap">{cert.period}</span>
+                </div>
               </div>
             </div>
           </div>
