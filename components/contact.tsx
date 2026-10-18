@@ -128,7 +128,7 @@ export default function ContactSection() {
               <Button
                 onClick={() =>
                   window.open(
-                    "https://drive.google.com/file/d/1a6IvkTKtXQ0e-5-HvFXVPif2gFfTn5DN/view?usp=drive_link",
+                    "https://drive.google.com/file/d/1lqwqs_kSa1meQUFlkjB_pDUxVDdX052t/view?usp=drive_link",
                     "_blank"
                   )
                 }
