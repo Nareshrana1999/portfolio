@@ -13,7 +13,8 @@ const MapPin = dynamic(() => import('lucide-react').then(mod => mod.MapPin), {
 const education = [
   {
     id: 1,
-    degree: "B.E. Computer Science Engineering",
+    degree: "Bachelor of Engineering",
+    specialization: "Computer Science and Engineering",
     institution: "Brindavan College of Engineering",
     location: "Bengaluru, India",
     period: "Feb 2022 – Jul 2025",
@@ -28,7 +29,8 @@ const education = [
   },
   {
     id: 2,
-    degree: "Diploma in Computer Science",
+    degree: "Diploma",
+    specialization: "Computer Science and Engineering",
     institution: "Al Khateeb Polytechnic College",
     location: "Bengaluru, India",
     period: "Aug 2016 – May 2020",
@@ -174,6 +176,7 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                 <div className="min-w-0">
                   <h4 className="font-bold text-white text-lg md:text-xl leading-tight">{item.degree}</h4>
+                  <p className="text-base md:text-lg text-blue-200 mt-1 leading-tight">{item.specialization}</p>
                   <p className="text-sm text-gray-300 mt-1 leading-tight">{item.institution}</p>
                 </div>
                 <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${item.calendarColor} w-fit shrink-0`}>
@@ -181,7 +184,7 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
                   <span className="font-mono text-xs whitespace-nowrap">{item.period}</span>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-3 mt-2 text-sm">
+              <div className="flex flex-wrap items-center gap-3 mt-3 text-sm">
                 <div className="flex items-center text-gray-400">
                   <MapPin className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
                   <span>{item.location}</span>
@@ -191,21 +194,18 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
                   <Award className="h-3.5 w-3.5 mr-1.5 text-green-400" />
                   <span>{item.grade}</span>
                 </div>
+                <a
+                  href={item.credentialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center text-sm ${item.iconColor} hover:text-white transition-colors px-3 py-1.5 rounded-lg border ${item.iconColor.replace("text-", "border-")}/20 hover:bg-gray-800/50 w-fit`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  View Credential
+                  <ExternalLink className="h-3.5 w-3.5 ml-2" />
+                </a>
               </div>
             </div>
-          </div>
-
-          <div className="flex justify-end mt-3">
-            <a
-              href={item.credentialLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center text-sm ${item.iconColor} hover:text-white transition-colors px-3 py-1.5 rounded-lg border ${item.iconColor.replace("text-", "border-")}/20 hover:bg-gray-800/50 w-fit`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              View Credential
-              <ExternalLink className="h-3.5 w-3.5 ml-2" />
-            </a>
           </div>
         </div>
       </motion.div>
@@ -270,7 +270,7 @@ const EducationSection = () => {
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Education Section */}
             <div className="space-y-8">
