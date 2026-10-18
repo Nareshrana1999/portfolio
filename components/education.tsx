@@ -184,15 +184,17 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
                   <span className="font-mono text-xs whitespace-nowrap">{item.period}</span>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-3 mt-3 text-sm">
-                <div className="flex items-center text-gray-400">
-                  <MapPin className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
-                  <span>{item.location}</span>
-                </div>
-                
-                <div className="flex items-center text-gray-400">
-                  <Award className="h-3.5 w-3.5 mr-1.5 text-green-400" />
-                  <span>{item.grade}</span>
+              <div className="flex flex-wrap items-center justify-between gap-3 mt-3 text-sm">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center text-gray-400">
+                    <MapPin className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
+                    <span>{item.location}</span>
+                  </div>
+                  
+                  <div className="flex items-center text-gray-400">
+                    <Award className="h-3.5 w-3.5 mr-1.5 text-green-400" />
+                    <span>{item.grade}</span>
+                  </div>
                 </div>
                 <a
                   href={item.credentialLink}
