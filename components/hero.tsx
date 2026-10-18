@@ -191,20 +191,20 @@ export default function HeroSection() {
 
             <Button
               size="lg"
-              onClick={() => scrollToSection("projects")}
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
-            >
-              View My Work
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-
-            <Button
-              size="lg"
               onClick={() => scrollToSection("contact")}
               className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
             >
               <Mail className="h-4 w-4" />
               Get In Touch
+            </Button>
+
+            <Button
+              size="lg"
+              onClick={() => scrollToSection("projects")}
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
+            >
+              View My Work
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
         </div>

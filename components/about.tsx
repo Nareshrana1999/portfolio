@@ -109,26 +109,24 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <Card className="max-w-5xl mx-auto mb-16 bg-gray-800/70 border border-indigo-500/20 shadow-lg">
-          <CardContent className="p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+        <Card className="max-w-4xl mx-auto mb-16 bg-gray-800/60 border border-indigo-500/20 shadow-lg">
+          <CardContent className="p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <Languages className="h-5 w-5 text-white" />
               </div>
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">Languages</h3>
-              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white">Languages</h3>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 ["English", "Fluent"],
                 ["Hindi", "Native"],
                 ["Kannada", "Fluent"],
                 ["Nepali", "Native"],
               ].map(([language, level]) => (
-                <div key={language} className="rounded-xl border border-gray-700/70 bg-gray-900/50 px-4 py-3">
+                <div key={language} className="flex items-center justify-between rounded-lg border border-gray-700/70 bg-gray-900/50 px-4 py-2.5">
                   <p className="font-semibold text-white">{language}</p>
-                  <p className="text-sm text-gray-400">{level}</p>
+                  <p className="text-sm text-indigo-300">{level}</p>
                 </div>
               ))}
             </div>
