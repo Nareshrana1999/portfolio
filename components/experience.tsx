@@ -25,7 +25,7 @@ const experiences = [
   {
     title: "AI - DevOps Engineer",
     company: "Aitch Nu Global Technologies",
-    location: "Bengaluru",
+    location: "Bengaluru, India",
     locationUrl: "https://share.google/RpFvkOndQcuNZo3R4",
     period: "May 2024 – Dec 2024",
     color: "from-green-500 to-emerald-600",
@@ -40,7 +40,7 @@ const experiences = [
   {
     title: "Hardware and Network Technician",
     company: "Shree Nandi Computer Institute",
-    location: "Bengaluru",
+    location: "Bengaluru, India",
     locationUrl: "https://share.google/yHBvxr9dkO6u0TM4s",
     period: "Sep 2015 – May 2016",
     color: "from-orange-500 to-amber-600",
