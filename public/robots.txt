@@ -1,0 +1,16 @@
+# Allow all search engines to crawl the website
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Disallow crawling of admin and API routes
+Disallow: /api/
+Disallow: /admin/
+
+# Performance optimization - prevent crawling of development files
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Crawl-delay: 10  # Uncomment if you want to limit crawl rate
