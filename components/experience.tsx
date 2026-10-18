@@ -41,7 +41,6 @@ const experiences = [
     title: "Hardware and Network Technician",
     company: "Shree Nandi Computer Institute",
     location: "Bengaluru, India",
-    locationUrl: "https://share.google/yHBvxr9dkO6u0TM4s",
     period: "Sep 2015 – May 2016",
     color: "from-orange-500 to-amber-600",
     logo: "🖥️",
@@ -58,7 +57,7 @@ interface Experience {
   title: string
   company: string
   location: string
-  locationUrl: string
+  locationUrl?: string
   period: string
   color: string
   logo: string
@@ -100,16 +99,20 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
                 <div>
                   <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
                   <div className="flex items-center space-x-4">
-                    <a
-                      href={exp.locationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-300 font-semibold flex items-center hover:text-blue-200 hover:underline transition-colors"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {exp.company}
-                      <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-70 transition-opacity" />
-                    </a>
+                    {exp.locationUrl ? (
+                      <a
+                        href={exp.locationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-300 font-semibold flex items-center hover:text-blue-200 hover:underline transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {exp.company}
+                        <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-70 transition-opacity" />
+                      </a>
+                    ) : (
+                      <p className="text-blue-300 font-semibold">{exp.company}</p>
+                    )}
                     <div className="hidden sm:flex items-center text-gray-400">
                       <MapPin className="h-3.5 w-3.5 mr-1" />
                       <span className="text-sm">{exp.location}</span>
