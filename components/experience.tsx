@@ -198,7 +198,7 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
 
 export default function ExperienceSection() {
   // IMPORTANT: Set to null so NO cards are open by default
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleCard = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
