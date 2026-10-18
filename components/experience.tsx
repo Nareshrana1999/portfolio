@@ -10,7 +10,7 @@ const experiences = [
   {
     title: "Machine Learning Trainee",
     company: "SkillDzire",
-    location: "Hyderabad, India",
+    location: "Bengaluru, India",
     locationUrl: "https://share.google/jDVMtw1mNVIptmbVz",
     period: "Jan 2025 – May 2025",
     color: "from-blue-500 to-purple-600",
