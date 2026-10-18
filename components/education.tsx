@@ -271,7 +271,7 @@ const EducationSection = () => {
         </div>
 
         <div className="relative max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 gap-12">
             {/* Education Section */}
             <div className="space-y-8">
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
