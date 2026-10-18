@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Phone, Mail, Globe, Heart, Sparkles } from "lucide-react"
+import { Heart, Sparkles } from "lucide-react"
 
 const hobbiesData = [
   {
@@ -54,45 +54,6 @@ const hobbiesData = [
   },
 ]
 
-const contactCards = [
-  {
-    icon: MapPin,
-    title: "Location",
-    value: "Bengaluru, India",
-    color: "from-blue-500 to-indigo-600",
-    bgColor: "bg-blue-500/10",
-    borderColor: "border-blue-500/20",
-    href: "https://maps.google.com/?q=Bengaluru,Karnataka,India",
-  },
-  {
-    icon: Phone,
-    title: "Phone",
-    value: "+91 6363830414",
-    color: "from-green-500 to-emerald-600",
-    bgColor: "bg-green-500/10",
-    borderColor: "border-green-500/20",
-    href: "tel:+916363830414",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    value: "nareshrana2.nr@gmail.com",
-    color: "from-purple-500 to-violet-600",
-    bgColor: "bg-purple-500/10",
-    borderColor: "border-purple-500/20",
-    href: "mailto:nareshrana2.nr@gmail.com",
-  },
-  {
-    icon: Globe,
-    title: "Languages",
-    value: "English, Hindi, Nepali, Kannada",
-    color: "from-orange-500 to-amber-600",
-    bgColor: "bg-orange-500/10",
-    borderColor: "border-orange-500/20",
-    href: "#about",
-  },
-]
-
 export default function AboutSection() {
   return (
     <section
@@ -105,8 +66,8 @@ export default function AboutSection() {
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
-          <div className="lg:col-span-2">
+        <div className="mb-16">
+          <div className="max-w-5xl mx-auto">
             <Card className="bg-gray-800 border border-gray-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardContent className="p-6 sm:p-8">
                 <div className="flex items-center mb-6">
@@ -145,32 +106,6 @@ export default function AboutSection() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-          <div className="space-y-4">
-            {contactCards.map((card, index) => {
-              const Icon = card.icon
-              return (
-                <a
-                  key={index}
-                  href={card.href}
-                  target={card.href.startsWith("http") ? "_blank" : undefined}
-                  rel={card.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="block"
-                >
-                  <Card className={`bg-${card.bgColor.replace("bg-", "")} border ${card.borderColor} hover:bg-opacity-20 hover:-translate-y-0.5 transition-all duration-300`}>
-                    <CardContent className="p-4 flex items-center space-x-3">
-                    <div className={`p-2 bg-gradient-to-r ${card.color} rounded-lg`}>
-                      <Icon className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm">{card.title}</h4>
-                      <p className="text-gray-300 text-xs">{card.value}</p>
-                    </div>
-                    </CardContent>
-                  </Card>
-                </a>
-              )
-            })}
           </div>
         </div>
 

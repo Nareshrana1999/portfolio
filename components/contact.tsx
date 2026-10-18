@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink, FileText } from "lucide-react"
+import { Mail, Phone, MapPin, Github, Linkedin, FileText } from "lucide-react"
 
 const contactInfo = [
   {
@@ -118,7 +118,6 @@ export default function ContactSection() {
                       </h4>
                       <p className="text-gray-400 group-hover:text-gray-300 transition-colors truncate">{info.value}</p>
                     </a>
-                    <ExternalLink className="h-4 w-4 shrink-0 text-gray-500 group-hover:text-blue-400 transition-colors" />
                   </div>
                 )
               })}
