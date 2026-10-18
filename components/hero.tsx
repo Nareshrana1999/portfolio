@@ -47,11 +47,11 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container mx-auto px-4 py-10 sm:py-16 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Profile Picture */}
           <div 
-            className="relative mx-auto mb-8 mt-10 group"
+            className="relative mx-auto mb-6 mt-6 sm:mb-8 sm:mt-10 group"
             onMouseEnter={() => setShowWave(true)}
             onMouseLeave={() => setShowWave(false)}
             onTouchStart={() => {
@@ -59,7 +59,7 @@ export default function HeroSection() {
               setTimeout(() => setShowWave(false), 2000)
             }}>
             <motion.div 
-              className="relative w-48 h-48 md:w-56 md:h-56 mx-auto"
+              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 mx-auto"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
@@ -136,7 +136,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6"
           >
             Naresh Rana
           </motion.h1>
@@ -164,22 +164,12 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col md:flex-row gap-3 sm:gap-4 justify-center"
           >
             <Button
               size="lg"
-              onClick={() => scrollToSection("projects")}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
-            >
-              View My Work
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
               onClick={() => window.open("https://linkedin.com/in/nareshrana1999", "_blank")}
-              className="border-blue-400/50 bg-transparent text-blue-300 hover:bg-blue-500/10 hover:text-blue-200 font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
             >
               <Linkedin className="mr-2 h-4 w-4" />
               LinkedIn
@@ -197,6 +187,15 @@ export default function HeroSection() {
             >
               <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
               View Resume
+            </Button>
+
+            <Button
+              size="lg"
+              onClick={() => scrollToSection("projects")}
+              className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg group"
+            >
+              View My Work
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
 
             <Button

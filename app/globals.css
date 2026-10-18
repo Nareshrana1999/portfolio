@@ -97,6 +97,52 @@ body {
   }
 }
 
+@media (max-width: 767px) {
+  section:not(#home) {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  section:not(#home) > div {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  section:not(#home) h2 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  #home .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #home .max-w-4xl {
+    max-width: 42rem;
+  }
+
+  #home h1 {
+    font-size: clamp(2.25rem, 8vw, 3rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  #home .text-lg {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  #home .text-xl {
+    font-size: 1.125rem !important;
+  }
+
+  #home .flex.flex-col > button {
+    width: min(100%, 22rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
