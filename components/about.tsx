@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { Heart, Sparkles } from "lucide-react"
+import { Heart, Sparkles, Languages } from "lucide-react"
 
 const hobbiesData = [
   {
@@ -108,6 +108,33 @@ export default function AboutSection() {
             </Card>
           </div>
         </div>
+
+        <Card className="max-w-5xl mx-auto mb-16 bg-gray-800/70 border border-indigo-500/20 shadow-lg">
+          <CardContent className="p-6 sm:p-8">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-11 h-11 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <Languages className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">Languages</h3>
+                <p className="text-sm text-gray-400">Communication across teams and communities</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                ["English", "Fluent"],
+                ["Hindi", "Native"],
+                ["Kannada", "Fluent"],
+                ["Nepali", "Native"],
+              ].map(([language, level]) => (
+                <div key={language} className="rounded-xl border border-gray-700/70 bg-gray-900/50 px-4 py-3">
+                  <p className="font-semibold text-white">{language}</p>
+                  <p className="text-sm text-gray-400">{level}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">

@@ -1,7 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Mail, Phone, MapPin, Github, Linkedin, FileText } from "lucide-react"
+import { Mail, Phone, MapPin, Github, Linkedin, FileText, Copy, Check } from "lucide-react"
+import { useState } from "react"
 
 const contactInfo = [
   {
@@ -57,6 +58,18 @@ const contactInfo = [
 ]
 
 export default function ContactSection() {
+  const [copied, setCopied] = useState<string | null>(null)
+
+  const copyContact = async (value: string, label: string) => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(label)
+      window.setTimeout(() => setCopied(null), 1800)
+    } catch {
+      setCopied(null)
+    }
+  }
+
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden">
       {/* Decorative Background */}
@@ -118,6 +131,17 @@ export default function ContactSection() {
                       </h4>
                       <p className="text-gray-400 group-hover:text-gray-300 transition-colors truncate">{info.value}</p>
                     </a>
+                    {(info.title === "Email" || info.title === "Phone") && (
+                      <button
+                        type="button"
+                        aria-label={`Copy ${info.title.toLowerCase()}`}
+                        onClick={() => copyContact(info.value, info.title)}
+                        className="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-xs text-gray-300 hover:border-blue-400/50 hover:text-white transition-colors"
+                      >
+                        {copied === info.title ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                        {copied === info.title ? "Copied" : "Copy"}
+                      </button>
+                    )}
                   </div>
                 )
               })}
