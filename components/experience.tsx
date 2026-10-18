@@ -11,6 +11,7 @@ const experiences = [
     title: "Machine Learning Trainee",
     company: "SkillDzire",
     location: "Hyderabad, India",
+    locationUrl: "https://share.google/jDVMtw1mNVIptmbVz",
     period: "Jan 2025 – May 2025",
     color: "from-blue-500 to-purple-600",
     logo: "🤖",
@@ -25,6 +26,7 @@ const experiences = [
     title: "AI - DevOps Engineer",
     company: "Aitch Nu Global Technologies",
     location: "Bengaluru",
+    locationUrl: "https://share.google/RpFvkOndQcuNZo3R4",
     period: "May 2024 – Dec 2024",
     color: "from-green-500 to-emerald-600",
     logo: "☁️",
@@ -39,6 +41,7 @@ const experiences = [
     title: "Hardware and Network Technician",
     company: "Shree Nandi Computer Institute",
     location: "Bengaluru",
+    locationUrl: "https://share.google/yHBvxr9dkO6u0TM4s",
     period: "Sep 2015 – May 2016",
     color: "from-orange-500 to-amber-600",
     logo: "🖥️",
@@ -55,6 +58,7 @@ interface Experience {
   title: string
   company: string
   location: string
+  locationUrl: string
   period: string
   color: string
   logo: string
@@ -102,7 +106,15 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
                     </p>
                     <div className="hidden sm:flex items-center text-gray-400">
                       <MapPin className="h-3.5 w-3.5 mr-1" />
-                      <span className="text-sm">{exp.location}</span>
+                      <a
+                        href={exp.locationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm hover:text-blue-300 hover:underline transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {exp.location}
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -166,7 +178,15 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
               <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-700/30">
                 <div className="flex items-center text-xs text-gray-400">
                   <MapPin className="h-3.5 w-3.5 mr-1 sm:hidden" />
-                  <span className="sm:hidden text-xs">{exp.location}</span>
+                  <a
+                    href={exp.locationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="sm:hidden text-xs hover:text-blue-300 hover:underline transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {exp.location}
+                  </a>
                 </div>
                 <button
                   className="text-sm text-blue-400 hover:text-blue-300 flex items-center transition-colors group"
