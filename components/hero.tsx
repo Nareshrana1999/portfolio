@@ -147,9 +147,9 @@ export default function HeroSection() {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="text-xl text-gray-300 mb-8"
           >
-            <span className="text-blue-400 font-semibold">Full-Stack Developer</span> · 
+            <span className="text-blue-400 font-semibold">Software Engineer</span> · 
             <span className="text-green-400 font-semibold"> DevOps Engineer</span> · 
-            <span className="text-purple-400 font-semibold"> AI Enthusiast</span>
+            <span className="text-purple-400 font-semibold"> AI/ML</span>
           </motion.p>
 
           <motion.p
@@ -158,8 +158,8 @@ export default function HeroSection() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="text-lg text-gray-300 max-w-2xl mx-auto mb-10"
           >
-            Computer Science and Engineering graduate with expertise in Full-Stack Development, Artificial Intelligence, Machine
-            Learning, and DevOps. Passionate about building scalable applications and delivering innovative solutions.
+            Computer Science and Engineering graduate with expertise in Software Development, Artificial Intelligence, Machine
+            Learning, and DevOps Engineer. Passionate about building scalable applications and delivering innovative solutions.
           </motion.p>
 
           <motion.div
@@ -181,7 +181,7 @@ export default function HeroSection() {
               size="lg"
               onClick={() =>
                 window.open(
-                  "https://drive.google.com/file/d/1a6IvkTKtXQ0e-5-HvFXVPif2gFfTn5DN/view?usp=drive_link",
+                  "https://drive.google.com/file/d/1lqwqs_kSa1meQUFlkjB_pDUxVDdX052t/view?usp=drive_link",
                   "_blank"
                 )
               }
