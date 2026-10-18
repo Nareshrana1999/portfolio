@@ -100,21 +100,19 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
                 <div>
                   <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
                   <div className="flex items-center space-x-4">
-                    <p className="text-blue-300 font-semibold flex items-center">
+                    <a
+                      href={exp.locationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-300 font-semibold flex items-center hover:text-blue-200 hover:underline transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       {exp.company}
                       <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-70 transition-opacity" />
-                    </p>
+                    </a>
                     <div className="hidden sm:flex items-center text-gray-400">
                       <MapPin className="h-3.5 w-3.5 mr-1" />
-                      <a
-                        href={exp.locationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm hover:text-blue-300 hover:underline transition-colors"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        {exp.location}
-                      </a>
+                      <span className="text-sm">{exp.location}</span>
                     </div>
                   </div>
                 </div>
@@ -178,15 +176,7 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
               <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-700/30">
                 <div className="flex items-center text-xs text-gray-400">
                   <MapPin className="h-3.5 w-3.5 mr-1 sm:hidden" />
-                  <a
-                    href={exp.locationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="sm:hidden text-xs hover:text-blue-300 hover:underline transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {exp.location}
-                  </a>
+                  <span className="sm:hidden text-xs">{exp.location}</span>
                 </div>
                 <button
                   className="text-sm text-blue-400 hover:text-blue-300 flex items-center transition-colors group"
