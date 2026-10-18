@@ -62,6 +62,7 @@ const contactCards = [
     color: "from-blue-500 to-indigo-600",
     bgColor: "bg-blue-500/10",
     borderColor: "border-blue-500/20",
+    href: "https://maps.google.com/?q=Bengaluru,Karnataka,India",
   },
   {
     icon: Phone,
@@ -70,6 +71,7 @@ const contactCards = [
     color: "from-green-500 to-emerald-600",
     bgColor: "bg-green-500/10",
     borderColor: "border-green-500/20",
+    href: "tel:+916363830414",
   },
   {
     icon: Mail,
@@ -78,6 +80,7 @@ const contactCards = [
     color: "from-purple-500 to-violet-600",
     bgColor: "bg-purple-500/10",
     borderColor: "border-purple-500/20",
+    href: "mailto:nareshrana2.nr@gmail.com",
   },
   {
     icon: Globe,
@@ -86,6 +89,7 @@ const contactCards = [
     color: "from-orange-500 to-amber-600",
     bgColor: "bg-orange-500/10",
     borderColor: "border-orange-500/20",
+    href: "#about",
   },
 ]
 
@@ -146,8 +150,15 @@ export default function AboutSection() {
             {contactCards.map((card, index) => {
               const Icon = card.icon
               return (
-                <Card key={index} className={`bg-${card.bgColor.replace("bg-", "")} border ${card.borderColor} hover:bg-opacity-20 transition-colors duration-300`}>
-                  <CardContent className="p-4 flex items-center space-x-3">
+                <a
+                  key={index}
+                  href={card.href}
+                  target={card.href.startsWith("http") ? "_blank" : undefined}
+                  rel={card.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="block"
+                >
+                  <Card className={`bg-${card.bgColor.replace("bg-", "")} border ${card.borderColor} hover:bg-opacity-20 hover:-translate-y-0.5 transition-all duration-300`}>
+                    <CardContent className="p-4 flex items-center space-x-3">
                     <div className={`p-2 bg-gradient-to-r ${card.color} rounded-lg`}>
                       <Icon className="h-5 w-5 text-white" />
                     </div>
@@ -155,8 +166,9 @@ export default function AboutSection() {
                       <h4 className="font-semibold text-white text-sm">{card.title}</h4>
                       <p className="text-gray-300 text-xs">{card.value}</p>
                     </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </a>
               )
             })}
           </div>

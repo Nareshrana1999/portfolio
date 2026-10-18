@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink, FileText } from "lucide-react"
+import { useState } from "react"
 
 const contactInfo = [
   {
@@ -13,6 +14,7 @@ const contactInfo = [
     bgColor: "bg-blue-500/10",
     borderColor: "border-blue-500/20",
     hoverColor: "hover:border-blue-400/40",
+    action: "Send an email",
   },
   {
     icon: Phone,
@@ -23,6 +25,7 @@ const contactInfo = [
     bgColor: "bg-green-500/10",
     borderColor: "border-green-500/20",
     hoverColor: "hover:border-green-400/40",
+    action: "Call now",
   },
   {
     icon: MapPin,
@@ -33,6 +36,7 @@ const contactInfo = [
     bgColor: "bg-orange-500/10",
     borderColor: "border-orange-500/20",
     hoverColor: "hover:border-orange-400/40",
+    action: "Open in Maps",
   },
   {
     icon: Github,
@@ -43,6 +47,7 @@ const contactInfo = [
     bgColor: "bg-gray-500/10",
     borderColor: "border-gray-500/20",
     hoverColor: "hover:border-gray-400/40",
+    action: "Open GitHub",
   },
   {
     icon: Linkedin,
@@ -53,10 +58,23 @@ const contactInfo = [
     bgColor: "bg-sky-500/10",
     borderColor: "border-sky-500/20",
     hoverColor: "hover:border-sky-400/40",
+    action: "Open LinkedIn",
   },
 ]
 
 export default function ContactSection() {
+  const [copied, setCopied] = useState<string | null>(null)
+
+  const copyValue = async (value: string, label: string) => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(label)
+      window.setTimeout(() => setCopied(null), 1800)
+    } catch {
+      setCopied(null)
+    }
+  }
+
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden">
       {/* Decorative Background */}
@@ -84,7 +102,7 @@ export default function ContactSection() {
         </div>
 
         {/* Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 mb-16">
           {/* Contact Info */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
@@ -97,27 +115,41 @@ export default function ContactSection() {
             <div className="space-y-4">
               {contactInfo.map((info, index) => {
                 const Icon = info.icon
+                const isCopyable = info.title === "Email" || info.title === "Phone"
                 return (
-                  <a
+                  <div
                     key={index}
-                    href={info.href}
-                    target={info.href.startsWith("http") ? "_blank" : undefined}
-                    rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className={`group flex items-center p-4 rounded-xl ${info.bgColor} backdrop-blur-sm border ${info.borderColor} ${info.hoverColor} transition-all duration-300 hover:shadow-lg`}
+                    className={`group flex items-center gap-3 p-4 rounded-xl ${info.bgColor} backdrop-blur-sm border ${info.borderColor} ${info.hoverColor} transition-all duration-300 hover:shadow-lg`}
                   >
                     <div
                       className={`w-12 h-12 bg-gradient-to-r ${info.color} rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-200`}
                     >
                       <Icon className="h-5 w-5 text-white" />
                     </div>
-                    <div className="flex-1">
+                    <a
+                      href={info.href}
+                      target={info.href.startsWith("http") ? "_blank" : undefined}
+                      rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="flex-1 min-w-0"
+                    >
                       <h4 className="font-semibold text-white group-hover:text-blue-300 transition-colors">
                         {info.title}
                       </h4>
-                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors">{info.value}</p>
-                    </div>
-                    <ExternalLink className="h-4 w-4 text-gray-500 group-hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-200" />
-                  </a>
+                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors truncate">{info.value}</p>
+                      <span className="text-xs text-gray-500">{info.action}</span>
+                    </a>
+                    {isCopyable ? (
+                      <button
+                        type="button"
+                        onClick={() => copyValue(info.value, info.title)}
+                        className="shrink-0 rounded-md border border-white/10 px-2.5 py-1.5 text-xs text-gray-300 hover:border-blue-400/50 hover:text-white transition-colors"
+                      >
+                        {copied === info.title ? "Copied" : "Copy"}
+                      </button>
+                    ) : (
+                      <ExternalLink className="h-4 w-4 shrink-0 text-gray-500 group-hover:text-blue-400 transition-colors" />
+                    )}
+                  </div>
                 )
               })}
             </div>
@@ -125,7 +157,7 @@ export default function ContactSection() {
 
           {/* Resume View - Centered with Doc Icon */}
           <div className="flex items-center justify-center">
-            <div className="text-center space-y-6">
+            <div className="w-full rounded-2xl border border-teal-500/20 bg-teal-500/5 p-8 text-center space-y-6">
               <h3 className="text-2xl font-bold text-white flex items-center justify-center">
                 <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-lg flex items-center justify-center mr-3">
                   <FileText className="h-4 w-4 text-white" />
@@ -148,6 +180,7 @@ export default function ContactSection() {
                 <FileText className="mr-2 h-4 w-4" />
                 View Resume
               </Button>
+              <p className="text-xs text-gray-500">Available for software engineering, AI/ML, and DevOps opportunities.</p>
             </div>
           </div>
         </div>
