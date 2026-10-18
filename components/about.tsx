@@ -74,7 +74,7 @@ const contactCards = [
   {
     icon: Mail,
     title: "Email",
-    value: "nareshrana1999@outlook.com",
+    value: "nareshrana2.nr@gmail.com",
     color: "from-purple-500 to-violet-600",
     bgColor: "bg-purple-500/10",
     borderColor: "border-purple-500/20",
