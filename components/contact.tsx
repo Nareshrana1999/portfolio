@@ -97,13 +97,6 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 max-w-3xl mx-auto mb-16">
           {/* Contact Info */}
           <div className="space-y-6">
-            <h3 className="contact-info-title text-2xl font-bold text-white mb-6 flex items-center">
-              <div className="contact-info-icon w-10 h-10 flex items-center justify-center mr-3">
-                <Phone className="h-4 w-4" />
-              </div>
-              Contact Information
-            </h3>
-
             <div className="space-y-4">
               {contactInfo.map((info, index) => {
                 const Icon = info.icon

@@ -1849,7 +1849,6 @@ html.light #projects .project-filter { background:rgba(255,255,255,.76) !importa
 #contact .contact-method:hover::after { left:135%; }
 #contact .contact-method-icon { box-shadow:0 0 20px rgba(255,92,117,.12); transition:transform .28s ease,box-shadow .28s ease; }
 #contact .contact-method:hover .contact-method-icon { transform:rotate(-4deg) scale(1.06); box-shadow:0 0 26px rgba(255,92,117,.25); }
-#contact .contact-info-icon { flex:none; border-radius:50%; background:#a5f36a; color:#111a12; box-shadow:0 0 24px rgba(165,243,106,.18); }
 
 html.light #experience .experience-card-panel { background:linear-gradient(145deg,#fff,#f2f7fb) !important; }
 html.light #experience .experience-card-panel h3 { color:#162b38 !important; }
