@@ -1911,6 +1911,41 @@ html.light #contact .contact-method p { color:#526774 !important; }
   #contact .contact-method,#contact .contact-method-icon { transition:none !important; }
 }
 
+/* Keep the colored section titles inside narrow screens and prevent final glyph clipping. */
+#about .about-heading h2,
+#experience > div > div:first-child h2,
+#skills .skills-heading h2,
+#education .education-heading h2,
+#contact > div.max-w-6xl > div:first-child h2 {
+  display:block;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+  padding-right:.2em;
+  overflow:visible !important;
+  text-wrap:balance;
+  letter-spacing:-.04em !important;
+  overflow-wrap:normal;
+}
+@media (max-width:767px) {
+  #about .about-heading h2,
+  #experience > div > div:first-child h2,
+  #skills .skills-heading h2,
+  #education .education-heading h2,
+  #contact > div.max-w-6xl > div:first-child h2 {
+    font-size:clamp(1.75rem,7vw,2.45rem) !important;
+    line-height:1.08 !important;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    justify-content:flex-start;
+    column-gap:.18em;
+  }
+  #skills .skills-heading h2 .section-title-accent { margin-left:0 !important; }
+  #contact > div.max-w-6xl > div:first-child h2 { justify-content:center; }
+}
+
 /* Distinct section identities: profile, timeline, skill matrix, credentials, and contact. */
 #about .section-index {
   display:inline-flex;
