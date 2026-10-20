@@ -28,6 +28,7 @@ export default function AboutSection() {
               <div className="about-facts-head"><span>AT A GLANCE</span></div>
               <div className="about-metric"><strong>08<span>+</span></strong><span>Projects built</span></div>
               <div className="about-metric"><strong>03</strong><span>Professional experiences</span></div>
+              <div className="about-metric"><strong>07</strong><span>Certifications</span></div>
               <div className="about-facts-foot">SOFTWARE <i>·</i> AI/ML <i>·</i> DEVOPS</div>
             </aside>
 

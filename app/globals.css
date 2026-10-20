@@ -1201,16 +1201,16 @@ html.light #home .portrait-coordinate { text-shadow:none; }
   display:grid;
   width:100%;
   max-width:none !important;
-  grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);
+  grid-template-columns:repeat(2,minmax(0,1fr));
   grid-template-areas:"summary facts" "interests languages";
-  gap:0;
+  gap:1rem;
   align-items:stretch;
 }
 #about .about-main,#about .about-details,#about .about-side-stack { display:contents; }
-#about .about-summary { grid-area:summary; border-right:0; border-bottom:0; border-radius:12px 0 0 0; }
-#about .about-facts { grid-area:facts; border-bottom:0; border-radius:0 12px 0 0; }
-#about .about-languages { grid-area:languages; border-radius:0 0 12px 0 !important; }
-#about .about-interests { grid-area:interests; border-right:0; border-radius:0 0 0 12px; }
+#about .about-summary { grid-area:summary; border-radius:12px; }
+#about .about-facts { grid-area:facts; border-radius:12px; }
+#about .about-languages { grid-area:languages; border-radius:12px !important; }
+#about .about-interests { grid-area:interests; border-radius:12px; }
 #about .about-main,#about .about-details { max-width:none !important; width:100%; margin:0; padding:0; background:transparent !important; }
 #about .about-facts { align-self:stretch; }
 #about .about-metric { flex:1 1 auto; }
@@ -1219,10 +1219,8 @@ html.light #home .portrait-coordinate { text-shadow:none; }
     grid-template-columns:minmax(0,1fr);
     grid-template-areas:"summary" "facts" "languages" "interests";
   }
-  #about .about-summary { border-right:1px solid rgba(121,193,202,.2); border-bottom:0; border-radius:12px 12px 0 0; }
-  #about .about-facts { border-right:1px solid rgba(121,193,202,.2); border-bottom:0; border-radius:0; }
-  #about .about-languages { border-right:1px solid rgba(165,243,106,.22); border-bottom:0; border-radius:0 !important; }
-  #about .about-interests { border-right:1px solid rgba(121,193,202,.2); border-radius:0 0 12px 12px; }
+  #about .about-layout { gap:.8rem; }
+  #about .about-summary,#about .about-facts,#about .about-languages,#about .about-interests { border-radius:12px !important; }
 }
 
 @media (max-width:850px) {
