@@ -1249,7 +1249,8 @@ html.light #home .portrait-coordinate { text-shadow:none; }
   justify-content:center;
   width:min(100%,1240px);
   margin:.8rem auto 0;
-  padding-inline:clamp(1rem,3vw,2rem);
+  padding: .8rem clamp(1rem,3vw,2rem) 0;
+  border-top:1px solid var(--line);
 }
 .section-next-link,
 #home .hero-bottomline a {
