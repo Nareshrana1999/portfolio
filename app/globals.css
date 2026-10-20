@@ -1672,10 +1672,12 @@ section:not(#home) { padding-top:2.5rem !important; }
 #projects .project-heading h2 { margin-bottom:.65rem !important; }
 #projects .project-heading h2 span {
   display:inline;
-  background:none !important;
-  color:#a5f36a !important;
-  -webkit-text-fill-color:#a5f36a !important;
-  text-shadow:0 0 28px rgba(151,244,104,.14);
+  background-image:linear-gradient(105deg,#5ba7ff,#55dfca) !important;
+  background-clip:text !important;
+  -webkit-background-clip:text !important;
+  color:transparent !important;
+  -webkit-text-fill-color:transparent !important;
+  text-shadow:0 0 28px rgba(91,167,255,.14);
   box-decoration-break:clone;
   -webkit-box-decoration-break:clone;
 }
@@ -1747,9 +1749,15 @@ html.light #projects .project-filter { background:rgba(255,255,255,.76) !importa
 /* Give each portfolio section its own color signature and tactile motion. */
 .section-title-accent,
 #about .about-heading h2 span,
-#skills .skills-heading h2 span,
-#contact > div.max-w-6xl > div:first-child h2 span {
+#skills .skills-heading h2 span {
   background-image:linear-gradient(105deg,#9bf36a,#54e5bc) !important;
+  background-clip:text !important;
+  -webkit-background-clip:text !important;
+  color:transparent !important;
+  -webkit-text-fill-color:transparent !important;
+}
+#contact > div.max-w-6xl > div:first-child h2 span {
+  background-image:linear-gradient(105deg,#ff6b7d,#f3a6ff) !important;
   background-clip:text !important;
   -webkit-background-clip:text !important;
   color:transparent !important;
@@ -1826,9 +1834,9 @@ html.light #projects .project-filter { background:rgba(255,255,255,.76) !importa
 @keyframes education-marker-pulse { 0%,100% { filter:drop-shadow(0 0 2px rgba(85,224,190,.12)); } 50% { filter:drop-shadow(0 0 7px rgba(85,224,190,.48)); } }
 
 #contact {
-  background-image:radial-gradient(ellipse at 92% 20%,rgba(103,121,255,.11),transparent 31rem),radial-gradient(ellipse at 12% 85%,rgba(63,219,198,.08),transparent 28rem);
+  background-image:radial-gradient(ellipse at 92% 20%,rgba(103,121,255,.11),transparent 31rem),radial-gradient(ellipse at 12% 85%,rgba(255,92,117,.08),transparent 28rem);
 }
-#contact .section-title-accent { background-image:linear-gradient(100deg,#71e7d5,#98f27a) !important; }
+#contact .section-title-accent { background-image:linear-gradient(100deg,#ff6b7d,#f3a6ff) !important; }
 #contact .contact-method {
   position:relative;
   overflow:hidden;
@@ -1837,10 +1845,11 @@ html.light #projects .project-filter { background:rgba(255,255,255,.76) !importa
   transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;
 }
 #contact .contact-method::after { content:""; position:absolute; top:0; left:-120%; width:80%; height:100%; background:linear-gradient(100deg,transparent,rgba(127,218,245,.055),transparent); transform:skewX(-18deg); transition:left .6s ease; pointer-events:none; }
-#contact .contact-method:hover { transform:translateX(5px); border-color:rgba(111,213,244,.46) !important; box-shadow:0 14px 35px rgba(0,0,0,.22),0 0 25px rgba(87,159,238,.08); }
+#contact .contact-method:hover { transform:translateX(5px); border-color:rgba(255,111,137,.46) !important; box-shadow:0 14px 35px rgba(0,0,0,.22),0 0 25px rgba(255,92,117,.08); }
 #contact .contact-method:hover::after { left:135%; }
-#contact .contact-method-icon { box-shadow:0 0 20px rgba(79,166,240,.12); transition:transform .28s ease,box-shadow .28s ease; }
-#contact .contact-method:hover .contact-method-icon { transform:rotate(-4deg) scale(1.06); box-shadow:0 0 26px rgba(85,188,239,.25); }
+#contact .contact-method-icon { box-shadow:0 0 20px rgba(255,92,117,.12); transition:transform .28s ease,box-shadow .28s ease; }
+#contact .contact-method:hover .contact-method-icon { transform:rotate(-4deg) scale(1.06); box-shadow:0 0 26px rgba(255,92,117,.25); }
+#contact .contact-info-icon { flex:none; border-radius:50%; background:#a5f36a; color:#111a12; box-shadow:0 0 24px rgba(165,243,106,.18); }
 
 html.light #experience .experience-card-panel { background:linear-gradient(145deg,#fff,#f2f7fb) !important; }
 html.light #experience .experience-card-panel h3 { color:#162b38 !important; }
@@ -1993,13 +2002,13 @@ html.light #skills .skill-tile:hover .skill-tile-inner { background:color-mix(in
 }
 #contact .section-title-accent { background-image:linear-gradient(100deg,#ff9cad,#f3a6ff) !important; }
 #contact .contact-method { border-radius:999px 8px 8px 999px !important; border-left:2px solid rgba(255,124,147,.38) !important; }
-#contact .contact-method:nth-child(2) { border-left-color:rgba(91,207,234,.5) !important; }
-#contact .contact-method:nth-child(3) { border-left-color:rgba(155,243,106,.48) !important; }
+#contact .contact-method:nth-child(2) { border-left-color:rgba(255,111,137,.5) !important; }
+#contact .contact-method:nth-child(3) { border-left-color:rgba(255,111,137,.48) !important; }
 #contact .contact-method:nth-child(4) { border-left-color:rgba(174,155,255,.48) !important; }
 #contact .contact-method:nth-child(5) { border-left-color:rgba(91,177,255,.5) !important; }
 #contact .contact-method-icon { border-radius:50% !important; }
 #contact .contact-method:nth-child(1) { background-image:linear-gradient(105deg,rgba(73,147,244,.09),transparent 45%) !important; }
-#contact .contact-method:nth-child(2) { background-image:linear-gradient(105deg,rgba(77,222,164,.09),transparent 45%) !important; }
+#contact .contact-method:nth-child(2) { background-image:linear-gradient(105deg,rgba(255,92,117,.09),transparent 45%) !important; }
 #contact .contact-method:nth-child(3) { background-image:linear-gradient(105deg,rgba(255,175,91,.09),transparent 45%) !important; }
 #contact .contact-method:nth-child(4) { background-image:linear-gradient(105deg,rgba(177,158,255,.09),transparent 45%) !important; }
 #contact .contact-method:nth-child(5) { background-image:linear-gradient(105deg,rgba(80,174,255,.09),transparent 45%) !important; }

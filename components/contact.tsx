@@ -20,10 +20,10 @@ const contactInfo = [
     title: "Phone",
     value: "+91 6363830414",
     href: "tel:+916363830414",
-    color: "from-green-500 to-green-600",
-    bgColor: "bg-green-500/10",
-    borderColor: "border-green-500/20",
-    hoverColor: "hover:border-green-400/40",
+    color: "from-rose-500 to-red-600",
+    bgColor: "bg-rose-500/10",
+    borderColor: "border-rose-500/20",
+    hoverColor: "hover:border-rose-400/40",
   },
   {
     icon: MapPin,
@@ -97,9 +97,9 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 max-w-3xl mx-auto mb-16">
           {/* Contact Info */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mr-3">
-                <Phone className="h-4 w-4 text-white" />
+            <h3 className="contact-info-title text-2xl font-bold text-white mb-6 flex items-center">
+              <div className="contact-info-icon w-10 h-10 flex items-center justify-center mr-3">
+                <Phone className="h-4 w-4" />
               </div>
               Contact Information
             </h3>
