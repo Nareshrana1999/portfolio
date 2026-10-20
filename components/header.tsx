@@ -27,14 +27,16 @@ export default function Header({ activeSection = "", onSectionClick }: HeaderPro
     <header className="fixed top-4 md:top-4 left-0 right-0 z-50 pointer-events-none">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 relative pointer-events-auto mt-4 md:mt-0">
         {/* Logo */}
-        <div
+        <button
+          type="button"
+          aria-label="Back to home"
           className="flex items-center space-x-2 cursor-pointer absolute left-4 top-1 md:top-0"
           onClick={() => onSectionClick?.("home")}
         >
           <div className="w-11 h-11 rounded-xl backdrop-blur-sm bg-white/5 shadow-md flex items-center justify-center p-2">
             <Logo />
           </div>
-        </div>
+        </button>
 
         {/* Desktop Navigation Bar */}
         <nav className="hidden md:flex items-center justify-center mx-auto px-3 py-2 rounded-full space-x-1 relative transition-all duration-300 bg-white/5 backdrop-blur-sm shadow-lg">
@@ -54,15 +56,17 @@ export default function Header({ activeSection = "", onSectionClick }: HeaderPro
           })}
         </nav>
 
-        {/* Hamburger Button */}
-        <button
-          className="md:hidden absolute right-4 top-1 p-2 rounded-full text-white hover:bg-white/10 transition"
-          onClick={() => setIsMobileMenuOpen(true)}
-          title="Open Menu"
-          aria-label="Open Menu"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
+        <div className="header-actions">
+          <button
+            type="button"
+            className="menu-toggle md:hidden"
+            onClick={() => setIsMobileMenuOpen(true)}
+            title="Open Menu"
+            aria-label="Open Menu"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -71,7 +75,7 @@ export default function Header({ activeSection = "", onSectionClick }: HeaderPro
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-black/80 backdrop-blur-sm p-6 flex flex-col items-center justify-center space-y-6"
+              className="mobile-navigation fixed top-0 left-0 right-0 bottom-0 z-50 bg-black/80 backdrop-blur-sm p-6 flex flex-col items-center justify-center space-y-6"
             >
               <button
                 onClick={() => setIsMobileMenuOpen(false)}

@@ -2,7 +2,8 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Star, GitFork } from "lucide-react"
+import { Github, Star, GitFork, ArrowUpRight } from "lucide-react"
+import { useState } from "react"
 
 interface Project {
   title: string
@@ -89,6 +90,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
             className="w-full h-full object-cover transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="project-image-meta">
+            <span>{project.category.replace("-", " / ").toUpperCase()}</span>
+            <span>OPEN SOURCE</span>
+          </div>
 
           {/* Centered GitHub Icon - Shows on hover */}
           {project.githubLink && (
@@ -106,10 +111,6 @@ const ProjectCard = ({ project }: { project: Project }) => {
             </div>
           )}
 
-          {/* Project Title Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-            <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-          </div>
         </div>
 
         <CardContent className="p-5">
@@ -144,6 +145,18 @@ const ProjectCard = ({ project }: { project: Project }) => {
               </Badge>
             ))}
           </div>
+
+          <a
+            href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-repo-link"
+            aria-label={`View ${project.title} on GitHub`}
+          >
+            <Github className="h-4 w-4" />
+            View repository
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
         </CardContent>
       </Card>
     </div>
@@ -151,7 +164,14 @@ const ProjectCard = ({ project }: { project: Project }) => {
 }
 
 const ProjectsSection = () => {
-  const displayedProjects = [...projects]
+  const [activeFilter, setActiveFilter] = useState<"all" | Project["category"]>("all")
+  const filters: { label: string; value: "all" | Project["category"] }[] = [
+    { label: "All projects", value: "all" },
+    { label: "AI & machine learning", value: "ai-ml" },
+    { label: "Web applications", value: "web" },
+    { label: "IoT", value: "iot" },
+  ]
+  const displayedProjects = projects.filter((project) => activeFilter === "all" || project.category === activeFilter)
 
   return (
     <section id="projects" className="py-16 bg-gray-900 scroll-mt-20">
@@ -163,6 +183,21 @@ const ProjectsSection = () => {
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6" />
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">A collection of my recent work and contributions</p>
+        </div>
+
+        <div className="project-filters" role="group" aria-label="Filter projects by type">
+          {filters.map((filter) => (
+            <button
+              key={filter.value}
+              type="button"
+              aria-pressed={activeFilter === filter.value}
+              onClick={() => setActiveFilter(filter.value)}
+              className={`project-filter${activeFilter === filter.value ? " is-active" : ""}`}
+            >
+              {filter.label}
+              <span>{filter.value === "all" ? projects.length : projects.filter((project) => project.category === filter.value).length}</span>
+            </button>
+          ))}
         </div>
 
         {/* Projects Grid */}

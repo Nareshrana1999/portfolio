@@ -1,14 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { GraduationCap, Award, Calendar, ExternalLink } from 'lucide-react'
-import dynamic from 'next/dynamic'
-
-// Dynamically import MapPin to prevent hydration issues
-const MapPin = dynamic(() => import('lucide-react').then(mod => mod.MapPin), { 
-  ssr: false,
-  loading: () => <div className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
-})
+import { GraduationCap, Award, Calendar, ExternalLink, MapPin } from 'lucide-react'
 
 const education = [
   {
@@ -165,7 +158,7 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className={`ml-14 md:ml-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-7 border ${item.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10`}
+        className={`education-card ml-14 md:ml-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-7 border ${item.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/10`}
       >
         <div className="space-y-3">
           <div className="flex items-start gap-3">
@@ -227,7 +220,7 @@ const CertificationItem = ({ cert, index }: { cert: any; index: number }) => {
       ></div>
 
       <div
-        className={`ml-12 md:ml-16 bg-gray-800/40 backdrop-blur-sm rounded-xl p-4 md:p-6 border ${cert.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-lg`}
+        className={`certification-card ml-12 md:ml-16 bg-gray-800/40 backdrop-blur-sm rounded-xl p-4 md:p-6 border ${cert.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-lg`}
       >
         {/* Mobile-optimized layout */}
         <div className="space-y-3">
@@ -264,18 +257,16 @@ const EducationSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800/90"></div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-12">
-          <span className="inline-block text-sm font-semibold text-blue-400 mb-3 px-4 py-1.5 rounded-full bg-blue-500/10">
-            Qualifications
-          </span>
+        <div className="education-heading text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Education & Certifications</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          <p className="education-intro">A focused foundation in computer science, supported by hands-on learning and industry certifications.</p>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
           <div className="grid grid-cols-1 gap-12">
             {/* Education Section */}
-            <div className="space-y-8">
+            <div className="education-column space-y-8">
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <GraduationCap className="h-5 w-5 text-blue-400" />
                 Education
@@ -288,7 +279,7 @@ const EducationSection = () => {
             </div>
 
             {/* Certifications Section */}
-            <div className="space-y-8 w-full">
+            <div className="certification-column space-y-8 w-full">
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <Award className="h-5 w-5 text-purple-400" />
                 Certifications

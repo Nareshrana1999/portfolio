@@ -18,11 +18,11 @@ export default function Portfolio() {
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      const headerHeight = 100 // Account for fixed header
-      const elementPosition = element.offsetTop - headerHeight
+      const headerHeight = 120 // Keep section content clear of the fixed navigation
+      const elementPosition = window.scrollY + element.getBoundingClientRect().top - headerHeight
 
       window.scrollTo({
-        top: elementPosition,
+        top: Math.max(0, elementPosition),
         behavior: "smooth",
       })
     }
