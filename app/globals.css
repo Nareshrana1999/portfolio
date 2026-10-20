@@ -1096,6 +1096,7 @@ html.light #home .portrait-frame {
 html.light #home .portrait-frame::before { border-color:rgba(25,77,72,.2); }
 html.light #home .portrait-frame::after { filter:drop-shadow(0 0 4px rgba(8,127,120,.5)); }
 html.light #home .portrait-coordinate { text-shadow:none; }
+
 @media (prefers-reduced-motion:reduce) {
   #home .portrait-frame { transition:none; }
   #home .portrait-frame:hover { transform:none; }
@@ -2104,5 +2105,14 @@ html.light #skills .skill-tile:hover .skill-tile-inner { background:color-mix(in
 #contact > div.max-w-6xl > div:first-child::before {
   content:none !important;
   display:none !important;
+}
+
+/* Make the portrait role label easier to read, including on narrow screens. */
+#home .portrait-coordinate { font-size:.72rem; font-weight:700; letter-spacing:.09em; }
+@media (max-width:639px) {
+  #home .portrait-coordinate { font-size:clamp(.52rem,2.1vw,.68rem); letter-spacing:.045em; }
+}
+@media (max-width:359px) {
+  #home .portrait-coordinate { font-size:.52rem; letter-spacing:.025em; }
 }
 
