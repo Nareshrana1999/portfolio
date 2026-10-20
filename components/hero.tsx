@@ -61,7 +61,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: .75, delay: .12, ease: "easeOut" }}
         >
-          <div className="portrait-index"><span>PROFILE / 01</span><span>26° 54′ N</span></div>
+          <div className="portrait-index"><span>PROFILE / 01</span></div>
           <div className="portrait-frame">
             <div className="portrait-image-motion">
               <Image
