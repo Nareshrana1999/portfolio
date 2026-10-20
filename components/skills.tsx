@@ -73,7 +73,7 @@ const skillsData = [
     bgColor: "bg-gradient-to-br from-amber-500/10 to-yellow-600/5",
     borderColor: "border-amber-500/20",
     skills: [
-      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "MongoDB", icon: SiMongodb, color: "#ed1e63" },
       { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
       { name: "MySQL", icon: SiMysql, color: "#4479A1" },
       { name: "SQL", icon: Database, color: "#4479A1" },
@@ -164,7 +164,7 @@ export default function SkillsSection() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/5 blur-2xl rounded-full" />
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/5 blur-2xl rounded-full" />
-        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-green-500/5 blur-2xl rounded-full" />
+        <div className="skills-glow-pink absolute top-1/2 left-1/3 w-24 h-24 blur-2xl rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
