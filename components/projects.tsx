@@ -183,7 +183,6 @@ const ProjectsSection = () => {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Projects</span>
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6" />
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">A collection of my recent work and contributions</p>
         </div>
 
         <div className="project-filters" role="group" aria-label="Filter projects by type">

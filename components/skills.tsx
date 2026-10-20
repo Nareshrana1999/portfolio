@@ -182,10 +182,6 @@ export default function SkillsSection() {
             </span>
           </h2>
 
-          <p className="skills-intro text-lg text-gray-300 max-w-2xl mx-auto mb-6 leading-relaxed">
-            Technologies and tools I use to bring ideas to life and build scalable solutions
-          </p>
-
           <div className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full w-32" />
         </div>
 

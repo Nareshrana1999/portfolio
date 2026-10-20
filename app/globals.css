@@ -50,7 +50,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--aqua); outline-
 /* A restrained, consistent studio palette across every portfolio section. */
 section:not(#home) {
   position: relative;
-  padding-block: clamp(4.5rem, 8vw, 7.25rem) !important;
+  padding-block: clamp(3.5rem, 5vw, 4.5rem) !important;
   background: var(--page) !important;
   border-top: 1px solid rgba(180, 205, 220, .045);
   scroll-margin-top: 5rem;
@@ -313,7 +313,7 @@ html.light { --surface: #fff; --surface-raised: #eaf1f2; --line: rgba(29,52,67,.
 .hero-bottomline { position:relative; z-index:1; display:flex; justify-content:space-between; width:min(100%,1200px); margin:2.4rem auto 0; padding-top:1rem; border-top:1px solid var(--line); color:#63737e; font-family:ui-monospace,monospace; font-size:.62rem; letter-spacing:.14em; }
 .hero-bottomline span:last-child { display:inline-flex; align-items:center; gap:.4rem; }
 
-section:not(#home) { padding-block:clamp(5rem,9vw,8rem) !important; }
+section:not(#home) { padding-block:clamp(3.5rem,5vw,4.5rem) !important; }
 section:not(#home)::before { width:calc(100% - 3rem); max-width:1200px; background:linear-gradient(90deg,var(--aqua),rgba(165,243,106,.06),transparent 70%); opacity:.35; }
 section:not(#home) h2 { color:var(--text) !important; font-size:clamp(2.5rem,5vw,4.5rem) !important; font-weight:720; line-height:.98; letter-spacing:-.065em; }
 section:not(#home) h2 .text-transparent { background:none !important; color:var(--aqua) !important; -webkit-text-fill-color:var(--aqua); }
@@ -572,6 +572,51 @@ html.light #contact .grid.lg\:grid-cols-\[1\.15fr_0\.85fr\] > div:last-child > d
   .about-metric > span { display:block; margin-top:.35rem; text-align:left; }
   .language-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
   #contact .grid.lg\:grid-cols-\[1\.15fr_0\.85fr\] > div:last-child > div { padding:1.4rem; }
+}
+
+/* Match section headings to the compact, left-aligned About title. */
+section:not(#home) { padding-top:2rem !important; scroll-margin-top:4.75rem !important; }
+#about.about-section { padding-top:2rem !important; scroll-margin-top:4.75rem !important; }
+#experience > div > div:first-child,
+#skills .skills-heading,
+#projects > div > div:first-child,
+#education .education-heading,
+#contact > div.max-w-6xl > div:first-child {
+  width:100%;
+  max-width:none;
+  margin:0 0 1.75rem !important;
+  text-align:left !important;
+}
+#about .about-heading { margin:0 0 1.75rem !important; }
+#about .about-heading h2,
+section:not(#home) h2 {
+  font-size:clamp(2.5rem,5vw,3.6rem) !important;
+  line-height:.98;
+  letter-spacing:-.065em;
+}
+#experience > div > div:first-child h2 + div,
+#projects > div > div:first-child h2 + div,
+#education .education-heading h2 + div,
+#contact > div.max-w-6xl > div:first-child h2 + div,
+#skills .skills-heading h2 + div {
+  margin-left:0 !important;
+  margin-right:auto !important;
+}
+#contact > div.max-w-6xl > div:first-child > div:first-child {
+  padding:0;
+  border:0;
+  background:transparent !important;
+}
+#contact > div.max-w-6xl > div:first-child > div:first-child svg { width:1rem; height:1rem; }
+@media (max-width:639px) {
+  section:not(#home) { padding-top:2rem !important; }
+  #about.about-section { padding-top:2rem !important; }
+  #about .about-heading,
+  #experience > div > div:first-child,
+  #skills .skills-heading,
+  #projects > div > div:first-child,
+  #education .education-heading,
+  #contact > div.max-w-6xl > div:first-child { margin-bottom:1.25rem !important; }
 }
 
 @media (max-width:639px) {
@@ -1123,7 +1168,7 @@ html.light #home .portrait-coordinate { text-shadow:none; }
 }
 
 /* Compact refinement: keep the profile focused and proportional. */
-#about.about-section { padding:6rem 1.5rem 4rem !important; }
+#about.about-section { padding:4.25rem 1.5rem 4rem !important; }
 #about .about-wrap { width:min(100%,1080px); }
 #about .about-heading { margin-bottom:1.35rem; }
 #about .about-heading h2 { font-size:clamp(2.65rem,4.5vw,3.6rem) !important; }
@@ -1143,10 +1188,10 @@ html.light #home .portrait-coordinate { text-shadow:none; }
 #about .language-row { min-height:2.4rem; padding:.5rem .6rem; }
 #about .interest-list span { padding:.4rem .55rem; font-size:.67rem; }
 @media (max-width:850px) {
-  #about.about-section { padding-top:5.5rem !important; }
+  #about.about-section { padding-top:4.25rem !important; }
 }
 @media (max-width:639px) {
-  #about.about-section { padding:5rem 1rem 3.5rem !important; }
+  #about.about-section { padding:3.5rem 1rem 3rem !important; }
   #about .about-heading { margin-bottom:1.1rem; }
   #about .about-heading h2 { font-size:clamp(2.5rem,12vw,3.3rem) !important; }
   #about .about-main { grid-template-columns:1fr; }
@@ -1271,4 +1316,74 @@ html.light #home .portrait-coordinate { text-shadow:none; }
 @media (max-width:639px) {
   .section-next-wrap { margin-top:.55rem; padding-inline:1rem; }
   .section-next-link { font-size:.54rem; }
+}
+
+/* Keep section starts compact and use the same eyebrow/title alignment site-wide. */
+section:not(#home) { padding-top:2.5rem !important; }
+#about.about-section { padding-top:2.5rem !important; }
+#experience > div > div:first-child,
+#skills .skills-heading,
+#projects > div > div:first-child,
+#education .education-heading,
+#contact > div.max-w-6xl > div:first-child {
+  width:100%;
+  max-width:none;
+  margin:0 0 1.75rem !important;
+  text-align:left !important;
+}
+#about .about-heading { margin:0 0 1.75rem !important; }
+#about .about-heading h2,
+#experience > div > div:first-child h2,
+#skills .skills-heading h2,
+#projects > div > div:first-child h2,
+#education .education-heading h2,
+#contact > div.max-w-6xl > div:first-child h2 {
+  font-size:clamp(2.5rem,5vw,3.6rem) !important;
+  line-height:.98;
+  letter-spacing:-.065em;
+}
+#experience > div > div:first-child::before { content:"02 / THE JOURNEY"; }
+#skills .skills-heading::before { content:"03 / THE TOOLKIT"; }
+#projects > div > div:first-child::before { content:"04 / SELECTED WORK"; }
+#education .education-heading::before { content:"05 / THE FOUNDATION"; }
+#contact > div.max-w-6xl > div:first-child::before { content:"06 / OPEN CONVERSATION"; }
+#experience > div > div:first-child::before,
+#skills .skills-heading::before,
+#projects > div > div:first-child::before,
+#education .education-heading::before,
+#contact > div.max-w-6xl > div:first-child::before {
+  display:block;
+  margin-bottom:.8rem;
+  color:var(--aqua);
+  font:700 .67rem/1.4 ui-monospace,SFMono-Regular,monospace;
+  letter-spacing:.16em;
+}
+#skills .skills-eyebrow,
+#contact > div.max-w-6xl > div:first-child > div:first-child { display:none !important; }
+#experience > div > div:first-child h2 + div,
+#projects > div > div:first-child h2 + div,
+#education .education-heading h2 + div,
+#contact > div.max-w-6xl > div:first-child h2 + div,
+#skills .skills-heading > div.h-1 { display:none !important; }
+#skills .skills-intro,
+#projects > div > div:first-child > p { margin-left:0 !important; margin-right:0 !important; }
+#education .education-intro { max-width:38rem; margin:.5rem 0 0; color:var(--muted); }
+#experience > div > div:first-child h2 + div,
+#projects > div > div:first-child h2 + div,
+#education .education-heading h2 + div,
+#contact > div.max-w-6xl > div:first-child h2 + div,
+#skills .skills-heading h2 + div { margin-left:0 !important; margin-right:auto !important; }
+#education .education-heading::before { content:"05 / THE FOUNDATION"; display:block; margin-bottom:.8rem; color:var(--aqua); font:700 .67rem/1.4 ui-monospace,SFMono-Regular,monospace; letter-spacing:.16em; }
+#contact > div.max-w-6xl > div:first-child::before { content:"06 / OPEN CONVERSATION"; display:block; margin-bottom:.8rem; color:var(--aqua); font:700 .67rem/1.4 ui-monospace,SFMono-Regular,monospace; }
+#contact > div.max-w-6xl > div:first-child > div:first-child { padding:0; border:0; background:transparent !important; }
+#contact > div.max-w-6xl > div:first-child > div:first-child svg { width:1rem; height:1rem; }
+@media (max-width:639px) {
+  section:not(#home) { padding-top:1.5rem !important; }
+  #about.about-section { padding-top:1.5rem !important; }
+  #about .about-heading,
+  #experience > div > div:first-child,
+  #skills .skills-heading,
+  #projects > div > div:first-child,
+  #education .education-heading,
+  #contact > div.max-w-6xl > div:first-child { margin-bottom:1.25rem !important; }
 }

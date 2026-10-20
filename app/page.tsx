@@ -18,7 +18,7 @@ export default function Portfolio() {
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      const headerHeight = 120 // Keep section content clear of the fixed navigation
+      const headerHeight = 76 // Keep section headings just below the fixed navigation
       const elementPosition = window.scrollY + element.getBoundingClientRect().top - headerHeight
 
       window.scrollTo({
