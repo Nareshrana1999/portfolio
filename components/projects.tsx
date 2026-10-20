@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Github, Star, GitFork, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
 import SectionNext from "@/components/section-next"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useState } from "react"
 
 interface Project {
@@ -98,58 +98,27 @@ const carouselProjects = [...projects, allProjectsCard]
 const ProjectCard = ({
   project,
   index,
-  direction,
   onSwipe,
 }: {
   project: Project
   index: number
-  direction: number
-  onSwipe: (offsetX: number) => void
+  onSwipe: (step: number) => void
 }) => {
-  const reduceMotion = useReducedMotion()
-  const pageVariants = {
-    enter: (turn: number) => ({
-      opacity: 1,
-      x: turn * 30,
-      rotateY: turn * 52,
-      scale: 0.965,
-      transformOrigin: turn > 0 ? "right center" : "left center",
-      boxShadow: "0 22px 42px rgba(0,0,0,.38)",
-    }),
-    center: {
-      opacity: 1,
-      x: 0,
-      rotateY: 0,
-      scale: 1,
-      transformOrigin: "center center",
-      boxShadow: "0 24px 55px rgba(0,0,0,.28)",
-    },
-    exit: (turn: number) => ({
-      opacity: 1,
-      x: turn * -30,
-      rotateY: turn * -58,
-      scale: 0.965,
-      transformOrigin: turn > 0 ? "left center" : "right center",
-      boxShadow: "0 22px 42px rgba(0,0,0,.38)",
-    }),
-  }
-
   return (
     <motion.div
-      className="group relative project-card-shell project-carousel-card"
-      custom={direction}
-      variants={pageVariants}
-      initial={reduceMotion ? { opacity: 0 } : "enter"}
-      animate="center"
-      exit={reduceMotion ? { opacity: 0 } : "exit"}
-      transition={reduceMotion ? { duration: 0.12 } : { duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative project-card-shell project-carousel-card project-card-fade"
+      role="group"
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.14}
+      dragElastic={0.12}
       dragMomentum={false}
-      whileDrag={reduceMotion ? undefined : { scale: 0.985, rotateY: 3, cursor: "grabbing" }}
-      onDragEnd={(_, info) => onSwipe(info.offset.x)}
-      aria-label={`${project.title}, project ${index + 1} of ${carouselProjects.length}. Swipe left or right to browse.`}
+      dragTransition={{ bounceStiffness: 420, bounceDamping: 34 }}
+      whileDrag={{ scale: 0.985 }}
+      onDragEnd={(_, info) => {
+        if (info.offset.x < -70) onSwipe(1)
+        if (info.offset.x > 70) onSwipe(-1)
+      }}
+      aria-label={`${project.title}, project ${index + 1} of ${carouselProjects.length}. Drag or swipe left or right, or use the previous and next arrows.`}
     >
       <Card className="project-card h-full overflow-hidden bg-gray-800/50 border border-gray-700/50 transition-all duration-300 group">
         <div className="project-card-visual relative h-48 overflow-hidden">
@@ -171,8 +140,6 @@ const ProjectCard = ({
             <span>{project.isCollection ? "ALL PROJECTS" : project.category.replace("-", " / ").toUpperCase()}</span>
             <span>{String(index + 1).padStart(2, "0")} <i>/</i> {String(carouselProjects.length).padStart(2, "0")}</span>
           </div>
-          <span className="project-scanline" aria-hidden="true" />
-
           {/* Centered GitHub Icon - Shows on hover */}
           {project.githubLink && !project.isCollection && (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -243,18 +210,12 @@ const ProjectCard = ({
 
 const ProjectsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [direction, setDirection] = useState(1)
   const activeProject = carouselProjects[activeIndex]
+  const previousIndex = (activeIndex - 1 + carouselProjects.length) % carouselProjects.length
+  const nextIndex = (activeIndex + 1) % carouselProjects.length
 
-  const showProject = (nextIndex: number) => {
-    if (nextIndex < 0 || nextIndex >= carouselProjects.length || nextIndex === activeIndex) return
-    setDirection(nextIndex > activeIndex ? 1 : -1)
-    setActiveIndex(nextIndex)
-  }
-
-  const handleSwipe = (offsetX: number) => {
-    if (offsetX < -70) showProject(activeIndex + 1)
-    if (offsetX > 70) showProject(activeIndex - 1)
+  const moveProject = (step: number) => {
+    setActiveIndex((currentIndex) => (currentIndex + step + carouselProjects.length) % carouselProjects.length)
   }
 
   return (
@@ -272,36 +233,28 @@ const ProjectsSection = () => {
         <div className="project-carousel" aria-label="Project showcase">
           <div className="project-carousel-stage">
             <div className="project-carousel-stack" aria-hidden="true">
-              {activeIndex > 0 && (
-                <div className="project-carousel-peek project-carousel-peek-previous">
-                  {carouselProjects[activeIndex - 1].image ? <img src={carouselProjects[activeIndex - 1].image} alt="" /> : <Github />}
-                  <span>{String(activeIndex).padStart(2, "0")}</span>
-                </div>
-              )}
-              {activeIndex < carouselProjects.length - 1 && (
-                <div className="project-carousel-peek project-carousel-peek-next">
-                  {carouselProjects[activeIndex + 1].image ? <img src={carouselProjects[activeIndex + 1].image} alt="" /> : <Github />}
-                  <span>{String(activeIndex + 2).padStart(2, "0")}</span>
-                </div>
-              )}
+              <div className="project-carousel-peek project-carousel-peek-previous">
+                {carouselProjects[previousIndex].image ? <img src={carouselProjects[previousIndex].image} alt="" /> : <Github />}
+                <span>{String(previousIndex + 1).padStart(2, "0")}</span>
+              </div>
+              <div className="project-carousel-peek project-carousel-peek-next">
+                {carouselProjects[nextIndex].image ? <img src={carouselProjects[nextIndex].image} alt="" /> : <Github />}
+                <span>{String(nextIndex + 1).padStart(2, "0")}</span>
+              </div>
             </div>
-            <AnimatePresence mode="sync" initial={false}>
-              <ProjectCard
-                key={activeProject.title}
-                project={activeProject}
-                index={activeIndex}
-                direction={direction}
-                onSwipe={handleSwipe}
-              />
-            </AnimatePresence>
+            <ProjectCard
+              key={activeProject.title}
+              project={activeProject}
+              index={activeIndex}
+              onSwipe={moveProject}
+            />
           </div>
 
           <div className="project-carousel-controls">
             <button
               type="button"
               className="project-carousel-arrow"
-              onClick={() => showProject(activeIndex - 1)}
-              disabled={activeIndex === 0}
+              onClick={() => moveProject(-1)}
               aria-label="View previous project"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -314,8 +267,7 @@ const ProjectsSection = () => {
             <button
               type="button"
               className="project-carousel-arrow"
-              onClick={() => showProject(activeIndex + 1)}
-              disabled={activeIndex === carouselProjects.length - 1}
+              onClick={() => moveProject(1)}
               aria-label="View next project"
             >
               <ChevronRight className="h-5 w-5" />
