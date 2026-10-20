@@ -2116,3 +2116,8 @@ html.light #skills .skill-tile:hover .skill-tile-inner { background:color-mix(in
   #home .portrait-coordinate { font-size:.52rem; letter-spacing:.025em; }
 }
 
+/* On desktop, land at the project title so the active card is centered in view. */
+@media (min-width:768px) {
+  #projects { scroll-margin-top:-6rem; }
+}
+
