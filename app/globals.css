@@ -1462,7 +1462,7 @@ section:not(#home) { padding-top:2.5rem !important; }
   width:2px !important;
 }
 #education .certification-column .certification-card { margin-left:2.2rem !important; }
-#education .certification-column .certification-card h4 { color:#a5f36a !important; }
+#education .certification-column .certification-card h4 { color:#f1f5f9 !important; font-weight:700 !important; }
 #education .certification-column .certification-card > div > div:first-child > div:first-child svg { color:#fff !important; }
 #education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex {
   display:grid !important;
@@ -1475,6 +1475,40 @@ section:not(#home) { padding-top:2.5rem !important; }
   justify-self:end;
 }
 #education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child p { white-space:nowrap; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child p { color:#60a5fa !important; }
+#education .certification-column .certification-card > div > div:first-child { display:block; }
+#education .certification-column .certification-card { position:relative; }
+#education .certification-column .certification-card > div > div:first-child > div:first-child {
+  position:absolute;
+  top:.75rem;
+  left:.85rem;
+  margin:0;
+  padding:0;
+  background:transparent !important;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 {
+  width:100%;
+  padding-top:1.1rem;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex {
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:.35rem .5rem;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child,
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child { order:initial; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child {
+  justify-self:end;
+  padding:.3rem .5rem;
+  gap:.3rem;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child svg { width:.75rem; height:.75rem; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child span { font-size:.72rem; }
+#education .certification-column .certification-card h4 {
+  font-size:.72rem !important;
+  line-height:1.25;
+  white-space:nowrap;
+}
 #education .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child {
   color:#fb7185 !important;
   border-color:rgba(251,113,133,.35) !important;
@@ -1491,4 +1525,88 @@ section:not(#home) { padding-top:2.5rem !important; }
   overflow:visible !important;
 }
 #education .grid.grid-cols-1.gap-12 > .certification-column::before { display:none !important; content:none !important; }
+
+#education .certification-column .certification-card {
+  display:block !important;
+  min-height:6.5rem !important;
+  height:auto !important;
+  padding:.65rem !important;
+}
+#education .certification-column .certification-card > div > div:first-child {
+  display:flex !important;
+  align-items:flex-start;
+  gap:.55rem;
+}
+#education .certification-column .certification-card > div > div:first-child > div:first-child {
+  position:static;
+  flex:0 0 1.5rem;
+  display:grid;
+  width:1.5rem;
+  height:1.5rem;
+  place-items:center;
+  margin:0;
+  padding:0;
+}
+#education .certification-column .certification-card > div > div:first-child > div:first-child svg { width:1.1rem; height:1.1rem; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 {
+  min-width:0;
+  width:auto;
+  padding-top:0;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex {
+  grid-template-columns:minmax(0,1fr);
+  align-items:start;
+  gap:.4rem;
+}
+#education .certification-column .certification-card h4 { font-size:.9rem !important; }
+#education .certification-column .certification-card h4 {
+  overflow:visible;
+  text-overflow:clip;
+  white-space:normal;
+  overflow-wrap:normal;
+  line-height:1.35;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child p { color:#9bf36a !important; }
+#education .certification-action-row { display:flex; justify-content:flex-start; margin:.7rem 0 0 2.05rem; }
+#education .certification-credential-link {
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  min-height:2rem;
+  padding:.35rem .7rem;
+  border:1px solid rgba(96,165,250,.48);
+  border-radius:3px;
+  color:#60a5fa;
+  font-size:.78rem;
+  line-height:1;
+  text-decoration:none;
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+#education .certification-credential-link:hover { color:#bfdbfe; border-color:#60a5fa; background:rgba(96,165,250,.08); }
+#education .certification-credential-link svg { width:.9rem; height:.9rem; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child,
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child { order:initial; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child p { font-size:.86rem !important; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child {
+  justify-self:start;
+  align-self:start;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex {
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:auto auto;
+  align-items:center;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child { display:contents; }
+#education .certification-column .certification-card h4 { grid-column:1 / -1; grid-row:1; }
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:first-child p {
+  grid-column:1;
+  grid-row:2;
+  margin:.25rem 0 0;
+}
+#education .certification-column .certification-card > div > div:first-child > div.flex-1 > div.flex > div:last-child {
+  grid-column:2;
+  grid-row:2;
+  justify-self:end;
+  align-self:center;
+}
 

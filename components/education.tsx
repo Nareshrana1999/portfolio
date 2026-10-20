@@ -43,6 +43,7 @@ const certifications = [
   {
     id: 1,
     title: "Machine Learning Specialist",
+    credentialLink: "https://drive.google.com/file/d/1j20sEANxwU0XiuHNdnvUNLxHUHhSJFTs/view?usp=drive_link",
     issuer: "SkillDzire",
     period: "2025",
     iconColor: "text-blue-400",
@@ -51,28 +52,31 @@ const certifications = [
     calendarColor: "text-blue-300 bg-blue-900/30 border-blue-800/50",
   },
   {
-    id: 3,
-    title: "Docker Foundations Professional Certificate",
-    issuer: "Docker",
+    id: 2,
+    title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    credentialLink: "https://drive.google.com/file/d/1b03rqz38flOhBVFBj77I2BVg42s6a2lV/view?usp=sharing",
+    issuer: "Oracle",
     period: "2025",
-    iconColor: "text-rose-400",
-    dotColor: "from-rose-400 to-rose-600",
-    borderColor: "border-rose-500/20",
-    calendarColor: "text-rose-300 bg-rose-900/30 border-rose-800/50",
+    iconColor: "text-emerald-400",
+    dotColor: "from-emerald-400 to-emerald-600",
+    borderColor: "border-emerald-500/20",
+    calendarColor: "text-emerald-300 bg-emerald-900/30 border-emerald-800/50",
   },
   {
-    id: 4,
-    title: "GitHub Foundations",
-    issuer: "GitHub",
+    id: 8,
+    title: "Microsoft Azure AI Essentials Professional Certificate",
+    credentialLink: "https://drive.google.com/file/d/1LjmTUXjt3TbxD16DHLkUe1oV5lcAX6_j/view?usp=sharing",
+    issuer: "Microsoft and LinkedIn Learning",
     period: "2025",
-    iconColor: "text-violet-400",
-    dotColor: "from-violet-400 to-violet-600",
-    borderColor: "border-violet-500/20",
-    calendarColor: "text-violet-300 bg-violet-900/30 border-violet-800/50",
+    iconColor: "text-sky-400",
+    dotColor: "from-sky-400 to-sky-600",
+    borderColor: "border-sky-500/20",
+    calendarColor: "text-sky-300 bg-sky-900/30 border-sky-800/50",
   },
   {
     id: 5,
     title: "AI-DevOps Engineer",
+    credentialLink: "https://drive.google.com/file/d/1ChzK80W0p_obegfpq3P56IS4bafWmFtU/view?usp=drive_link",
     issuer: "Aitch Nu Global Technologies",
     period: "2024",
     iconColor: "text-emerald-400",
@@ -81,24 +85,48 @@ const certifications = [
     calendarColor: "text-emerald-300 bg-emerald-900/30 border-emerald-800/50",
   },
   {
-    id: 6,
-    title: "Fiber Optic Communication System Certification",
-    issuer: "National Skill Training Institute",
-    period: "2019",
-    iconColor: "text-amber-400",
-    dotColor: "from-amber-400 to-amber-600",
-    borderColor: "border-amber-500/20",
-    calendarColor: "text-amber-300 bg-amber-900/30 border-amber-800/50",
+    id: 4,
+    title: "GitHub Foundations",
+    credentialLink: "https://github.com/nareshrana1999",
+    issuer: "GitHub",
+    period: "2025",
+    iconColor: "text-violet-400",
+    dotColor: "from-violet-400 to-violet-600",
+    borderColor: "border-violet-500/20",
+    calendarColor: "text-violet-300 bg-violet-900/30 border-violet-800/50",
   },
   {
     id: 7,
     title: "Hardware & Networking Certification",
+    credentialLink: "https://drive.google.com/file/d/14FpmWMuZMDm9-U4k9FXm1VpC4gsza53e/view?usp=drive_link",
     issuer: "Shree Nandi Computer Institute",
     period: "2016",
     iconColor: "text-rose-400",
     dotColor: "from-rose-400 to-rose-600",
     borderColor: "border-rose-500/20",
     calendarColor: "text-rose-300 bg-rose-900/30 border-rose-800/50",
+  },
+  {
+    id: 3,
+    title: "Docker Foundations Professional Certificate",
+    credentialLink: "https://github.com/nareshrana1999",
+    issuer: "Docker",
+    period: "2025",
+    iconColor: "text-rose-400",
+    dotColor: "from-rose-400 to-rose-600",
+    borderColor: "border-rose-500/20",
+    calendarColor: "text-rose-300 bg-rose-900/30 border-rose-800/50",
+  },
+  {
+    id: 6,
+    title: "Fiber Optic Communication System Certification",
+    credentialLink: "https://drive.google.com/file/d/1NZombgWsh40POjzJ4mIrfQqaPr2Dj4Il/view?usp=drive_link",
+    issuer: "National Skill Training Institute",
+    period: "2019",
+    iconColor: "text-amber-400",
+    dotColor: "from-amber-400 to-amber-600",
+    borderColor: "border-amber-500/20",
+    calendarColor: "text-amber-300 bg-amber-900/30 border-amber-800/50",
   },
 ]
 
@@ -233,6 +261,14 @@ const CertificationItem = ({ cert, index }: { cert: any; index: number }) => {
               </div>
             </div>
           </div>
+          {cert.credentialLink && (
+            <div className="certification-action-row">
+              <a href={cert.credentialLink} target="_blank" rel="noopener noreferrer" className="certification-credential-link">
+                View Credential
+                <ExternalLink aria-hidden="true" />
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -248,7 +284,7 @@ const EducationSection = () => {
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800/90"></div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="education-heading text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Education & Certifications</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
@@ -284,8 +320,6 @@ const EducationSection = () => {
           </div>
         </div>
 
-        {/* Animated decorative elements */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-900 to-transparent z-10"></div>
       </div>
       <SectionNext targetId="contact" targetLabel="Contact" />
     </section>
