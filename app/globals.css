@@ -1224,3 +1224,22 @@ html.light #home .portrait-coordinate { text-shadow:none; }
   #about .about-languages { border-right:1px solid rgba(165,243,106,.22); border-bottom:0; border-radius:0 !important; }
   #about .about-interests { border-right:1px solid rgba(121,193,202,.2); border-radius:0 0 12px 12px; }
 }
+
+@media (max-width:850px) {
+  #home .hero-actions {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr);
+    width:100%;
+    gap:.6rem;
+  }
+  #home .hero-actions .hero-action,
+  #home .hero-actions .hero-action-quiet {
+    width:100%;
+    min-width:0;
+    min-height:48px;
+    flex:none;
+    justify-content:center;
+    padding:.7rem 1rem;
+    font-size:.82rem;
+  }
+}
