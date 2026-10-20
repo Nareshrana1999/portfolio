@@ -111,7 +111,7 @@ const projects: Project[] = [
     technologies: ["JavaScript", "HTML5", "CSS3", "3 Card Games"],
     githubLink: "https://github.com/Nareshrana1999/poker-game",
     liveLink: "https://nareshrana1999.github.io/poker-game/",
-    liveLabel: "Play games",
+    liveLabel: "Play Poker Games",
     image: "https://raw.githubusercontent.com/Nareshrana1999/poker-game/main/images/blackjack.jpg",
     category: "game",
     stars: 1,
