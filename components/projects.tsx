@@ -2,9 +2,10 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Star, GitFork, ArrowUpRight } from "lucide-react"
+import { Github, Star, GitFork, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
 import SectionNext from "@/components/section-next"
-import { motion, useReducedMotion } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { useState } from "react"
 
 interface Project {
   title: string
@@ -16,6 +17,7 @@ interface Project {
   category: "ai-ml" | "web" | "iot" | "data" | "game"
   stars?: number
   forks?: number
+  isCollection?: boolean
 }
 
 const projects: Project[] = [
@@ -27,7 +29,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/Nareshrana1999/object-detection-yolov8n",
     liveLink: "",
     image:
-      "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/104576/images/f26858c-44de-c5d7-bd7a-dd1b47d2e82_yolo-feature-img.png",
+      "https://raw.githubusercontent.com/ultralytics/ultralytics/main/ultralytics/assets/bus.jpg",
     category: "ai-ml",
     stars: 0,
     forks: 0,
@@ -80,39 +82,105 @@ const projects: Project[] = [
   },
 ]
 
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+const allProjectsCard: Project = {
+  title: "Explore All Projects",
+  description: "Browse the complete GitHub portfolio, including more experiments, applications, and open-source work.",
+  technologies: ["GitHub", "Open source", "More projects"],
+  githubLink: "https://github.com/Nareshrana1999?tab=repositories",
+  liveLink: "",
+  image: "",
+  category: "data",
+  isCollection: true,
+}
+
+const carouselProjects = [...projects, allProjectsCard]
+
+const ProjectCard = ({
+  project,
+  index,
+  direction,
+  onSwipe,
+}: {
+  project: Project
+  index: number
+  direction: number
+  onSwipe: (offsetX: number) => void
+}) => {
   const reduceMotion = useReducedMotion()
+  const pageVariants = {
+    enter: (turn: number) => ({
+      opacity: 1,
+      x: turn * 30,
+      rotateY: turn * 52,
+      scale: 0.965,
+      transformOrigin: turn > 0 ? "right center" : "left center",
+      boxShadow: "0 22px 42px rgba(0,0,0,.38)",
+    }),
+    center: {
+      opacity: 1,
+      x: 0,
+      rotateY: 0,
+      scale: 1,
+      transformOrigin: "center center",
+      boxShadow: "0 24px 55px rgba(0,0,0,.28)",
+    },
+    exit: (turn: number) => ({
+      opacity: 1,
+      x: turn * -30,
+      rotateY: turn * -58,
+      scale: 0.965,
+      transformOrigin: turn > 0 ? "left center" : "right center",
+      boxShadow: "0 22px 42px rgba(0,0,0,.38)",
+    }),
+  }
 
   return (
     <motion.div
-      className="h-full group relative project-card-shell"
-      initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.985 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.55, delay: reduceMotion ? 0 : (index % 3) * 0.09, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative project-card-shell project-carousel-card"
+      custom={direction}
+      variants={pageVariants}
+      initial={reduceMotion ? { opacity: 0 } : "enter"}
+      animate="center"
+      exit={reduceMotion ? { opacity: 0 } : "exit"}
+      transition={reduceMotion ? { duration: 0.12 } : { duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.14}
+      dragMomentum={false}
+      whileDrag={reduceMotion ? undefined : { scale: 0.985, rotateY: 3, cursor: "grabbing" }}
+      onDragEnd={(_, info) => onSwipe(info.offset.x)}
+      aria-label={`${project.title}, project ${index + 1} of ${carouselProjects.length}. Swipe left or right to browse.`}
     >
       <Card className="project-card h-full overflow-hidden bg-gray-800/50 border border-gray-700/50 transition-all duration-300 group">
         <div className="project-card-visual relative h-48 overflow-hidden">
-          <img
-            src={project.image || "/placeholder.svg"}
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          {project.isCollection ? (
+            <div className="project-collection-visual">
+              <Github aria-hidden="true" />
+              <span>THE COMPLETE REPOSITORY INDEX</span>
+              <strong>More work. One place.</strong>
+            </div>
+          ) : (
+            <img
+              src={project.image || "/placeholder.svg"}
+              alt={project.title}
+              className="project-card-image w-full h-full object-cover transition-transform duration-500"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           <div className="project-image-meta">
-            <span>{project.category.replace("-", " / ").toUpperCase()}</span>
-            <span>{String(index + 1).padStart(2, "0")} <i>/</i> {String(projects.length).padStart(2, "0")}</span>
+            <span>{project.isCollection ? "ALL PROJECTS" : project.category.replace("-", " / ").toUpperCase()}</span>
+            <span>{String(index + 1).padStart(2, "0")} <i>/</i> {String(carouselProjects.length).padStart(2, "0")}</span>
           </div>
           <span className="project-scanline" aria-hidden="true" />
 
           {/* Centered GitHub Icon - Shows on hover */}
-          {project.githubLink && (
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {project.githubLink && !project.isCollection && (
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <a
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 bg-gray-900/80 rounded-full backdrop-blur-sm transition-all duration-300 transform"
+                className="pointer-events-auto p-4 bg-gray-900/80 rounded-full backdrop-blur-sm transition-all duration-300 transform"
                 title="View on GitHub"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -142,7 +210,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             </div>
           </div>
 
-          <p className="text-sm text-gray-400 mb-4 line-clamp-2">{project.description}</p>
+          <p className="text-sm text-gray-400 mb-4">{project.description}</p>
 
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech, i) => (
@@ -161,10 +229,10 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             target="_blank"
             rel="noopener noreferrer"
             className="project-repo-link"
-            aria-label={`View ${project.title} on GitHub`}
+            aria-label={project.isCollection ? "View All Projects on GitHub" : `View ${project.title} on GitHub`}
           >
             <Github className="h-4 w-4" />
-            View repository
+            {project.isCollection ? "View All Projects on GitHub" : "View repository"}
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </CardContent>
@@ -174,6 +242,21 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 }
 
 const ProjectsSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [direction, setDirection] = useState(1)
+  const activeProject = carouselProjects[activeIndex]
+
+  const showProject = (nextIndex: number) => {
+    if (nextIndex < 0 || nextIndex >= carouselProjects.length || nextIndex === activeIndex) return
+    setDirection(nextIndex > activeIndex ? 1 : -1)
+    setActiveIndex(nextIndex)
+  }
+
+  const handleSwipe = (offsetX: number) => {
+    if (offsetX < -70) showProject(activeIndex + 1)
+    if (offsetX > 70) showProject(activeIndex - 1)
+  }
+
   return (
     <section id="projects" className="projects-future py-16 bg-gray-900 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -186,24 +269,59 @@ const ProjectsSection = () => {
           <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6" />
         </div>
 
-        {/* Projects Grid */}
-        <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={`${project.title}-${index}`} project={project} index={index} />
-          ))}
-        </div>
+        <div className="project-carousel" aria-label="Project showcase">
+          <div className="project-carousel-stage">
+            <div className="project-carousel-stack" aria-hidden="true">
+              {activeIndex > 0 && (
+                <div className="project-carousel-peek project-carousel-peek-previous">
+                  {carouselProjects[activeIndex - 1].image ? <img src={carouselProjects[activeIndex - 1].image} alt="" /> : <Github />}
+                  <span>{String(activeIndex).padStart(2, "0")}</span>
+                </div>
+              )}
+              {activeIndex < carouselProjects.length - 1 && (
+                <div className="project-carousel-peek project-carousel-peek-next">
+                  {carouselProjects[activeIndex + 1].image ? <img src={carouselProjects[activeIndex + 1].image} alt="" /> : <Github />}
+                  <span>{String(activeIndex + 2).padStart(2, "0")}</span>
+                </div>
+              )}
+            </div>
+            <AnimatePresence mode="sync" initial={false}>
+              <ProjectCard
+                key={activeProject.title}
+                project={activeProject}
+                index={activeIndex}
+                direction={direction}
+                onSwipe={handleSwipe}
+              />
+            </AnimatePresence>
+          </div>
 
-        {/* View All Button */}
-        <div className="mt-12 text-center">
-          <a
-            href="https://github.com/Nareshrana1999?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-8 py-3 border-2 border-blue-500 text-blue-400 rounded-lg hover:bg-blue-500 hover:text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25"
-          >
-            <Github className="h-5 w-5 mr-2" />
-            View All Projects on GitHub
-          </a>
+          <div className="project-carousel-controls">
+            <button
+              type="button"
+              className="project-carousel-arrow"
+              onClick={() => showProject(activeIndex - 1)}
+              disabled={activeIndex === 0}
+              aria-label="View previous project"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <div className="project-carousel-progress" aria-live="polite" aria-atomic="true">
+              <span>{String(activeIndex + 1).padStart(2, "0")}</span>
+              <div className="project-carousel-progress-track"><span style={{ width: `${((activeIndex + 1) / carouselProjects.length) * 100}%` }} /></div>
+              <span>{String(carouselProjects.length).padStart(2, "0")}</span>
+            </div>
+            <button
+              type="button"
+              className="project-carousel-arrow"
+              onClick={() => showProject(activeIndex + 1)}
+              disabled={activeIndex === carouselProjects.length - 1}
+              aria-label="View next project"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+
         </div>
       </div>
       <div className="projects-ambient" aria-hidden="true"><span /><span /><span /></div>
