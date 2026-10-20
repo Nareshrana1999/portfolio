@@ -65,7 +65,7 @@ const projects: Project[] = [
     liveLink: "https://nareshrana1999.github.io/GameZone/",
     liveLabel: "Play GameZone",
     image: "https://play-lh.googleusercontent.com/aPLbcAPz2cMQfD9uaas_3CQYUmAbl0E8xv2mHUPimTtb4iMxsrLYtzuIfNpWVxMOq4fYGimquF-t-JwcuaJdpw%3Dw240-h480",
-    category: "web",
+    category: "game",
     stars: 1,
     forks: 0,
   },
