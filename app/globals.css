@@ -2288,3 +2288,19 @@ html.light #about .about-interests { border-color:rgba(169,118,99,.32) !importan
 html.light #about .about-summary { border-left-color:#a97663 !important; }
 html.light #about .about-facts { border-top-color:#a97663 !important; }
 
+/* Color each section's scroll action to match its own heading accent. */
+#home { --scroll-accent:#54e5bc; }
+#about { --scroll-accent:#c49a87; }
+#experience { --scroll-accent:#62d9f0; }
+#skills { --scroll-accent:#ed1e63; }
+#projects { --scroll-accent:#55dfca; }
+#education { --scroll-accent:#55dfca; }
+#contact { --scroll-accent:#ff9cad; }
+.section-next-link,
+#home .hero-bottomline a { color:#82949e !important; }
+.section-next-link svg,
+#home .hero-bottomline a svg { color:var(--scroll-accent) !important; }
+html.light .section-next-link,
+html.light #home .hero-bottomline a { color:#63737e !important; }
+html.light #about { --scroll-accent:#a97663; }
+
