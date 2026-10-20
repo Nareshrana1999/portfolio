@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Star, GitFork, ArrowUpRight, ChevronLeft, ChevronRight, Play } from "lucide-react"
+import { Github, ArrowUpRight, ChevronLeft, ChevronRight, Play } from "lucide-react"
 import SectionNext from "@/components/section-next"
 import { motion } from "framer-motion"
 import { useState } from "react"
@@ -16,8 +16,6 @@ interface Project {
   liveLabel?: string
   image: string
   category: "ai-ml" | "web" | "iot" | "data" | "game"
-  stars?: number
-  forks?: number
   isCollection?: boolean
 }
 
@@ -32,8 +30,6 @@ const projects: Project[] = [
     image:
       "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/874/856/datas/original.png",
     category: "ai-ml",
-    stars: 1,
-    forks: 0,
   },
   {
     title: "Heart Disease Prediction",
@@ -43,8 +39,6 @@ const projects: Project[] = [
     liveLink: "",
     image: "https://miro.medium.com/v2/resize:fit:722/1*wcVkHBeTP-6wXYTE4dId9w.png",
     category: "ai-ml",
-    stars: 1,
-    forks: 0,
   },
   {
     title: "COVID-19 Detection",
@@ -54,8 +48,6 @@ const projects: Project[] = [
     liveLink: "",
     image: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=1200&q=85",
     category: "ai-ml",
-    stars: 1,
-    forks: 0,
   },
   {
     title: "Game Zone Platform",
@@ -66,8 +58,6 @@ const projects: Project[] = [
     liveLabel: "Play GameZone",
     image: "https://play-lh.googleusercontent.com/aPLbcAPz2cMQfD9uaas_3CQYUmAbl0E8xv2mHUPimTtb4iMxsrLYtzuIfNpWVxMOq4fYGimquF-t-JwcuaJdpw%3Dw240-h480",
     category: "game",
-    stars: 1,
-    forks: 0,
   },
   {
     title: "Fishing Boat Safety System",
@@ -77,8 +67,6 @@ const projects: Project[] = [
     liveLink: "",
     image: "https://worldoceanreview.com/en/files/2013/04/wor2_c3c-s80_3-28_fisheries_monitoring_centre-500x461.jpg",
     category: "iot",
-    stars: 0,
-    forks: 0,
   },
   {
     title: "Student Feedback System",
@@ -90,8 +78,6 @@ const projects: Project[] = [
     liveLabel: "Open feedback app",
     image: "https://static.vecteezy.com/system/resources/previews/025/452/512/non_2x/educational-institutions-obtain-student-feedback-vector.jpg",
     category: "web",
-    stars: 0,
-    forks: 0,
   },
   {
     title: "Now Player",
@@ -102,8 +88,6 @@ const projects: Project[] = [
     liveLabel: "Live player",
     image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=85",
     category: "web",
-    stars: 1,
-    forks: 0,
   },
   {
     title: "Poker Game Collection",
@@ -114,8 +98,6 @@ const projects: Project[] = [
     liveLabel: "Play Poker Games",
     image: "https://raw.githubusercontent.com/Nareshrana1999/poker-game/main/images/blackjack.jpg",
     category: "game",
-    stars: 1,
-    forks: 0,
   },
 ]
 
@@ -200,20 +182,6 @@ const ProjectCard = ({
         <CardContent className="project-card-content p-5">
           <div className="flex justify-between items-start mb-3">
             <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-            <div className="flex items-center space-x-2">
-              {project.stars !== undefined && (
-                <span className="flex items-center text-xs text-gray-400">
-                  <Star className="h-3 w-3 mr-1 text-yellow-400" />
-                  {project.stars}
-                </span>
-              )}
-              {project.forks !== undefined && (
-                <span className="flex items-center text-xs text-gray-400">
-                  <GitFork className="h-3 w-3 mr-1 text-blue-400" />
-                  {project.forks}
-                </span>
-              )}
-            </div>
           </div>
 
           <p className="text-sm text-gray-400 mb-4">{project.description}</p>
