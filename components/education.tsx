@@ -51,15 +51,6 @@ const certifications = [
     calendarColor: "text-blue-300 bg-blue-900/30 border-blue-800/50",
   },
   {
-    title: "Microsoft Azure AI Essentials Professional",
-    issuer: "Microsoft",
-    period: "2025",
-    iconColor: "text-amber-400",
-    dotColor: "from-amber-400 to-amber-600",
-    borderColor: "border-amber-500/20",
-    calendarColor: "text-amber-300 bg-amber-900/30 border-amber-800/50",
-  },
-  {
     id: 3,
     title: "Docker Foundations Professional Certificate",
     issuer: "Docker",
