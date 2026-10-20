@@ -2237,3 +2237,54 @@ html.light #skills h2.skills-title span.section-title-accent {
   -webkit-text-fill-color:#c21850 !important;
 }
 
+/* Replace green accents in the Experience timeline with the warm reference tone. */
+#experience { --aqua:#c49a87; }
+#experience [class*="from-green-500"] {
+  background-image:linear-gradient(110deg,#c49a87,#ead3c2) !important;
+}
+#experience .experience-card-shell:nth-of-type(2) .experience-card-panel {
+  border-left-color:rgba(196,154,135,.62) !important;
+}
+
+/* The screenshots also show green accents on About; match them to the same tone. */
+#about.about-section {
+  background:radial-gradient(ellipse at 78% 18%,rgba(34,211,238,.075),transparent 32%),radial-gradient(ellipse at 12% 55%,rgba(196,154,135,.07),transparent 30%),#090d12 !important;
+}
+#about .about-heading h2 span {
+  background:none !important;
+  background-image:none !important;
+  background-clip:border-box !important;
+  -webkit-background-clip:border-box !important;
+  color:#c49a87 !important;
+  -webkit-text-fill-color:#c49a87 !important;
+}
+#about .section-index {
+  border-color:rgba(196,154,135,.38) !important;
+  border-left-color:#c49a87 !important;
+  background:rgba(196,154,135,.09) !important;
+  color:#c49a87 !important;
+}
+#about .about-summary,
+#about .about-facts,
+#about .about-languages,
+#about .about-interests { border-color:rgba(196,154,135,.28) !important; }
+#about .about-summary { border-left:3px solid rgba(196,154,135,.78) !important; }
+#about .about-facts { border-top:2px solid rgba(196,154,135,.55) !important; }
+#about .status-led { background:#c49a87 !important; box-shadow:0 0 14px rgba(196,154,135,.62) !important; }
+#about .about-metric strong { color:#c49a87 !important; text-shadow:0 0 22px rgba(196,154,135,.18) !important; }
+html.light #about .about-heading h2 span,
+html.light #about .about-metric strong { color:#a97663 !important; }
+html.light #about .about-heading h2 span { -webkit-text-fill-color:#a97663 !important; }
+html.light #about .section-index {
+  border-color:rgba(169,118,99,.34) !important;
+  border-left-color:#a97663 !important;
+  background:rgba(169,118,99,.08) !important;
+  color:#a97663 !important;
+}
+html.light #about .about-summary,
+html.light #about .about-facts,
+html.light #about .about-languages,
+html.light #about .about-interests { border-color:rgba(169,118,99,.32) !important; }
+html.light #about .about-summary { border-left-color:#a97663 !important; }
+html.light #about .about-facts { border-top-color:#a97663 !important; }
+
