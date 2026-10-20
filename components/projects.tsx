@@ -110,13 +110,15 @@ const ProjectCard = ({
       role="group"
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.12}
+      dragElastic={0.18}
       dragMomentum={false}
-      dragTransition={{ bounceStiffness: 420, bounceDamping: 34 }}
+      dragTransition={{ bounceStiffness: 560, bounceDamping: 38 }}
       whileDrag={{ scale: 0.985 }}
       onDragEnd={(_, info) => {
-        if (info.offset.x < -70) onSwipe(1)
-        if (info.offset.x > 70) onSwipe(-1)
+        // Include release velocity so a quick flick advances without needing a long swipe.
+        const swipeDistance = info.offset.x + info.velocity.x * 0.12
+        if (swipeDistance < -55) onSwipe(1)
+        if (swipeDistance > 55) onSwipe(-1)
       }}
       aria-label={`${project.title}, project ${index + 1} of ${carouselProjects.length}. Drag or swipe left or right, or use the previous and next arrows.`}
     >
