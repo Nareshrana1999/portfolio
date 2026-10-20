@@ -63,14 +63,16 @@ export default function HeroSection() {
         >
           <div className="portrait-index"><span>PROFILE / 01</span><span>26° 54′ N</span></div>
           <div className="portrait-frame">
-            <Image
-              src="/images/Profile-cutout.png"
-              alt="Portrait of Naresh Rana"
-              fill
-              priority
-              sizes="(max-width: 760px) 42vw, (max-width: 1200px) 36vw, 410px"
-              className="portrait-image"
-            />
+            <div className="portrait-image-motion">
+              <Image
+                src="/images/Profile-cutout.png"
+                alt="Portrait of Naresh Rana"
+                fill
+                priority
+                sizes="(max-width: 760px) 42vw, (max-width: 1200px) 36vw, 410px"
+                className="portrait-image"
+              />
+            </div>
             <div className="portrait-overlay" />
           </div>
           <div className="portrait-coordinate"><span>SOFTWARE · AI/ML · DEVOPS</span></div>
