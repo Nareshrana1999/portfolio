@@ -30,7 +30,7 @@ const education = [
     period: "Aug 2016 – May 2020",
     grade: "CGPA: 7.5/10.0",
     credentialLink: "https://drive.google.com/file/d/1gd9vI3Z1BxBlV8rqduqTXRoEKViUEIDi/view?usp=drive_link",
-    color: "from-green-500 to-green-600",
+    color: "from-emerald-400 to-emerald-600",
     icon: <GraduationCap className="h-5 w-5" />,
     iconColor: "text-emerald-400",
     dotColor: "from-emerald-400 to-emerald-600",
@@ -123,10 +123,10 @@ const certifications = [
     credentialLink: "https://drive.google.com/file/d/1NZombgWsh40POjzJ4mIrfQqaPr2Dj4Il/view?usp=drive_link",
     issuer: "National Skill Training Institute",
     period: "2019",
-    iconColor: "text-amber-400",
-    dotColor: "from-amber-400 to-amber-600",
-    borderColor: "border-amber-500/20",
-    calendarColor: "text-amber-300 bg-amber-900/30 border-amber-800/50",
+    iconColor: "text-emerald-400",
+    dotColor: "from-emerald-400 to-emerald-600",
+    borderColor: "border-emerald-500/20",
+    calendarColor: "text-emerald-300 bg-emerald-900/30 border-emerald-800/50",
   },
 ]
 
@@ -200,7 +200,7 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
               <div className="flex flex-wrap items-center justify-between gap-3 mt-3 text-sm">
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="flex items-center text-gray-400">
-                    <MapPin className="h-3.5 w-3.5 mr-1.5 text-orange-400" />
+                    <MapPin className="h-3.5 w-3.5 mr-1.5 text-emerald-400" />
                     <span>{item.location}</span>
                   </div>
                   
@@ -286,7 +286,8 @@ const EducationSection = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="education-heading text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Education & Certifications</h2>
+          <span className="section-index education-index">05 / THE FOUNDATION</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Education & <span className="section-title-accent">Certifications</span></h2>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 

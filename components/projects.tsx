@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Github, Star, GitFork, ArrowUpRight } from "lucide-react"
 import SectionNext from "@/components/section-next"
-import { useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 
 interface Project {
   title: string
@@ -80,11 +80,19 @@ const projects: Project[] = [
   },
 ]
 
-const ProjectCard = ({ project }: { project: Project }) => {
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const reduceMotion = useReducedMotion()
+
   return (
-    <div className="h-full group relative">
-      <Card className="h-full overflow-hidden bg-gray-800/50 border border-gray-700/50 transition-all duration-300 group">
-        <div className="relative h-48 overflow-hidden">
+    <motion.div
+      className="h-full group relative project-card-shell"
+      initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.985 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay: reduceMotion ? 0 : (index % 3) * 0.09, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <Card className="project-card h-full overflow-hidden bg-gray-800/50 border border-gray-700/50 transition-all duration-300 group">
+        <div className="project-card-visual relative h-48 overflow-hidden">
           <img
             src={project.image || "/placeholder.svg"}
             alt={project.title}
@@ -93,8 +101,9 @@ const ProjectCard = ({ project }: { project: Project }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
           <div className="project-image-meta">
             <span>{project.category.replace("-", " / ").toUpperCase()}</span>
-            <span>OPEN SOURCE</span>
+            <span>{String(index + 1).padStart(2, "0")} <i>/</i> {String(projects.length).padStart(2, "0")}</span>
           </div>
+          <span className="project-scanline" aria-hidden="true" />
 
           {/* Centered GitHub Icon - Shows on hover */}
           {project.githubLink && (
@@ -114,7 +123,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
         </div>
 
-        <CardContent className="p-5">
+        <CardContent className="project-card-content p-5">
           <div className="flex justify-between items-start mb-3">
             <h3 className="text-lg font-semibold text-white">{project.title}</h3>
             <div className="flex items-center space-x-2">
@@ -160,24 +169,16 @@ const ProjectCard = ({ project }: { project: Project }) => {
           </a>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   )
 }
 
 const ProjectsSection = () => {
-  const [activeFilter, setActiveFilter] = useState<"all" | Project["category"]>("all")
-  const filters: { label: string; value: "all" | Project["category"] }[] = [
-    { label: "All projects", value: "all" },
-    { label: "AI & machine learning", value: "ai-ml" },
-    { label: "Web applications", value: "web" },
-    { label: "IoT", value: "iot" },
-  ]
-  const displayedProjects = projects.filter((project) => activeFilter === "all" || project.category === activeFilter)
-
   return (
-    <section id="projects" className="py-16 bg-gray-900 scroll-mt-20">
+    <section id="projects" className="projects-future py-16 bg-gray-900 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="project-heading text-center mb-12">
+          <p className="project-kicker"><span /> 04 / SELECTED WORK <span /></p>
           <h2 className="text-4xl font-bold text-white mb-4">
             My{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Projects</span>
@@ -185,25 +186,10 @@ const ProjectsSection = () => {
           <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6" />
         </div>
 
-        <div className="project-filters" role="group" aria-label="Filter projects by type">
-          {filters.map((filter) => (
-            <button
-              key={filter.value}
-              type="button"
-              aria-pressed={activeFilter === filter.value}
-              onClick={() => setActiveFilter(filter.value)}
-              className={`project-filter${activeFilter === filter.value ? " is-active" : ""}`}
-            >
-              {filter.label}
-              <span>{filter.value === "all" ? projects.length : projects.filter((project) => project.category === filter.value).length}</span>
-            </button>
-          ))}
-        </div>
-
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedProjects.map((project, index) => (
-            <ProjectCard key={`${project.title}-${index}`} project={project} />
+        <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
+            <ProjectCard key={`${project.title}-${index}`} project={project} index={index} />
           ))}
         </div>
 
@@ -220,6 +206,7 @@ const ProjectsSection = () => {
           </a>
         </div>
       </div>
+      <div className="projects-ambient" aria-hidden="true"><span /><span /><span /></div>
       <SectionNext targetId="education" targetLabel="Education" />
     </section>
   )

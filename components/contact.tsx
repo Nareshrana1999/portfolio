@@ -81,10 +81,7 @@ export default function ContactSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 mb-4 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
-            <Mail className="w-5 h-5 text-blue-400" />
-            <span className="text-sm font-semibold text-blue-400 uppercase tracking-wider">Get In Touch</span>
-          </div>
+          <span className="section-index contact-index">06 / OPEN CONVERSATION</span>
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Let's Connect &{" "}

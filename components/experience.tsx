@@ -91,10 +91,10 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
 
       <div className="ml-16 mb-8">
         <div
-          className={`p-0.5 rounded-xl bg-gradient-to-r ${exp.color} cursor-pointer transition-all duration-300`}
+          className={`experience-card-shell p-0.5 rounded-xl bg-gradient-to-r ${exp.color} cursor-pointer transition-all duration-300`}
           onClick={onClick}
         >
-          <Card className="bg-gray-900/80 backdrop-blur-sm border-0 rounded-xl overflow-hidden">
+          <Card className="experience-card-panel bg-gray-900/80 backdrop-blur-sm border-0 rounded-xl overflow-hidden">
             <CardContent className="p-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                 <div>
@@ -108,11 +108,11 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
                         className="text-blue-300 font-semibold flex items-center hover:text-blue-200 hover:underline transition-colors"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        {exp.company}
+                        <span className="experience-company-name">{exp.company}</span>
                         <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-70 transition-opacity" />
                       </a>
                     ) : (
-                      <p className="text-blue-300 font-semibold">{exp.company}</p>
+                      <p className="text-blue-300 font-semibold"><span className="experience-company-name">{exp.company}</span></p>
                     )}
                     <div className="hidden sm:flex items-center text-gray-400">
                       <MapPin className="h-3.5 w-3.5 mr-1" />
@@ -120,9 +120,9 @@ const ExperienceCard = ({ exp, index, isOpen, onClick }: ExperienceCardProps) =>
                     </div>
                   </div>
                 </div>
-                <Badge className="mt-2 sm:mt-0 bg-gradient-to-r bg-opacity-20 backdrop-blur-sm border-0 text-blue-100 px-3 py-1">
-                  <Calendar className="h-3.5 w-3.5 mr-1.5" />
-                  <span className="text-sm">{exp.period}</span>
+                <Badge className="experience-date-badge mt-2 w-fit self-start px-2.5 py-0.5 sm:mt-0 sm:self-auto">
+                  <Calendar className="mr-1 h-3 w-3" />
+                  <span className="text-xs">{exp.period}</span>
                 </Badge>
               </div>
 
@@ -222,7 +222,8 @@ export default function ExperienceSection() {
     <section id="experience" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Work Experience</h2>
+          <span className="section-index experience-index">02 / THE JOURNEY</span>
+          <h2 className="text-4xl font-bold text-white mb-4">Work <span className="section-title-accent">Experience</span></h2>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full" />
         </div>
 

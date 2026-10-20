@@ -1,6 +1,6 @@
 "use client"
 
-import { Code, Database, Cloud, Brain, Wrench, Zap } from "lucide-react"
+import { Code, Database, Cloud, Brain, Wrench } from "lucide-react"
 import SectionNext from "@/components/section-next"
 import {
   SiPython,
@@ -170,14 +170,11 @@ export default function SkillsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="skills-heading text-center mb-16">
-          <div className="skills-eyebrow inline-flex items-center space-x-2 mb-4 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
-            <Zap className="w-5 h-5 text-blue-400" />
-            <span className="text-sm font-semibold text-blue-400 uppercase tracking-wider">Technical Skills</span>
-          </div>
+          <span className="section-index skills-index">03 / THE TOOLKIT</span>
 
           <h2 className="skills-title text-4xl md:text-5xl font-bold text-white mb-4">
             Skills &
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 ml-3">
+            <span className="section-title-accent bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 ml-3">
               Technologies
             </span>
           </h2>
