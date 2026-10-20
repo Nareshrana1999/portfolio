@@ -1,6 +1,7 @@
 "use client"
 
 import { Code, Database, Cloud, Brain, Wrench, Zap } from "lucide-react"
+import SectionNext from "@/components/section-next"
 import {
   SiPython,
   SiCplusplus,
@@ -202,6 +203,7 @@ export default function SkillsSection() {
           </div>
         </div>
       </div>
+      <SectionNext targetId="projects" targetLabel="Projects" />
     </section>
   )
 }

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
 import { useState } from "react"
+import SectionNext from "@/components/section-next"
 
 const experiences = [
   {
@@ -237,6 +238,7 @@ export default function ExperienceSection() {
           ))}
         </div>
       </div>
+      <SectionNext targetId="skills" targetLabel="Skills" />
     </section>
   )
 }

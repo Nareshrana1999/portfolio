@@ -2,6 +2,7 @@
 
 import { Mail, Phone, MapPin, Github, Linkedin, Copy, Check } from "lucide-react"
 import { useState } from "react"
+import SectionNext from "@/components/section-next"
 
 const contactInfo = [
   {
@@ -149,6 +150,7 @@ export default function ContactSection() {
 
         </div>
       </div>
+      <SectionNext targetId="home" targetLabel="top" backToTop />
     </section>
   )
 }

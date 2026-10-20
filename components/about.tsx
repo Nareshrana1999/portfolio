@@ -1,6 +1,8 @@
+import SectionNext from "@/components/section-next"
+
 const languages = ["English", "Hindi", "Kannada", "Nepali"]
 
-const interests = ["Football · Cricket · Tennis · Kabaddi", "Trekking", "Gaming", "Motor biking & travel", "Film & anime", "Community service"]
+const interests = ["Football · Cricket · Tennis · Kabaddi", "Trekking", "Hiking", "Walking", "Gaming", "Motor biking & travel", "Film & anime", "Community service"]
 
 export default function AboutSection() {
   return (
@@ -49,6 +51,7 @@ export default function AboutSection() {
         </div>
         </div>
       </div>
+      <SectionNext targetId="experience" targetLabel="Work experience" />
     </section>
   )
 }

@@ -77,7 +77,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      <div className="hero-bottomline"><span>SCROLL TO EXPLORE <ArrowDownRight className="h-3.5 w-3.5" /></span></div>
+      <div className="hero-bottomline"><a href="#about">SCROLL TO EXPLORE <ArrowDownRight className="h-3.5 w-3.5" /></a></div>
     </section>
   )
 }

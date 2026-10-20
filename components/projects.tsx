@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Github, Star, GitFork, ArrowUpRight } from "lucide-react"
+import SectionNext from "@/components/section-next"
 import { useState } from "react"
 
 interface Project {
@@ -220,6 +221,7 @@ const ProjectsSection = () => {
           </a>
         </div>
       </div>
+      <SectionNext targetId="education" targetLabel="Education" />
     </section>
   )
 }
