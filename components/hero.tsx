@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react"
+import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react"
 import { motion } from "framer-motion"
 
 const resumeUrl = "https://drive.google.com/file/d/1lqwqs_kSa1meQUFlkjB_pDUxVDdX052t/view?usp=drive_link"
@@ -21,7 +21,8 @@ export default function HeroSection({ onSectionClick }: { onSectionClick: (secti
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: "easeOut" }}
         >
-          <div className="hero-kicker"><span className="availability-dot" /> Software engineer</div>
+          <div className="hero-kicker"><span className="availability-dot" aria-hidden="true" /> Software engineer</div>
+          <a className="hero-location-box" href="https://maps.google.com/?q=Bengaluru,Karnataka,India" target="_blank" rel="noopener noreferrer"><MapPin className="h-3.5 w-3.5" aria-hidden="true" /> Bengaluru, India</a>
 
           <div className="hero-heading-group">
             <h1 className="hero-title">Naresh<br /><span>Rana</span></h1>
@@ -38,20 +39,18 @@ export default function HeroSection({ onSectionClick }: { onSectionClick: (secti
             <a className="hero-action hero-action-secondary" href={resumeUrl} target="_blank" rel="noopener noreferrer">
               View résumé <ArrowUpRight className="h-4 w-4" />
             </a>
+            <button type="button" className="hero-action hero-action-ask" onClick={() => onSectionClick("ask")}>
+              Ask Naresh <MessageCircle className="h-4 w-4" />
+            </button>
           </div>
 
-          <div className="hero-socials" aria-label="Social profiles">
-            <a className="hero-social-github" href="https://github.com/nareshrana1999" target="_blank" rel="noopener noreferrer"><Github className="h-4 w-4" /> GitHub <ArrowUpRight className="h-3 w-3" /></a>
-            <span className="hero-social-cluster">
-              <a className="hero-social-linkedin" href="https://linkedin.com/in/nareshrana1999" target="_blank" rel="noopener noreferrer"><Linkedin className="h-4 w-4" /> LinkedIn <ArrowUpRight className="h-3 w-3" /></a>
-              <a className="hero-social-location" href="https://maps.google.com/?q=Bengaluru,Karnataka,India" target="_blank" rel="noopener noreferrer"><MapPin className="h-3.5 w-3.5" /> Bengaluru, India <ArrowUpRight className="h-3 w-3" /></a>
-            </span>
+          <div className="hero-socials hero-link-row" aria-label="Social and contact links">
+            <a href="https://github.com/nareshrana1999" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github className="h-5 w-5" /></a>
+            <a href="https://linkedin.com/in/nareshrana1999" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin className="h-5 w-5" /></a>
+            <a href="mailto:nareshrana2.nr@gmail.com" aria-label="Email Naresh" title="Email Naresh"><Mail className="h-5 w-5" /></a>
+            <a href="tel:+916363830414" aria-label="Call Naresh" title="Call Naresh"><Phone className="h-5 w-5" /></a>
           </div>
 
-          <div className="hero-contact-links" aria-label="Contact details">
-            <a className="hero-contact-email" href="mailto:nareshrana2.nr@gmail.com"><Mail className="h-4 w-4" /> nareshrana2.nr@gmail.com</a>
-            <a className="hero-contact-phone" href="tel:+916363830414"><Phone className="h-4 w-4" /> +91 6363830414</a>
-          </div>
         </motion.div>
 
         <motion.div
@@ -76,6 +75,7 @@ export default function HeroSection({ onSectionClick }: { onSectionClick: (secti
           </div>
           <div className="portrait-coordinate"><span>SOFTWARE · AI/ML · DEVOPS</span></div>
         </motion.div>
+
       </div>
 
       <div className="hero-bottomline"><a href="#about">SCROLL TO EXPLORE <ArrowDownRight className="h-3.5 w-3.5" /></a></div>

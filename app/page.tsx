@@ -8,6 +8,7 @@ import ExperienceSection from "@/components/experience"
 import SkillsSection from "@/components/skills"
 import ProjectsSection from "@/components/projects"
 import EducationSection from "@/components/education"
+import AskSection from "@/components/ask"
 import Footer from "@/components/footer"
 import { scrollToSection } from "@/lib/scroll-to-section"
 
@@ -21,7 +22,7 @@ export default function Portfolio() {
 
   // Track active section based on scroll position
   useEffect(() => {
-    const sections = ["home", "about", "experience", "skills", "projects", "education"]
+    const sections = ["home", "about", "experience", "skills", "projects", "education", "ask"]
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 150 // Offset for header
@@ -52,6 +53,7 @@ export default function Portfolio() {
         <SkillsSection />
         <ProjectsSection />
         <EducationSection />
+        <AskSection />
       </main>
 
       <Footer />
