@@ -1,4 +1,7 @@
+"use client"
+
 import { ArrowDownRight, ArrowUp } from "lucide-react"
+import { scrollToSection } from "@/lib/scroll-to-section"
 
 interface SectionNextProps {
   targetId: string
@@ -12,7 +15,7 @@ export default function SectionNext({ targetId, targetLabel, backToTop = false }
 
   return (
     <div className="section-next-wrap">
-      <a className="section-next-link" href={`#${targetId}`} aria-label={backToTop ? "Back to top" : `Scroll to ${targetLabel}`}>
+      <a className="section-next-link" href={`#${targetId}`} onClick={(event) => { event.preventDefault(); window.history.pushState(null, "", `#${targetId}`); scrollToSection(targetId) }} aria-label={backToTop ? "Back to top" : `Scroll to ${targetLabel}`}>
         <span>{label}</span>
         <ScrollIcon aria-hidden="true" />
       </a>

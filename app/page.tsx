@@ -10,22 +10,14 @@ import ProjectsSection from "@/components/projects"
 import EducationSection from "@/components/education"
 import ContactSection from "@/components/contact"
 import Footer from "@/components/footer"
+import { scrollToSection } from "@/lib/scroll-to-section"
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home")
 
   // Handle smooth scrolling to sections
   const handleSectionClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const headerHeight = 76 // Keep section headings just below the fixed navigation
-      const elementPosition = window.scrollY + element.getBoundingClientRect().top - headerHeight
-
-      window.scrollTo({
-        top: Math.max(0, elementPosition),
-        behavior: "smooth",
-      })
-    }
+    scrollToSection(sectionId)
   }
 
   // Track active section based on scroll position
@@ -55,7 +47,7 @@ export default function Portfolio() {
       <Header activeSection={activeSection} onSectionClick={handleSectionClick} />
 
       <main>
-        <HeroSection />
+        <HeroSection onSectionClick={handleSectionClick} />
         <AboutSection />
         <ExperienceSection />
         <SkillsSection />

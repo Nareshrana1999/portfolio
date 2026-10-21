@@ -6,10 +6,7 @@ import { motion } from "framer-motion"
 
 const resumeUrl = "https://drive.google.com/file/d/1lqwqs_kSa1meQUFlkjB_pDUxVDdX052t/view?usp=drive_link"
 
-export default function HeroSection() {
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
-  }
+export default function HeroSection({ onSectionClick }: { onSectionClick: (sectionId: string) => void }) {
 
   return (
     <section id="home" className="hero-section">
@@ -35,13 +32,13 @@ export default function HeroSection() {
           </p>
 
           <div className="hero-actions">
-            <button type="button" className="hero-action hero-action-primary" onClick={() => scrollToSection("projects")}>
+            <button type="button" className="hero-action hero-action-primary" onClick={() => onSectionClick("projects")}>
               Explore my work <ArrowDownRight className="h-4 w-4" />
             </button>
             <a className="hero-action hero-action-secondary" href={resumeUrl} target="_blank" rel="noopener noreferrer">
               View résumé <ArrowUpRight className="h-4 w-4" />
             </a>
-            <button type="button" className="hero-action hero-action-quiet" onClick={() => scrollToSection("contact")}>
+            <button type="button" className="hero-action hero-action-quiet" onClick={() => onSectionClick("contact")}>
               <Mail className="h-4 w-4" /> Get in touch
             </button>
           </div>

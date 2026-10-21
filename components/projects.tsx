@@ -2,10 +2,10 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, ArrowUpRight, ChevronLeft, ChevronRight, Play } from "lucide-react"
+import { Github, ArrowUpRight, ChevronLeft, ChevronRight, Hand, Play } from "lucide-react"
 import SectionNext from "@/components/section-next"
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface Project {
   title: string
@@ -27,8 +27,7 @@ const projects: Project[] = [
     technologies: ["Python", "OpenCV", "YOLOv8", "Machine Learning", "Computer Vision"],
     githubLink: "https://github.com/Nareshrana1999/object-detection-yolov8n",
     liveLink: "",
-    image:
-      "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/874/856/datas/original.png",
+    image: "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/874/856/datas/original.png",
     category: "ai-ml",
   },
   {
@@ -46,7 +45,7 @@ const projects: Project[] = [
     technologies: ["Python", "scikit-learn", "XGBoost", "LightGBM", "CatBoost"],
     githubLink: "https://github.com/Nareshrana1999/covid-analysis",
     liveLink: "",
-    image: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/projects/covid-detection.webp",
     category: "ai-ml",
   },
   {
@@ -56,7 +55,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/Nareshrana1999/GameZone",
     liveLink: "https://nareshrana1999.github.io/GameZone/",
     liveLabel: "Play GameZone",
-    image: "https://play-lh.googleusercontent.com/aPLbcAPz2cMQfD9uaas_3CQYUmAbl0E8xv2mHUPimTtb4iMxsrLYtzuIfNpWVxMOq4fYGimquF-t-JwcuaJdpw%3Dw240-h480",
+    image: "/images/projects/game-zone.webp",
     category: "game",
   },
   {
@@ -65,7 +64,7 @@ const projects: Project[] = [
     technologies: ["Arduino", "GPS", "GSM", "IoT", "Embedded Systems"],
     githubLink: "https://github.com/Nareshrana1999/Fishing-Boat-Safety-System",
     liveLink: "",
-    image: "https://worldoceanreview.com/en/files/2013/04/wor2_c3c-s80_3-28_fisheries_monitoring_centre-500x461.jpg",
+    image: "/images/projects/fishing-safety.webp",
     category: "iot",
   },
   {
@@ -86,7 +85,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/Nareshrana1999/now-player",
     liveLink: "https://nareshrana1999.github.io/now-player/",
     liveLabel: "Live player",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/projects/now-player.webp",
     category: "web",
   },
   {
@@ -96,7 +95,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/Nareshrana1999/poker-game",
     liveLink: "https://nareshrana1999.github.io/poker-game/",
     liveLabel: "Play Poker Games",
-    image: "https://raw.githubusercontent.com/Nareshrana1999/poker-game/main/images/blackjack.jpg",
+    image: "/images/projects/poker-games.webp",
     category: "game",
   },
 ]
@@ -114,6 +113,29 @@ const allProjectsCard: Project = {
 
 const carouselProjects = [...projects, allProjectsCard]
 
+const ProjectCardPeek = ({ project }: { project: Project }) => (
+  <article className="project-card project-peek-card h-full overflow-hidden" aria-hidden="true">
+    <div className="project-card-visual relative overflow-hidden">
+      {project.image ? (
+        <img src={project.image} alt="" className="project-card-image w-full h-full object-cover" />
+      ) : (
+        <div className="project-collection-visual"><Github /><span>THE COMPLETE REPOSITORY INDEX</span><strong>More work. One place.</strong></div>
+      )}
+      <div className="project-image-meta">
+        <span>{project.isCollection ? "ALL PROJECTS" : project.category.replace("-", " / ").toUpperCase()}</span>
+      </div>
+    </div>
+    <div className="project-card-content">
+      <div className="project-peek-title flex justify-between items-start mb-3"><h3>{project.title}</h3></div>
+      <p>{project.description}</p>
+      <div className="project-peek-technologies">
+        {project.technologies.map((tech) => <span key={tech}>{tech}</span>)}
+      </div>
+      <div className="project-card-links project-peek-repository"><Github /> <span>{project.isCollection ? "View All Projects on GitHub" : "View repository"}</span><ArrowUpRight /></div>
+    </div>
+  </article>
+)
+
 const ProjectCard = ({
   project,
   index,
@@ -123,22 +145,27 @@ const ProjectCard = ({
   index: number
   onSwipe: (step: number) => void
 }) => {
+  const pointerStart = useRef<{ x: number; y: number; id: number } | null>(null)
+
   return (
     <motion.div
       className="group relative project-card-shell project-carousel-card project-card-fade"
       role="group"
-      drag="x"
-      dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.18}
-      dragMomentum={false}
-      dragTransition={{ bounceStiffness: 560, bounceDamping: 38 }}
-      whileDrag={{ scale: 0.985 }}
-      onDragEnd={(_, info) => {
-        // Include release velocity so a quick flick advances without needing a long swipe.
-        const swipeDistance = info.offset.x + info.velocity.x * 0.12
-        if (swipeDistance < -55) onSwipe(1)
-        if (swipeDistance > 55) onSwipe(-1)
+      onPointerDown={(event) => {
+        if (event.button !== 0 || (event.target as HTMLElement).closest("a, button")) return
+        pointerStart.current = { x: event.clientX, y: event.clientY, id: event.pointerId }
+        event.currentTarget.setPointerCapture(event.pointerId)
       }}
+      onPointerUp={(event) => {
+        const start = pointerStart.current
+        pointerStart.current = null
+        if (!start || start.id !== event.pointerId) return
+        const deltaX = event.clientX - start.x
+        const deltaY = event.clientY - start.y
+        if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return
+        onSwipe(deltaX < 0 ? 1 : -1)
+      }}
+      onPointerCancel={() => { pointerStart.current = null }}
       aria-label={`${project.title}, project ${index + 1} of ${carouselProjects.length}. Drag or swipe left or right, or use the previous and next arrows.`}
     >
       <Card className="project-card h-full overflow-hidden bg-gray-800/50 border border-gray-700/50 transition-all duration-300 group">
@@ -150,11 +177,14 @@ const ProjectCard = ({
               <strong>More work. One place.</strong>
             </div>
           ) : (
-            <img
-              src={project.image || "/placeholder.svg"}
-              alt={project.title}
-              className="project-card-image w-full h-full object-cover transition-transform duration-500"
-            />
+            <>
+              <img src={project.image || "/placeholder.svg"} alt="" aria-hidden="true" className="project-card-image-backdrop" />
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+                className="project-card-image w-full h-full object-cover transition-transform duration-500"
+              />
+            </>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           <div className="project-image-meta">
@@ -226,9 +256,29 @@ const ProjectCard = ({
 
 const ProjectsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [showSwipeIntro, setShowSwipeIntro] = useState(false)
   const activeProject = carouselProjects[activeIndex]
   const previousIndex = (activeIndex - 1 + carouselProjects.length) % carouselProjects.length
   const nextIndex = (activeIndex + 1) % carouselProjects.length
+
+  useEffect(() => {
+    const section = document.getElementById("projects")
+    if (!section || !("IntersectionObserver" in window)) return
+
+    let timeoutId: number | undefined
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      setShowSwipeIntro(true)
+      timeoutId = window.setTimeout(() => setShowSwipeIntro(false), 2300)
+      observer.disconnect()
+    }, { threshold: 0.05 })
+
+    observer.observe(section)
+    return () => {
+      observer.disconnect()
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId)
+    }
+  }, [])
 
   const moveProject = (step: number) => {
     setActiveIndex((currentIndex) => (currentIndex + step + carouselProjects.length) % carouselProjects.length)
@@ -247,15 +297,19 @@ const ProjectsSection = () => {
         </div>
 
         <div className="project-carousel" aria-label="Project showcase">
-          <div className="project-carousel-stage">
+          <div className={`project-carousel-stage${showSwipeIntro ? " project-swipe-intro" : ""}`}>
+            <div className="project-swipe-indicator" aria-hidden="true">
+              <ChevronLeft className="project-swipe-chevron" />
+              <Hand className="project-swipe-hand" />
+              <span>SWIPE</span>
+              <ChevronRight className="project-swipe-chevron" />
+            </div>
             <div className="project-carousel-stack" aria-hidden="true">
               <div className="project-carousel-peek project-carousel-peek-previous">
-                {carouselProjects[previousIndex].image ? <img src={carouselProjects[previousIndex].image} alt="" /> : <Github />}
-                <span>{String(previousIndex + 1).padStart(2, "0")}</span>
+                <ProjectCardPeek project={carouselProjects[previousIndex]} />
               </div>
               <div className="project-carousel-peek project-carousel-peek-next">
-                {carouselProjects[nextIndex].image ? <img src={carouselProjects[nextIndex].image} alt="" /> : <Github />}
-                <span>{String(nextIndex + 1).padStart(2, "0")}</span>
+                <ProjectCardPeek project={carouselProjects[nextIndex]} />
               </div>
             </div>
             <ProjectCard
@@ -264,30 +318,8 @@ const ProjectsSection = () => {
               index={activeIndex}
               onSwipe={moveProject}
             />
-          </div>
-
-          <div className="project-carousel-controls">
-            <button
-              type="button"
-              className="project-carousel-arrow"
-              onClick={() => moveProject(-1)}
-              aria-label="View previous project"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <div className="project-carousel-progress" aria-live="polite" aria-atomic="true">
-              <span>{String(activeIndex + 1).padStart(2, "0")}</span>
-              <div className="project-carousel-progress-track"><span style={{ width: `${((activeIndex + 1) / carouselProjects.length) * 100}%` }} /></div>
-              <span>{String(carouselProjects.length).padStart(2, "0")}</span>
-            </div>
-            <button
-              type="button"
-              className="project-carousel-arrow"
-              onClick={() => moveProject(1)}
-              aria-label="View next project"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
+            <button type="button" className="project-carousel-side-arrow project-carousel-side-arrow-left" onClick={() => moveProject(-1)} aria-label="View previous project"><ChevronLeft /></button>
+            <button type="button" className="project-carousel-side-arrow project-carousel-side-arrow-right" onClick={() => moveProject(1)} aria-label="View next project"><ChevronRight /></button>
           </div>
 
         </div>
