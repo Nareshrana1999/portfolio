@@ -17,7 +17,6 @@ const navigationItems = [
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
-  { id: "contact", label: "Contact" },
 ]
 
 export default function MobileMenu({ isOpen, onClose, activeSection, onSectionClick }: MobileMenuProps) {

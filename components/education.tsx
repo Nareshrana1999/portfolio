@@ -322,7 +322,7 @@ const EducationSection = () => {
         </div>
 
       </div>
-      <SectionNext targetId="contact" targetLabel="Contact" />
+      <SectionNext targetId="home" targetLabel="top" backToTop />
     </section>
   )
 }

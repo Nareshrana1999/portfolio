@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react"
+import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react"
 import { motion } from "framer-motion"
 
 const resumeUrl = "https://drive.google.com/file/d/1lqwqs_kSa1meQUFlkjB_pDUxVDdX052t/view?usp=drive_link"
@@ -38,9 +38,6 @@ export default function HeroSection({ onSectionClick }: { onSectionClick: (secti
             <a className="hero-action hero-action-secondary" href={resumeUrl} target="_blank" rel="noopener noreferrer">
               View résumé <ArrowUpRight className="h-4 w-4" />
             </a>
-            <button type="button" className="hero-action hero-action-quiet" onClick={() => onSectionClick("contact")}>
-              <Mail className="h-4 w-4" /> Get in touch
-            </button>
           </div>
 
           <div className="hero-socials" aria-label="Social profiles">
@@ -49,6 +46,11 @@ export default function HeroSection({ onSectionClick }: { onSectionClick: (secti
               <a className="hero-social-linkedin" href="https://linkedin.com/in/nareshrana1999" target="_blank" rel="noopener noreferrer"><Linkedin className="h-4 w-4" /> LinkedIn <ArrowUpRight className="h-3 w-3" /></a>
               <a className="hero-social-location" href="https://maps.google.com/?q=Bengaluru,Karnataka,India" target="_blank" rel="noopener noreferrer"><MapPin className="h-3.5 w-3.5" /> Bengaluru, India <ArrowUpRight className="h-3 w-3" /></a>
             </span>
+          </div>
+
+          <div className="hero-contact-links" aria-label="Contact details">
+            <a className="hero-contact-email" href="mailto:nareshrana2.nr@gmail.com"><Mail className="h-4 w-4" /> nareshrana2.nr@gmail.com</a>
+            <a className="hero-contact-phone" href="tel:+916363830414"><Phone className="h-4 w-4" /> +91 6363830414</a>
           </div>
         </motion.div>
 
