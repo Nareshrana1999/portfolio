@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { GraduationCap, Award, Calendar, ExternalLink, MapPin } from 'lucide-react'
 import SectionNext from "@/components/section-next"
-import CertificationsShowcase from "@/components/certifications-showcase"
 
 const education = [
   {
@@ -150,7 +149,7 @@ const EducationSection = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="education-heading text-center mb-12">
           <span className="section-index education-index">05 / THE FOUNDATION</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Education & <span className="section-title-accent">Certifications</span></h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4"><span className="section-title-accent">Education</span></h2>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 
@@ -167,15 +166,6 @@ const EducationSection = () => {
                   <EducationItem key={index} item={item} index={index} />
                 ))}
               </div>
-            </div>
-
-            {/* Certifications Section */}
-            <div className="certification-column space-y-8 w-full">
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                <Award className="h-5 w-5 text-purple-400" />
-                Certifications
-              </h3>
-              <CertificationsShowcase />
             </div>
           </div>
         </div>

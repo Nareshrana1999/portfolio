@@ -4,15 +4,10 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import {
   ArrowUpRight,
   Bot,
-  Check,
-  Copy,
   ExternalLink,
   LoaderCircle,
   RotateCcw,
   Send,
-  ThumbsDown,
-  ThumbsUp,
-  RotateCw,
   WandSparkles,
 } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
@@ -20,7 +15,7 @@ import type { FormEvent } from "react"
 import SectionNext from "@/components/section-next"
 
 type Role = "assistant" | "user"
-type Message = { id: number; role: Role; text: string; source?: { label: string; href: string }; replyTo?: string }
+type Message = { id: number; role: Role; text: string; source?: { label: string; href: string } }
 type Mode = "checking" | "ai" | "local"
 
 const welcome: Message = {
@@ -110,8 +105,6 @@ export default function AskSection() {
   const [question, setQuestion] = useState("")
   const [mode, setMode] = useState<Mode>("checking")
   const [busy, setBusy] = useState(false)
-  const [copiedId, setCopiedId] = useState<number | null>(null)
-  const [feedback, setFeedback] = useState<Record<number, "up" | "down">>({})
   const messagesRef = useRef<HTMLDivElement>(null)
   const nextId = useRef(1)
   const conversationVersion = useRef(0)
@@ -140,7 +133,6 @@ export default function AskSection() {
     conversationVersion.current += 1
     setMessages([{ ...welcome, id: nextId.current++ }])
     setQuestion("")
-    setFeedback({})
     setBusy(false)
   }, [])
 
@@ -180,7 +172,7 @@ export default function AskSection() {
     }
 
     if (activeConversation === conversationVersion.current) {
-      setMessages((current) => [...current, { id: nextId.current++, role: "assistant", ...response, replyTo: text }])
+      setMessages((current) => [...current, { id: nextId.current++, role: "assistant", ...response }])
       setBusy(false)
     }
   }, [busy, messages, mode])
@@ -188,14 +180,6 @@ export default function AskSection() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     void ask(question)
-  }
-
-  const copyMessage = async (message: Message) => {
-    try {
-      await navigator.clipboard.writeText(message.text)
-      setCopiedId(message.id)
-      window.setTimeout(() => setCopiedId((current) => current === message.id ? null : current), 1500)
-    } catch { /* Clipboard access can be blocked in an insecure context. */ }
   }
 
   return (
@@ -240,14 +224,6 @@ export default function AskSection() {
                   <div className="ask-message-content">
                     <p>{message.text}</p>
                     {message.role === "assistant" && message.source && <a className="ask-source-link" href={message.source.href}>{message.source.label}<ExternalLink aria-hidden="true" /></a>}
-                    {message.role === "assistant" && message.id !== 0 && (
-                      <div className="ask-message-tools" aria-label="Answer options">
-                        <button type="button" onClick={() => void copyMessage(message)} aria-label="Copy answer" title="Copy answer">{copiedId === message.id ? <Check /> : <Copy />}</button>
-                        {message.replyTo && <button type="button" onClick={() => void ask(message.replyTo!)} aria-label="Retry this question" title="Try again"><RotateCw /></button>}
-                        <button type="button" onClick={() => setFeedback((current) => ({ ...current, [message.id]: "up" }))} className={feedback[message.id] === "up" ? "is-selected" : ""} aria-label="This answer was helpful" title="Helpful"><ThumbsUp /></button>
-                        <button type="button" onClick={() => setFeedback((current) => ({ ...current, [message.id]: "down" }))} className={feedback[message.id] === "down" ? "is-selected" : ""} aria-label="This answer was not helpful" title="Not helpful"><ThumbsDown /></button>
-                      </div>
-                    )}
                   </div>
                 </motion.div>
               ))}

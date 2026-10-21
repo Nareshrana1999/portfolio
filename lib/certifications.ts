@@ -32,28 +32,12 @@ export const certifications = [
     accent: "green",
   },
   {
-    slug: "github-foundations",
-    title: "GitHub Foundations",
-    issuer: "GitHub",
-    period: "2025",
-    credentialLink: "https://github.com/nareshrana1999",
-    accent: "violet",
-  },
-  {
     slug: "hardware-networking",
     title: "Hardware & Networking Certification",
     issuer: "Shree Nandi Computer Institute",
     period: "2016",
     credentialLink: "https://drive.google.com/file/d/14FpmWMuZMDm9-U4k9FXm1VpC4gsza53e/view?usp=drive_link",
     accent: "rose",
-  },
-  {
-    slug: "docker-foundations",
-    title: "Docker Foundations Professional Certificate",
-    issuer: "Docker",
-    period: "2025",
-    credentialLink: "https://github.com/nareshrana1999",
-    accent: "cyan",
   },
   {
     slug: "fiber-optic-communication",
