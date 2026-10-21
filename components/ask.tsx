@@ -8,8 +8,8 @@ import {
   Copy,
   ExternalLink,
   LoaderCircle,
+  RotateCcw,
   Send,
-  Sparkles,
   ThumbsDown,
   ThumbsUp,
   RotateCw,
@@ -114,6 +114,7 @@ export default function AskSection() {
   const [feedback, setFeedback] = useState<Record<number, "up" | "down">>({})
   const messagesRef = useRef<HTMLDivElement>(null)
   const nextId = useRef(1)
+  const conversationVersion = useRef(0)
   const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
@@ -135,10 +136,19 @@ export default function AskSection() {
     }
   }, [messages, busy, prefersReducedMotion])
 
+  const clearConversation = useCallback(() => {
+    conversationVersion.current += 1
+    setMessages([{ ...welcome, id: nextId.current++ }])
+    setQuestion("")
+    setFeedback({})
+    setBusy(false)
+  }, [])
+
   const ask = useCallback(async (rawQuestion: string) => {
     const text = rawQuestion.trim().slice(0, 500)
     if (!text || busy) return
 
+    const activeConversation = conversationVersion.current
     const userMessage: Message = { id: nextId.current++, role: "user", text }
     const priorMessages = messages.filter((message) => message.id !== 0).slice(-10)
     const updatedMessages = [...messages, userMessage]
@@ -169,8 +179,10 @@ export default function AskSection() {
       await new Promise((resolve) => window.setTimeout(resolve, 380))
     }
 
-    setMessages((current) => [...current, { id: nextId.current++, role: "assistant", ...response, replyTo: text }])
-    setBusy(false)
+    if (activeConversation === conversationVersion.current) {
+      setMessages((current) => [...current, { id: nextId.current++, role: "assistant", ...response, replyTo: text }])
+      setBusy(false)
+    }
   }, [busy, messages, mode])
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -209,8 +221,8 @@ export default function AskSection() {
           transition={{ duration: .5, delay: .08 }}
         >
           <div className="ask-panel-topbar">
-            <span className={`ask-status ask-status-${mode}`}><i /> {mode === "ai" ? "NARESH.RANA · AI ASSISTANT" : mode === "checking" ? "CONNECTING ASSISTANT" : "NARESH.RANA · PORTFOLIO GUIDE"}</span>
-            <span className="ask-grounded"><Sparkles aria-hidden="true" /> {mode === "ai" ? "AI + PORTFOLIO" : "PORTFOLIO KNOWLEDGE"}</span>
+            <span className={`ask-status ask-status-${mode}`}><i /> {mode === "ai" ? "NARESH AI · ONLINE" : mode === "checking" ? "CONNECTING TO NARESH AI" : "NARESH AI · PORTFOLIO MODE"}</span>
+            <button type="button" className="ask-reset" onClick={clearConversation} aria-label="Start a new conversation" title="New conversation"><RotateCcw aria-hidden="true" /><span>New chat</span></button>
           </div>
 
           <div ref={messagesRef} className="ask-messages" aria-live="polite" aria-relevant="additions text" aria-label="Conversation">
