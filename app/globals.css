@@ -286,7 +286,7 @@ html.light { --surface: #fff; --surface-raised: #eaf1f2; --line: rgba(29,52,67,.
 .hero-kicker { display:flex; align-items:center; gap:.65rem; margin-bottom:1.7rem; color:#a8b6bf; font-size:.76rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
 .availability-dot { width:8px; height:8px; border-radius:50%; background:var(--aqua); box-shadow:0 0 15px var(--aqua); }
 .kicker-divider { color:#53636e; }
-#home .hero-copy .hero-title { grid-column:auto; grid-row:auto; margin:0; color:#f4f7f8; font-size:clamp(4rem,9vw,8.3rem); font-weight:750; line-height:.78; letter-spacing:-.095em; }
+#home .hero-copy .hero-title { grid-column:auto; grid-row:auto; margin:0; color:#f4f7f8; font-family:"Times New Roman",Times,serif; font-size:clamp(4rem,9vw,8.3rem); font-weight:800; -webkit-text-stroke:.35px currentColor; line-height:.78; letter-spacing:-.06em; }
 .hero-title > span { display:inline-block; margin-top:.18em; color:var(--aqua); }
 .title-period { color:#f2f5f5; }
 #home .hero-copy .hero-role { grid-column:auto; grid-row:auto; margin:2rem 0 .85rem; color:#e7edef; font-size:clamp(1.1rem,1.7vw,1.42rem); font-weight:550; letter-spacing:-.025em; text-transform:none; }
@@ -3129,7 +3129,7 @@ html.light #skills.skills-section { background-image:radial-gradient(ellipse at 
 #ask .ask-status,#ask .ask-grounded,#ask .ask-panel-foot { display:inline-flex; align-items:center; gap:.5rem; color:#9aabb8; font:500 .6rem/1.4 ui-monospace,SFMono-Regular,monospace; letter-spacing:.14em; }
 #ask .ask-status i { width:.48rem; height:.48rem; border-radius:50%; background:#57d6bd; box-shadow:0 0 12px rgba(87,214,189,.6); animation:ask-status-pulse 2s ease-in-out infinite; }
 #ask .ask-grounded svg { width:.8rem; height:.8rem; color:#65c7f2; }
-#ask .ask-messages { display:flex; flex-direction:column; gap:.85rem; min-height:280px; max-height:390px; overflow-y:auto; padding:1.1rem; scrollbar-color:rgba(117,165,188,.3) transparent; scrollbar-width:thin; }
+#ask .ask-messages { display:flex; flex-direction:column; gap:.85rem; height:390px; min-height:390px; max-height:390px; overflow-y:auto; padding:1.1rem; scrollbar-color:rgba(117,165,188,.3) transparent; scrollbar-width:thin; }
 #ask .ask-message { display:flex; align-items:flex-start; gap:.55rem; max-width:min(88%,43rem); }
 #ask .ask-message p { margin:0; padding:.75rem .9rem; border:1px solid rgba(132,164,183,.15); border-radius:4px 14px 14px 14px; background:linear-gradient(145deg,rgba(27,38,49,.94),rgba(20,29,38,.96)); color:#d5e0e6; font-size:.85rem; line-height:1.65; }
 #ask .ask-message-visitor { align-self:flex-end; }
@@ -3173,7 +3173,7 @@ html.light #ask .ask-form input::placeholder { color:#788b95; }
   #ask .ask-panel { border-radius:12px; }
   #ask .ask-panel-topbar { min-height:2.65rem; padding:.5rem .65rem; }
   #ask .ask-status,#ask .ask-grounded { font-size:.49rem; letter-spacing:.08em; }
-  #ask .ask-messages { min-height:230px; max-height:330px; padding:.75rem .65rem; }
+  #ask .ask-messages { height:330px; min-height:330px; max-height:330px; padding:.75rem .65rem; }
   #ask .ask-message { max-width:94%; }
   #ask .ask-message p { padding:.6rem .68rem; font-size:.76rem; }
   #ask .ask-bot-icon { width:1.55rem; height:1.55rem; flex-basis:1.55rem; }
@@ -3427,8 +3427,36 @@ html.light #home .hero-contact-links a:hover { background:#087f78 !important; co
   #home .hero-contact-links a:hover { transform:none; }
 }
 
+/* Center the hero within the usable viewport and restore the profile status marker. */
+#home.hero-section {
+  min-height:100svh;
+  min-height:100dvh;
+  padding-top:clamp(5rem,10svh,7rem);
+  padding-bottom:clamp(1.5rem,3svh,2.25rem);
+  justify-content:center;
+}
+#home .portrait-index::before {
+  display:block;
+  content:"";
+  flex:0 0 .4rem;
+  width:.4rem;
+  height:.4rem;
+  border-radius:2px;
+  background:#a5f36a;
+  box-shadow:0 0 10px rgba(165,243,106,.65);
+}
+#home .portrait-index { justify-content:flex-start; align-items:center; gap:.45rem; }
+@media (max-width:639px) {
+  #home.hero-section {
+    min-height:100svh;
+    min-height:100dvh;
+    padding:clamp(4.75rem,11svh,6rem) 1rem clamp(.9rem,2.5svh,1.25rem) !important;
+  }
+}
+
 /* Ask Naresh: richer AI chat controls, accessible motion, and voice tools. */
 #ask .ask-panel-topbar { flex-wrap:wrap; }
+#ask .ask-panel-topbar > .ask-status { justify-self:start; width:max-content; max-width:100%; min-height:1.9rem; padding:.3rem .55rem; border:1px solid rgba(125,158,177,.16); border-radius:7px; background:rgba(255,255,255,.025); font-size:.64rem; letter-spacing:.08em; }
 #ask .ask-status-ai i { background:#a5f36a; box-shadow:0 0 12px rgba(165,243,106,.65); }
 #ask .ask-reset { display:inline-flex; align-items:center; gap:.36rem; min-height:1.9rem; padding:.3rem .55rem; border:1px solid rgba(125,158,177,.16); border-radius:7px; background:rgba(255,255,255,.025); color:#9aabb8; font-size:.64rem; transition:color .18s,border-color .18s,background .18s; }
 #ask .ask-reset:hover:not(:disabled) { color:#eaf7fb; border-color:rgba(101,199,242,.4); background:rgba(68,169,255,.07); }
@@ -3460,6 +3488,7 @@ html.light #home .hero-contact-links a:hover { background:#087f78 !important; co
 #ask .ask-follow-up button { display:inline-flex; flex:0 0 auto; align-items:center; gap:.28rem; white-space:nowrap; padding:.28rem .5rem; border:1px solid rgba(169,139,255,.2); border-radius:999px; background:rgba(151,111,225,.055); color:#c5b5ed; font-size:.61rem; transition:all .16s; }
 #ask .ask-follow-up button svg { width:.7rem; height:.7rem; flex:0 0 auto; }
 #ask .ask-follow-up button:hover { border-color:rgba(169,139,255,.55); background:rgba(151,111,225,.12); color:#eee5ff; }
+#ask .ask-follow-up button:disabled { cursor:wait; opacity:.55; }
 #ask .ask-form { align-items:center; position:relative; }
 #ask .ask-form input { padding-right:3.1rem; }
 #ask .ask-form > button:disabled { opacity:.48; }
@@ -3481,6 +3510,7 @@ html.light #ask .ask-follow-up button { border-color:rgba(123,87,184,.18); backg
 @media (max-width:639px) {
   #ask .ask-panel-topbar { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.4rem .5rem; padding:.5rem .6rem; }
   #ask .ask-status { grid-column:1; grid-row:1; min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-size:.46rem; letter-spacing:.055em; }
+  #ask .ask-panel-topbar > .ask-status { min-height:1.65rem; padding:.22rem .38rem; font-size:.56rem; }
   #ask .ask-grounded { grid-column:1; grid-row:2; justify-self:start; font-size:.46rem; letter-spacing:.055em; }
   #ask .ask-reset { grid-column:2; grid-row:1; min-height:1.65rem; padding:.22rem .38rem; font-size:.56rem; }
   #ask .ask-topic-list { gap:.32rem; padding:.58rem .6rem; }
@@ -3504,17 +3534,18 @@ html.light #ask .ask-follow-up button { border-color:rgba(123,87,184,.18); backg
     flex-direction:column;
     align-items:flex-start;
     justify-content:flex-start;
-    gap:.72rem;
+    gap:.35rem;
     align-self:start;
     min-width:0;
   }
   #home .hero-kicker { grid-column:1 / -1; grid-row:1; margin-bottom:.1rem; }
   #home .hero-location-box { grid-column:1 / -1; grid-row:2; margin:0 0 .15rem; }
-  #home .hero-heading-group .hero-title { font-size:clamp(3.2rem,14vw,4.5rem); line-height:.92; }
-  #home .hero-heading-group .hero-role { margin:0; font-size:clamp(.82rem,3.3vw,1.05rem); line-height:1.38; }
+  #home .hero-heading-group .hero-title { font-size:clamp(3.4rem,15vw,4.6rem); font-weight:800; line-height:.9; letter-spacing:-.06em; }
+  #home .hero-heading-group .hero-title > span { margin-top:0; }
+  #home .hero-heading-group .hero-role { margin:0; font-size:clamp(.82rem,3.3vw,1.05rem); line-height:1.48; }
   #home .hero-heading-group .hero-role::before { flex:0 0 .72rem; }
   #home .hero-visual { grid-column:2; grid-row:3; align-self:start; width:100%; max-width:9.5rem; margin:0 auto; }
-  #home .hero-copy .hero-description { grid-column:1 / -1; grid-row:4; align-self:start; max-width:none; margin:.1rem 0 0; font-size:clamp(.82rem,2.8vw,.95rem); line-height:1.6; }
+  #home .hero-copy .hero-description { grid-column:1 / -1; grid-row:4; align-self:start; max-width:none; margin:.65rem 0 0; font-size:clamp(.82rem,2.8vw,.95rem); line-height:1.75; }
   #home .hero-actions { grid-column:1 / -1; grid-row:5; margin-top:.3rem; }
   #home .hero-link-row { grid-column:1 / -1; grid-row:6; margin-top:.2rem; }
 }

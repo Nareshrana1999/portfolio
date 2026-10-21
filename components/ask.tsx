@@ -256,14 +256,12 @@ export default function AskSection() {
           </div>
 
           <div className="ask-compose">
-            {!busy && (
-              <div className="ask-follow-up" aria-label="Suggested follow-up">
-                <WandSparkles aria-hidden="true" /><span>Keep exploring</span>
-                {topics.map((topic) => (
-                  <button key={topic.label} type="button" onClick={() => void ask(topic.question)} disabled={busy}>{topic.label}<ArrowUpRight aria-hidden="true" /></button>
-                ))}
-              </div>
-            )}
+            <div className="ask-follow-up" aria-label="Suggested follow-up">
+              <WandSparkles aria-hidden="true" /><span>Keep exploring</span>
+              {topics.map((topic) => (
+                <button key={topic.label} type="button" onClick={() => void ask(topic.question)} disabled={busy}>{topic.label}<ArrowUpRight aria-hidden="true" /></button>
+              ))}
+            </div>
             <form className="ask-form" onSubmit={handleSubmit}>
               <label className="sr-only" htmlFor="ask-question">Ask about Naresh</label>
               <input
