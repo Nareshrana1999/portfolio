@@ -3054,6 +3054,7 @@ html.light #skills .skill-list-name { color:#3f5663; }
 #skills .skills-footer > div::before { color:#ff4b89 !important; }
 #skills .skills-footer > div { border-color:rgba(237,30,99,.3) !important; background:rgba(237,30,99,.045) !important; }
 #skills > .max-w-7xl { max-width:68rem !important; }
+#projects > .max-w-7xl { max-width:68rem !important; }
 html.light #skills .skills-index { color:#168d87 !important; border-color:rgba(22,141,135,.28) !important; background:rgba(22,141,135,.06) !important; }
 html.light #skills .skills-footer-text,
 html.light #skills .skills-footer > div::before { color:#c21850 !important; }
