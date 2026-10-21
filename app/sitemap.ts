@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { certifications } from '@/lib/certifications'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://naresh-rana-1999.vercel.app'
@@ -34,5 +35,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    ...certifications.map(({ slug }) => ({
+      url: `${baseUrl}/certifications/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
   ]
 }

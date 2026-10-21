@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { GraduationCap, Award, Calendar, ExternalLink, MapPin } from 'lucide-react'
 import SectionNext from "@/components/section-next"
+import CertificationsShowcase from "@/components/certifications-showcase"
 
 const education = [
   {
@@ -32,97 +33,6 @@ const education = [
     credentialLink: "https://drive.google.com/file/d/1gd9vI3Z1BxBlV8rqduqTXRoEKViUEIDi/view?usp=drive_link",
     color: "from-emerald-400 to-emerald-600",
     icon: <GraduationCap className="h-5 w-5" />,
-    iconColor: "text-emerald-400",
-    dotColor: "from-emerald-400 to-emerald-600",
-    borderColor: "border-emerald-500/20",
-    calendarColor: "text-emerald-300 bg-emerald-900/30 border-emerald-800/50",
-  },
-]
-
-const certifications = [
-  {
-    id: 1,
-    title: "Machine Learning Specialist",
-    credentialLink: "https://drive.google.com/file/d/1j20sEANxwU0XiuHNdnvUNLxHUHhSJFTs/view?usp=drive_link",
-    issuer: "SkillDzire",
-    period: "2025",
-    iconColor: "text-blue-400",
-    dotColor: "from-blue-400 to-blue-600",
-    borderColor: "border-blue-500/20",
-    calendarColor: "text-blue-300 bg-blue-900/30 border-blue-800/50",
-  },
-  {
-    id: 2,
-    title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
-    credentialLink: "https://drive.google.com/file/d/1b03rqz38flOhBVFBj77I2BVg42s6a2lV/view?usp=sharing",
-    issuer: "Oracle",
-    period: "2025",
-    iconColor: "text-emerald-400",
-    dotColor: "from-emerald-400 to-emerald-600",
-    borderColor: "border-emerald-500/20",
-    calendarColor: "text-emerald-300 bg-emerald-900/30 border-emerald-800/50",
-  },
-  {
-    id: 8,
-    title: "Microsoft Azure AI Essentials Professional Certificate",
-    credentialLink: "https://drive.google.com/file/d/1LjmTUXjt3TbxD16DHLkUe1oV5lcAX6_j/view?usp=sharing",
-    issuer: "Microsoft and LinkedIn Learning",
-    period: "2025",
-    iconColor: "text-sky-400",
-    dotColor: "from-sky-400 to-sky-600",
-    borderColor: "border-sky-500/20",
-    calendarColor: "text-sky-300 bg-sky-900/30 border-sky-800/50",
-  },
-  {
-    id: 5,
-    title: "AI-DevOps Engineer",
-    credentialLink: "https://drive.google.com/file/d/1ChzK80W0p_obegfpq3P56IS4bafWmFtU/view?usp=drive_link",
-    issuer: "Aitch Nu Global Technologies",
-    period: "2024",
-    iconColor: "text-emerald-400",
-    dotColor: "from-emerald-400 to-emerald-600",
-    borderColor: "border-emerald-500/20",
-    calendarColor: "text-emerald-300 bg-emerald-900/30 border-emerald-800/50",
-  },
-  {
-    id: 4,
-    title: "GitHub Foundations",
-    credentialLink: "https://github.com/nareshrana1999",
-    issuer: "GitHub",
-    period: "2025",
-    iconColor: "text-violet-400",
-    dotColor: "from-violet-400 to-violet-600",
-    borderColor: "border-violet-500/20",
-    calendarColor: "text-violet-300 bg-violet-900/30 border-violet-800/50",
-  },
-  {
-    id: 7,
-    title: "Hardware & Networking Certification",
-    credentialLink: "https://drive.google.com/file/d/14FpmWMuZMDm9-U4k9FXm1VpC4gsza53e/view?usp=drive_link",
-    issuer: "Shree Nandi Computer Institute",
-    period: "2016",
-    iconColor: "text-rose-400",
-    dotColor: "from-rose-400 to-rose-600",
-    borderColor: "border-rose-500/20",
-    calendarColor: "text-rose-300 bg-rose-900/30 border-rose-800/50",
-  },
-  {
-    id: 3,
-    title: "Docker Foundations Professional Certificate",
-    credentialLink: "https://github.com/nareshrana1999",
-    issuer: "Docker",
-    period: "2025",
-    iconColor: "text-cyan-400",
-    dotColor: "from-cyan-400 to-cyan-600",
-    borderColor: "border-cyan-500/20",
-    calendarColor: "text-cyan-300 bg-cyan-900/30 border-cyan-800/50",
-  },
-  {
-    id: 6,
-    title: "Fiber Optic Communication System Certification",
-    credentialLink: "https://drive.google.com/file/d/1NZombgWsh40POjzJ4mIrfQqaPr2Dj4Il/view?usp=drive_link",
-    issuer: "National Skill Training Institute",
-    period: "2019",
     iconColor: "text-emerald-400",
     dotColor: "from-emerald-400 to-emerald-600",
     borderColor: "border-emerald-500/20",
@@ -228,53 +138,6 @@ const EducationItem = ({ item, index }: { item: any; index: number }) => {
   )
 }
 
-const CertificationItem = ({ cert, index }: { cert: any; index: number }) => {
-  return (
-    <div className="relative mb-8">
-      {/* Timeline dot */}
-      <div className={`absolute left-4 md:left-6 top-6 h-3 w-3 rounded-full z-10 bg-gradient-to-br ${cert.dotColor}`} />
-
-      {/* Timeline line */}
-      <div
-        className={`absolute left-5 md:left-7 top-6 bottom-0 w-0.5 bg-gradient-to-b ${cert.dotColor.replace("from-", "from-").replace("to-", "to-")}/20`}
-      ></div>
-
-      <div
-        className={`certification-card ml-12 md:ml-16 bg-gray-800/40 backdrop-blur-sm rounded-xl p-4 md:p-6 border ${cert.borderColor} hover:border-opacity-60 transition-all duration-300 hover:shadow-lg`}
-      >
-        {/* Mobile-optimized layout */}
-        <div className="space-y-3">
-          <div className="flex items-start gap-3">
-            <div className={`mt-1 p-2 rounded-lg ${cert.iconColor.replace("text-", "bg-")}/10 flex-shrink-0`}>
-              <Award className={`h-5 w-5 ${cert.iconColor}`} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                <div className="min-w-0">
-                  <h4 className="font-bold text-white text-base md:text-lg leading-tight">{cert.title}</h4>
-                  <p className="text-sm md:text-base text-gray-300 mt-1 leading-tight">{cert.issuer}</p>
-                </div>
-                <div className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border ${cert.calendarColor} w-fit shrink-0`}>
-                  <Calendar className="h-3.5 w-3.5 opacity-70" />
-                  <span className="font-mono whitespace-nowrap">{cert.period}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          {cert.credentialLink && (
-            <div className="certification-action-row">
-              <a href={cert.credentialLink} target="_blank" rel="noopener noreferrer" className="certification-credential-link">
-                View Credential
-                <ExternalLink aria-hidden="true" />
-              </a>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
 const EducationSection = () => {
   return (
     <section
@@ -312,11 +175,7 @@ const EducationSection = () => {
                 <Award className="h-5 w-5 text-purple-400" />
                 Certifications
               </h3>
-              <div className="space-y-6 w-full">
-                {certifications.map((cert, index) => (
-                  <CertificationItem key={index} cert={cert} index={index} />
-                ))}
-              </div>
+              <CertificationsShowcase />
             </div>
           </div>
         </div>
