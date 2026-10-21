@@ -1060,6 +1060,10 @@ html.light #home .portrait-frame::before { border-color:rgba(25,77,72,.18); }
   #home .portrait-coordinate { font-size:.3rem; letter-spacing:0; }
 }
 
+@media (max-width:640px) {
+  #skills .skills-catalogue { width:100%; max-width:26.25rem; margin-inline:auto; }
+}
+
 /* Futuristic instrument-panel finish for the profile module. */
 #home .portrait-frame {
   border-color:rgba(98,224,210,.48);
