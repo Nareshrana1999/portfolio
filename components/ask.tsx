@@ -1,80 +1,189 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import {
+  ArrowUpRight,
+  Bot,
+  Check,
+  Copy,
+  ExternalLink,
+  LoaderCircle,
+  Send,
+  Sparkles,
+  ThumbsDown,
+  ThumbsUp,
+  RotateCw,
+  WandSparkles,
+} from "lucide-react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import type { FormEvent } from "react"
-import { motion } from "framer-motion"
-import { ArrowUpRight, Bot, Send, Sparkles } from "lucide-react"
 import SectionNext from "@/components/section-next"
 
-type Message = { id: number; role: "assistant" | "visitor"; text: string }
+type Role = "assistant" | "user"
+type Message = { id: number; role: Role; text: string; source?: { label: string; href: string }; replyTo?: string }
+type Mode = "checking" | "ai" | "local"
 
-const prompts = [
-  "What projects has Naresh built?",
-  "What are his strongest skills?",
-  "Tell me about his experience.",
-  "How can I contact him?",
+const welcome: Message = {
+  id: 0,
+  role: "assistant",
+  text: "Hello. I can provide information about Naresh’s projects, technical skills, professional experience, education, and contact details. What would you like to know?",
+}
+
+const topics = [
+  { label: "About me", question: "Tell me about Naresh’s background and what he focuses on." },
+  { label: "Projects", question: "Show me Naresh’s AI and software projects." },
+  { label: "Experience", question: "Summarize Naresh’s work experience and impact." },
+  { label: "Skills", question: "What technologies does Naresh work with?" },
+  { label: "Education", question: "Tell me about Naresh’s education and certifications." },
+  { label: "Contact", question: "How can I contact or hire Naresh?" },
 ]
 
-function answerFor(question: string) {
-  const q = question.toLowerCase()
+const localAnswers: Array<{ test: RegExp; text: string; source: Message["source"] }> = [
+  {
+    test: /contact|email|phone|reach|hire|available|availability/i,
+    text: "Naresh is based in Bengaluru, India. For professional inquiries, contact him at nareshrana2.nr@gmail.com or +91 6363830414. His current availability is not specified in the portfolio; please reach out directly to discuss opportunities.",
+    source: { label: "Contact Naresh", href: "mailto:nareshrana2.nr@gmail.com" },
+  },
+  {
+    test: /certification|certificate/i,
+    text: "The portfolio lists certifications and training from SkillDzire, Oracle Cloud Infrastructure, Microsoft and LinkedIn Learning, GitHub, Docker, Aitch Nu Global Technologies, and the National Skill Training Institute. See the education section for further details.",
+    source: { label: "Education & certifications", href: "#education" },
+  },
+  {
+    test: /skill|technology|tech stack|tools|language/i,
+    text: "Naresh’s technical toolkit includes Python, Java, C++, JavaScript, SQL, TensorFlow, OpenCV, scikit-learn, Pandas, and NumPy. He also works with MongoDB, PostgreSQL, MySQL, AWS, Docker, GitHub Actions, Linux, and Git. His core foundations include data structures and algorithms, object-oriented programming, databases, operating systems, and computer networks.",
+    source: { label: "Explore skills", href: "#skills" },
+  },
+  {
+    test: /experience|work|job|career|intern|achievement/i,
+    text: "Naresh’s experience includes a Machine Learning Trainee role at SkillDzire (January–May 2025), an AI–DevOps Engineer role at Aitch Nu Global Technologies (May–December 2024), and work as a Hardware and Network Technician at Shree Nandi Computer Institute (September 2015–May 2016). In his AI–DevOps role, he developed CI/CD workflows, containerized applications with Docker, and worked with AWS and Linux deployments.",
+    source: { label: "Work experience", href: "#experience" },
+  },
+  {
+    test: /education|degree|college|study|cgpa|gpa|diploma/i,
+    text: "Naresh earned a Bachelor of Engineering in Computer Science and Engineering from Brindavan College of Engineering, where he studied from 2022 to 2025 and graduated with a CGPA of 8.31/10.0. He previously completed a Diploma in Computer Science and Engineering at Al Khateeb Polytechnic College (2016–2020; CGPA 7.5/10.0).",
+    source: { label: "Education & certifications", href: "#education" },
+  },
+  {
+    test: /project|built|portfolio|strongest|best|machine learning|ai|computer vision|application/i,
+    text: "Selected projects include a real-time object detection system built with Python, OpenCV, and YOLOv8; a heart disease prediction model reported at 88% accuracy; a COVID-19 detection project evaluating 11 machine-learning models; a browser-based game platform; and an IoT fishing-boat safety system. Additional work includes a student feedback system, a web music player, and a poker game collection.",
+    source: { label: "Browse projects", href: "#projects" },
+  },
+  {
+    test: /about|background|who|introduce|summary|strength/i,
+    text: "Naresh Rana is a Computer Science and Engineering graduate based in Bengaluru, India. His work focuses on practical software development, machine learning, and DevOps, with experience across machine-learning projects, CI/CD, Docker, AWS, Linux, and full-stack applications. Explore the portfolio for examples of his projects and experience.",
+    source: { label: "About Naresh", href: "#about" },
+  },
+]
 
-  if (/contact|email|phone|reach|hire|available|availability/.test(q)) {
-    if (/available|availability/.test(q)) {
-      return "Availability details aren’t listed on this portfolio. You can reach Naresh at nareshrana2.nr@gmail.com or +91 6363830414 to discuss an opportunity."
-    }
-    return "You can contact Naresh by email at nareshrana2.nr@gmail.com or call +91 6363830414. He is based in Bengaluru, India."
+function answerLocally(question: string) {
+  const match = localAnswers.find((entry) => entry.test.test(question))
+  if (match) return { text: match.text, source: match.source }
+  return {
+    text: "I can provide information about Naresh’s projects, technical skills, professional experience, education, certifications, and contact details. Please ask about one of these areas or choose a topic below.",
+    source: undefined,
   }
-  if (/skill|technology|tech stack|tools|language/.test(q)) {
-    return "His listed skills include Python, Java, C++, SQL, data structures and algorithms, object-oriented programming, TensorFlow, OpenCV, scikit-learn, Pandas, NumPy, MongoDB, PostgreSQL, MySQL, AWS, Docker, GitHub Actions, Linux, Git, GitHub, VS Code, Cursor, and Claude."
-  }
-  if (/experience|work|job|career|intern/.test(q)) {
-    return "Naresh worked as a Machine Learning Trainee at SkillDzire (Jan–May 2025), an AI–DevOps Engineer at Aitch Nu Global Technologies (May–Dec 2024), and a Hardware and Network Technician at Shree Nandi Computer Institute (Sep 2015–May 2016). Details are in the Work Experience section."
-  }
-  if (/education|degree|college|study|cgpa|gpa|diploma/.test(q)) {
-    return "Naresh completed a Bachelor of Engineering in Computer Science and Engineering at Brindavan College of Engineering (CGPA 8.31/10.0, 2022–2025). He also holds a Diploma in Computer Science and Engineering from Al Khateeb Polytechnic College (CGPA 7.5/10.0, 2016–2020)."
-  }
-  if (/project|built|portfolio|strongest|best/.test(q)) {
-    return "The portfolio features Real-Time Object Detection (Python, OpenCV, YOLOv8), Heart Disease Prediction, COVID-19 Detection, Game Zone, Fishing Boat Safety System, Student Feedback System, Now Player, and Poker Game Collection. Open the Projects section for descriptions and repository links."
-  }
-  if (/about|background|who|introduce|summary/.test(q)) {
-    return "Naresh Rana is a Computer Science and Engineering graduate focused on practical software, machine learning, and DevOps. His portfolio highlights projects, work experience, skills, education, and certifications."
-  }
-  return "I can answer questions using the information on this portfolio about Naresh’s projects, skills, experience, education, and contact details. Try one of the suggested questions below."
+}
+
+function sourceFor(question: string): Message["source"] {
+  if (/contact|email|phone|hire/i.test(question)) return { label: "Contact Naresh", href: "mailto:nareshrana2.nr@gmail.com" }
+  if (/skill|technology|tool|language/i.test(question)) return { label: "Explore skills", href: "#skills" }
+  if (/experience|work|job|career/i.test(question)) return { label: "Work experience", href: "#experience" }
+  if (/education|degree|college|certification/i.test(question)) return { label: "Education & certifications", href: "#education" }
+  if (/project|built|portfolio|machine learning|ai/i.test(question)) return { label: "Browse projects", href: "#projects" }
+  return { label: "About Naresh", href: "#about" }
+}
+
+function TypingIndicator() {
+  return (
+    <motion.div className="ask-message ask-message-assistant ask-typing-row" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }}>
+      <span className="ask-bot-icon"><Bot aria-hidden="true" /></span>
+      <div className="ask-typing" role="status" aria-label="Assistant is thinking">
+        <span /><span /><span /><small>Thinking through the portfolio</small>
+      </div>
+    </motion.div>
+  )
 }
 
 export default function AskSection() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 0,
-      role: "assistant",
-      text: "Hi! I’m the portfolio guide. Ask me about Naresh’s background, projects, skills, experience, or how to get in touch.",
-    },
-  ])
+  const [messages, setMessages] = useState<Message[]>([welcome])
   const [question, setQuestion] = useState("")
-  const bottomRef = useRef<HTMLDivElement>(null)
+  const [mode, setMode] = useState<Mode>("checking")
+  const [busy, setBusy] = useState(false)
+  const [copiedId, setCopiedId] = useState<number | null>(null)
+  const [feedback, setFeedback] = useState<Record<number, "up" | "down">>({})
+  const messagesRef = useRef<HTMLDivElement>(null)
   const nextId = useRef(1)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
-    if (messages.length <= 1) return
-    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
-  }, [messages])
+    let cancelled = false
+    fetch("/api/ask", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : { mode: "local" })
+      .then((result: { mode?: string }) => { if (!cancelled) setMode(result.mode === "ai" ? "ai" : "local") })
+      .catch(() => { if (!cancelled) setMode("local") })
+    return () => { cancelled = true }
+  }, [])
 
-  const ask = (rawQuestion: string) => {
-    const text = rawQuestion.trim()
-    if (!text) return
-    const id = nextId.current
-    nextId.current += 2
-    setMessages((current) => [
-      ...current,
-      { id, role: "visitor", text },
-      { id: id + 1, role: "assistant", text: answerFor(text) },
-    ])
+  useEffect(() => {
+    const messagesElement = messagesRef.current
+    if (messagesElement) {
+      messagesElement.scrollTo({
+        top: messagesElement.scrollHeight,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      })
+    }
+  }, [messages, busy, prefersReducedMotion])
+
+  const ask = useCallback(async (rawQuestion: string) => {
+    const text = rawQuestion.trim().slice(0, 500)
+    if (!text || busy) return
+
+    const userMessage: Message = { id: nextId.current++, role: "user", text }
+    const priorMessages = messages.filter((message) => message.id !== 0).slice(-10)
+    const updatedMessages = [...messages, userMessage]
+    setMessages(updatedMessages)
     setQuestion("")
-  }
+    setBusy(true)
+
+    let response = answerLocally(text)
+    if (mode === "ai") {
+      try {
+        const apiResponse = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [...priorMessages, userMessage].map(({ role, text: content }) => ({ role, content })),
+          }),
+        })
+        if (!apiResponse.ok) throw new Error("AI service is unavailable")
+        const result = await apiResponse.json() as { answer?: string }
+        if (result.answer?.trim()) response = { text: result.answer.trim(), source: sourceFor(text) }
+      } catch {
+        response = {
+          ...answerLocally(text),
+          text: `${answerLocally(text).text}\n\nThe AI service is temporarily unavailable, so this response is based on the portfolio information available here.`,
+        }
+      }
+    } else {
+      await new Promise((resolve) => window.setTimeout(resolve, 380))
+    }
+
+    setMessages((current) => [...current, { id: nextId.current++, role: "assistant", ...response, replyTo: text }])
+    setBusy(false)
+  }, [busy, messages, mode])
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    ask(question)
+    void ask(question)
+  }
+
+  const copyMessage = async (message: Message) => {
+    try {
+      await navigator.clipboard.writeText(message.text)
+      setCopiedId(message.id)
+      window.setTimeout(() => setCopiedId((current) => current === message.id ? null : current), 1500)
+    } catch { /* Clipboard access can be blocked in an insecure context. */ }
   }
 
   return (
@@ -83,65 +192,82 @@ export default function AskSection() {
       <div className="ask-wrap">
         <motion.div
           className="ask-heading"
-          initial={{ opacity: 0, y: 16 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.45 }}
+          transition={{ duration: .45 }}
         >
           <span className="ask-index">06 / ASK THE PORTFOLIO</span>
           <h2>Ask <span>Naresh</span></h2>
-          <p>Want a quick answer? Ask about Naresh’s projects, experience, skills, or education. Replies use information published on this portfolio.</p>
         </motion.div>
 
         <motion.div
           className="ask-panel"
-          initial={{ opacity: 0, y: 20, scale: .99 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 20, scale: .99 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: .5, delay: .08 }}
         >
           <div className="ask-panel-topbar">
-            <span className="ask-status"><i /> NARESH.RANA · PORTFOLIO GUIDE</span>
-            <span className="ask-grounded"><Sparkles aria-hidden="true" /> SITE CONTENT</span>
+            <span className={`ask-status ask-status-${mode}`}><i /> {mode === "ai" ? "NARESH.RANA · AI ASSISTANT" : mode === "checking" ? "CONNECTING ASSISTANT" : "NARESH.RANA · PORTFOLIO GUIDE"}</span>
+            <span className="ask-grounded"><Sparkles aria-hidden="true" /> {mode === "ai" ? "AI + PORTFOLIO" : "PORTFOLIO KNOWLEDGE"}</span>
           </div>
 
-          <div className="ask-messages" aria-live="polite" aria-label="Conversation">
-            {messages.map((message) => (
-              <motion.div
-                key={message.id}
-                className={`ask-message ask-message-${message.role}`}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: .2 }}
-              >
-                {message.role === "assistant" && <span className="ask-bot-icon"><Bot aria-hidden="true" /></span>}
-                <p>{message.text}</p>
-              </motion.div>
-            ))}
-            <div ref={bottomRef} />
+          <div ref={messagesRef} className="ask-messages" aria-live="polite" aria-relevant="additions text" aria-label="Conversation">
+            <AnimatePresence initial={false}>
+              {messages.map((message) => (
+                <motion.div
+                  key={message.id}
+                  className={`ask-message ask-message-${message.role}`}
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 10, scale: .985 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={prefersReducedMotion ? undefined : { opacity: 0, y: -5 }}
+                  transition={{ duration: .22, ease: "easeOut" }}
+                >
+                  {message.role === "assistant" && <span className="ask-bot-icon"><Bot aria-hidden="true" /></span>}
+                  <div className="ask-message-content">
+                    <p>{message.text}</p>
+                    {message.role === "assistant" && message.source && <a className="ask-source-link" href={message.source.href}>{message.source.label}<ExternalLink aria-hidden="true" /></a>}
+                    {message.role === "assistant" && message.id !== 0 && (
+                      <div className="ask-message-tools" aria-label="Answer options">
+                        <button type="button" onClick={() => void copyMessage(message)} aria-label="Copy answer" title="Copy answer">{copiedId === message.id ? <Check /> : <Copy />}</button>
+                        {message.replyTo && <button type="button" onClick={() => void ask(message.replyTo!)} aria-label="Retry this question" title="Try again"><RotateCw /></button>}
+                        <button type="button" onClick={() => setFeedback((current) => ({ ...current, [message.id]: "up" }))} className={feedback[message.id] === "up" ? "is-selected" : ""} aria-label="This answer was helpful" title="Helpful"><ThumbsUp /></button>
+                        <button type="button" onClick={() => setFeedback((current) => ({ ...current, [message.id]: "down" }))} className={feedback[message.id] === "down" ? "is-selected" : ""} aria-label="This answer was not helpful" title="Not helpful"><ThumbsDown /></button>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+              {busy && <TypingIndicator key="typing" />}
+            </AnimatePresence>
           </div>
 
           <div className="ask-compose">
-            <div className="ask-prompts" aria-label="Suggested questions">
-              {prompts.map((prompt) => (
-                <button key={prompt} type="button" onClick={() => ask(prompt)}>{prompt}<ArrowUpRight aria-hidden="true" /></button>
-              ))}
-            </div>
+            {!busy && (
+              <div className="ask-follow-up" aria-label="Suggested follow-up">
+                <WandSparkles aria-hidden="true" /><span>Keep exploring</span>
+                {topics.map((topic) => (
+                  <button key={topic.label} type="button" onClick={() => void ask(topic.question)} disabled={busy}>{topic.label}<ArrowUpRight aria-hidden="true" /></button>
+                ))}
+              </div>
+            )}
             <form className="ask-form" onSubmit={handleSubmit}>
               <label className="sr-only" htmlFor="ask-question">Ask about Naresh</label>
               <input
                 id="ask-question"
                 value={question}
-                onChange={(event) => setQuestion(event.target.value)}
-                placeholder="Ask about Naresh’s projects, skills, or experience…"
+                onChange={(event) => setQuestion(event.target.value.slice(0, 500))}
+                placeholder="Ask anything about Naresh’s portfolio…"
                 autoComplete="off"
+                maxLength={500}
+                disabled={busy}
               />
-              <button type="submit" aria-label="Send question" disabled={!question.trim()}>
-                <span>Ask</span><Send aria-hidden="true" />
+              <button type="submit" aria-label="Send question" disabled={!question.trim() || busy}>
+                {busy ? <LoaderCircle className="ask-send-spinner" aria-hidden="true" /> : <><span>Ask</span><Send aria-hidden="true" /></>}
               </button>
             </form>
           </div>
-          <div className="ask-panel-foot"><span>GROUNDED IN THIS PORTFOLIO</span><span>NO EXTERNAL AI SERVICE</span></div>
         </motion.div>
       </div>
       <SectionNext targetId="home" targetLabel="top" backToTop />
