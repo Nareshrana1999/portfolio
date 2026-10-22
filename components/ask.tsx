@@ -21,52 +21,123 @@ type Mode = "checking" | "ai" | "local"
 const welcome: Message = {
   id: 0,
   role: "assistant",
-  text: "Hello. I can provide information about Naresh’s projects, technical skills, professional experience, education, and contact details. What would you like to know?",
+  text: "Hi, I’m Naresh’s portfolio assistant. I can help with his background, projects, experience, technical skills, education, and professional links. I can also provide a concise recruiter summary. What would you like to know?",
 }
 
 const topics = [
-  { label: "About me", question: "Tell me about Naresh’s background and what he focuses on." },
+  { label: "About", question: "Tell me about Naresh’s background and professional strengths." },
   { label: "Projects", question: "Show me Naresh’s AI and software projects." },
   { label: "Experience", question: "Summarize Naresh’s work experience and impact." },
   { label: "Skills", question: "What technologies does Naresh work with?" },
-  { label: "Education", question: "Tell me about Naresh’s education and certifications." },
-  { label: "Contact", question: "How can I contact or hire Naresh?" },
+  { label: "Education", question: "Summarize Naresh’s academic background." },
+  { label: "Contact", question: "How can I contact Naresh or view his professional links?" },
+  { label: "Recruiters", question: "Give me a concise recruiter summary of Naresh’s profile and relevant roles." },
 ]
 
 const localAnswers: Array<{ test: RegExp; text: string; source: Message["source"] }> = [
   {
+    test: /education.*certification|certification.*education/i,
+    text: "Naresh completed a Bachelor of Engineering in Computer Science and Engineering at Brindavan College of Engineering, affiliated with Visvesvaraya Technological University (February 2022–July 2025; CGPA 8.31/10). He also earned a Diploma in Computer Science and Engineering from Al Khateeb Polytechnic College (August 2016–May 2020; CGPA 7.5/10). His recorded credentials include Machine Learning Specialist (SkillDzire, 2025), Oracle Cloud Infrastructure AI Foundations Associate (2025), Microsoft Azure AI Essentials Professional Certificate (2025), AI–DevOps Engineer (Aitch Nu Global Technologies, 2024), Fiber Optic Communication System Certification (National Skill Training Institute, 2019), and Hardware & Networking Certification (Shree Nandi Computer Institute, 2016).",
+    source: { label: "Education", href: "#education" },
+  },
+  {
     test: /contact|email|phone|reach|hire|available|availability/i,
-    text: "Naresh is based in Bengaluru, India. For professional inquiries, contact him at nareshrana2.nr@gmail.com or +91 6363830414. His current availability is not specified in the portfolio; please reach out directly to discuss opportunities.",
+    text: "Naresh is based in Bengaluru, India. For professional inquiries, email nareshrana2.nr@gmail.com or call +91 6363830414. His portfolio links include GitHub (github.com/nareshrana1999) and LinkedIn (linkedin.com/in/nareshrana1999). The site also provides a résumé download. His current availability is not specified; please contact him directly to discuss an opportunity.",
     source: { label: "Contact Naresh", href: "mailto:nareshrana2.nr@gmail.com" },
   },
   {
     test: /certification|certificate/i,
-    text: "The portfolio lists certifications and training from SkillDzire, Oracle Cloud Infrastructure, Microsoft and LinkedIn Learning, GitHub, Docker, Aitch Nu Global Technologies, and the National Skill Training Institute. See the education section for further details.",
-    source: { label: "Education & certifications", href: "#education" },
+    text: "Naresh’s recorded credentials include the Machine Learning Specialist certification from SkillDzire (2025), Oracle Cloud Infrastructure AI Foundations Associate (2025), Microsoft Azure AI Essentials Professional Certificate (2025), AI–DevOps Engineer certification from Aitch Nu Global Technologies (2024), Fiber Optic Communication System Certification from the National Skill Training Institute (2019), and Hardware & Networking Certification from Shree Nandi Computer Institute (2016).",
+    source: { label: "Browse credentials", href: "/certifications/machine-learning-specialist" },
   },
   {
-    test: /skill|technology|tech stack|tools|language/i,
-    text: "Naresh’s technical toolkit includes Python, Java, C++, JavaScript, SQL, TensorFlow, OpenCV, scikit-learn, Pandas, and NumPy. He also works with MongoDB, PostgreSQL, MySQL, AWS, Docker, GitHub Actions, Linux, and Git. His core foundations include data structures and algorithms, object-oriented programming, databases, operating systems, and computer networks.",
+    test: /spoken language|speak|languages does|language does he speak/i,
+    text: "The portfolio lists English, Hindi, Kannada, and Nepali.",
+    source: { label: "About Naresh", href: "#about" },
+  },
+  {
+    test: /leadership|football|kabaddi|aicte|activity points|community service/i,
+    text: "The portfolio notes that Naresh served as a football team captain and kabaddi vice-captain. It also records 450+ AICTE activity points earned through community service, sustainability, and digital awareness initiatives.",
+    source: { label: "About Naresh", href: "#about" },
+  },
+  {
+    test: /recruiter|suitable roles?|roles? is he suited|best fit|role match|strongest areas/i,
+    text: "Naresh is a Computer Science and Engineering graduate (CGPA 8.31/10) with experience in machine learning, AI–DevOps, and hardware and networking. His background includes Python-based ML projects, CI/CD and Docker workflows, AWS and Linux deployments, and full-stack applications. Relevant opportunities to consider include junior software engineering, Python development, machine learning, and junior DevOps or cloud roles; fit depends on each role’s requirements.",
+    source: { label: "Experience", href: "#experience" },
+  },
+  {
+    test: /resume|résumé|\bcv\b/i,
+    text: "Naresh’s résumé is available from the portfolio homepage. Use the link below to open the current résumé file.",
+    source: { label: "Download résumé", href: "https://drive.google.com/file/d/1lqwqs_kSa1meQUFlkjB_pDUxVDdX052t/view?usp=drive_link" },
+  },
+  {
+    test: /github|repository|repo|linkedin|leetcode|professional links/i,
+    text: "Naresh’s professional profiles are GitHub at github.com/nareshrana1999, LinkedIn at linkedin.com/in/nareshrana1999, and LeetCode at leetcode.com/u/Nareshrana1999.",
+    source: { label: "GitHub profile", href: "https://github.com/nareshrana1999" },
+  },
+  {
+    test: /portfolio website|his portfolio|portfolio link|website link/i,
+    text: "Naresh’s portfolio is available at naresh-rana-1999.vercel.app.",
+    source: { label: "Open portfolio", href: "https://naresh-rana-1999.vercel.app" },
+  },
+  {
+    test: /what did he do at skilldzire|skilldzire|machine learning trainee/i,
+    text: "As a Machine Learning Trainee at SkillDzire from January to May 2025, Naresh developed 8+ machine-learning and deep-learning projects using Python, scikit-learn, and TensorFlow. The documented work includes object detection, COVID-19 detection, and heart disease prediction, as well as data preprocessing, feature engineering, model training, and evaluation.",
+    source: { label: "Work experience", href: "#experience" },
+  },
+  {
+    test: /devops experience|what did he do at aitch|aitch nu|ci\/cd|docker experience/i,
+    text: "At Aitch Nu Global Technologies (May–December 2024), Naresh worked on CI/CD pipelines and automated deployments with GitHub Actions, containerized applications with Docker, and supported deployments in AWS and Linux environments.",
+    source: { label: "Work experience", href: "#experience" },
+  },
+  {
+    test: /hardware|network technician|shree nandi/i,
+    text: "At Shree Nandi Computer Institute (September 2015–May 2016), Naresh assembled, configured, and upgraded desktop computers; installed Windows, drivers, software, and peripherals; and troubleshot hardware and network issues.",
+    source: { label: "Work experience", href: "#experience" },
+  },
+  {
+    test: /object detection/i,
+    text: "The Real-Time Object Detection project detects and tracks objects in images and live video using Python, OpenCV, and YOLOv8. The portfolio does not document exact performance results or model configuration, so those details should not be assumed.",
+    source: { label: "Browse projects", href: "#projects" },
+  },
+  {
+    test: /fishing boat|boat safety/i,
+    text: "The Fishing Boat Safety System is an IoT project focused on location tracking, accident detection, and emergency alerts. The portfolio does not specify the hardware or communication modules, so I can’t confirm those implementation details.",
+    source: { label: "Browse projects", href: "#projects" },
+  },
+  {
+    test: /heart disease|clinically|medical advice/i,
+    text: "The Heart Disease Prediction project uses patient health parameters and machine-learning methods to assess potential risk. The portfolio reports an 88% model accuracy figure, but does not establish clinical validation; it should not be treated as a diagnostic tool or medical advice.",
+    source: { label: "Browse projects", href: "#projects" },
+  },
+  {
+    test: /programming language/i,
+    text: "The programming languages listed in Naresh’s portfolio are Python, Java, C++, and SQL. His web development toolkit also includes JavaScript, HTML, CSS, React, and Node.js.",
+    source: { label: "Explore skills", href: "#skills" },
+  },
+  {
+    test: /skill|technolog(?:y|ies)|tech stack|tools|language/i,
+    text: "Naresh’s toolkit spans Python, Java, C++, JavaScript, and SQL; machine learning and computer vision with TensorFlow, scikit-learn, OpenCV, Pandas, and NumPy; and databases and deployment tools including MongoDB, PostgreSQL, MySQL, AWS, Docker, Linux, Git, and GitHub Actions. His computer science foundations include data structures and algorithms, object-oriented programming, databases, operating systems, and computer networks.",
     source: { label: "Explore skills", href: "#skills" },
   },
   {
     test: /experience|work|job|career|intern|achievement/i,
-    text: "Naresh’s experience includes a Machine Learning Trainee role at SkillDzire (January–May 2025), an AI–DevOps Engineer role at Aitch Nu Global Technologies (May–December 2024), and work as a Hardware and Network Technician at Shree Nandi Computer Institute (September 2015–May 2016). In his AI–DevOps role, he developed CI/CD workflows, containerized applications with Docker, and worked with AWS and Linux deployments.",
+    text: "Naresh has worked as a Machine Learning Trainee at SkillDzire (January–May 2025), an AI–DevOps Engineer at Aitch Nu Global Technologies (May–December 2024), and a Hardware and Network Technician at Shree Nandi Computer Institute (September 2015–May 2016). At SkillDzire, he completed 8+ machine-learning and deep-learning projects. At Aitch Nu, he built CI/CD workflows and containerized 5+ applications with Docker, supporting deployments in AWS and Linux environments.",
     source: { label: "Work experience", href: "#experience" },
   },
   {
-    test: /education|degree|college|study|cgpa|gpa|diploma/i,
-    text: "Naresh earned a Bachelor of Engineering in Computer Science and Engineering from Brindavan College of Engineering, where he studied from 2022 to 2025 and graduated with a CGPA of 8.31/10.0. He previously completed a Diploma in Computer Science and Engineering at Al Khateeb Polytechnic College (2016–2020; CGPA 7.5/10.0).",
-    source: { label: "Education & certifications", href: "#education" },
+    test: /education|academic|qualification|degree|college|study|cgpa|gpa|diploma|university/i,
+    text: "Naresh completed a Bachelor of Engineering in Computer Science and Engineering at Brindavan College of Engineering, affiliated with Visvesvaraya Technological University (February 2022–July 2025), with a CGPA of 8.31/10. He previously earned a Diploma in Computer Science and Engineering from Al Khateeb Polytechnic College (August 2016–May 2020), with a CGPA of 7.5/10.",
+    source: { label: "Education", href: "#education" },
   },
   {
     test: /project|built|portfolio|strongest|best|machine learning|ai|computer vision|application/i,
-    text: "Selected projects include a real-time object detection system built with Python, OpenCV, and YOLOv8; a heart disease prediction model reported at 88% accuracy; a COVID-19 detection project evaluating 11 machine-learning models; a browser-based game platform; and an IoT fishing-boat safety system. Additional work includes a student feedback system, a web music player, and a poker game collection.",
+    text: "Selected work includes a real-time object detection system using Python, OpenCV, and YOLOv8; a heart disease prediction model reported at 88% accuracy; and a COVID-19 prediction project evaluated across 11 machine-learning models. Other projects include a browser-based game platform, an IoT fishing-boat safety system, a student feedback application, a web music player, and a poker game collection.",
     source: { label: "Browse projects", href: "#projects" },
   },
   {
     test: /about|background|who|introduce|summary|strength/i,
-    text: "Naresh Rana is a Computer Science and Engineering graduate based in Bengaluru, India. His work focuses on practical software development, machine learning, and DevOps, with experience across machine-learning projects, CI/CD, Docker, AWS, Linux, and full-stack applications. Explore the portfolio for examples of his projects and experience.",
+    text: "Naresh Rana is a Computer Science and Engineering graduate based in Bengaluru, India. He focuses on building practical software across machine learning, DevOps, and full-stack development. His experience includes applied ML projects, CI/CD workflows, and deployments using Docker, AWS, and Linux. The portfolio also lists communication, teamwork, and problem-solving strengths, as well as football and kabaddi leadership roles.",
     source: { label: "About Naresh", href: "#about" },
   },
 ]
@@ -75,16 +146,23 @@ function answerLocally(question: string) {
   const match = localAnswers.find((entry) => entry.test.test(question))
   if (match) return { text: match.text, source: match.source }
   return {
-    text: "I can provide information about Naresh’s projects, technical skills, professional experience, education, certifications, and contact details. Please ask about one of these areas or choose a topic below.",
+    text: "I can help with Naresh’s background, projects, work history, technical skills, education, credentials, or professional links. For information beyond the portfolio, I’ll say when it isn’t documented. Try one of the suggested topics below.",
     source: undefined,
   }
 }
 
 function sourceFor(question: string): Message["source"] {
+  if (/certification|certificate/i.test(question)) return { label: "Browse credentials", href: "/certifications/machine-learning-specialist" }
+  if (/portfolio website|his portfolio|portfolio link|website link/i.test(question)) return { label: "Open portfolio", href: "https://naresh-rana-1999.vercel.app" }
+  if (/github|repository|repo/i.test(question)) return { label: "GitHub profile", href: "https://github.com/nareshrana1999" }
+  if (/linkedin/i.test(question)) return { label: "LinkedIn profile", href: "https://linkedin.com/in/nareshrana1999" }
+  if (/leetcode/i.test(question)) return { label: "LeetCode profile", href: "https://leetcode.com/u/Nareshrana1999" }
+  if (/resume|résumé|\bcv\b/i.test(question)) return { label: "Download résumé", href: "https://drive.google.com/file/d/1lqwqs_kSa1meQUFlkjB_pDUxVDdX052t/view?usp=drive_link" }
+  if (/recruiter|suitable roles?|roles? is he suited|best fit|role match|strongest areas/i.test(question)) return { label: "Experience", href: "#experience" }
   if (/contact|email|phone|hire/i.test(question)) return { label: "Contact Naresh", href: "mailto:nareshrana2.nr@gmail.com" }
-  if (/skill|technology|tool|language/i.test(question)) return { label: "Explore skills", href: "#skills" }
+  if (/skill|technolog(?:y|ies)|tech stack|tool|language/i.test(question)) return { label: "Explore skills", href: "#skills" }
   if (/experience|work|job|career/i.test(question)) return { label: "Work experience", href: "#experience" }
-  if (/education|degree|college|certification/i.test(question)) return { label: "Education & certifications", href: "#education" }
+  if (/education|academic|qualification|degree|college|certification/i.test(question)) return { label: "Education", href: "#education" }
   if (/project|built|portfolio|machine learning|ai/i.test(question)) return { label: "Browse projects", href: "#projects" }
   return { label: "About Naresh", href: "#about" }
 }
@@ -94,7 +172,7 @@ function TypingIndicator() {
     <motion.div className="ask-message ask-message-assistant ask-typing-row" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }}>
       <span className="ask-bot-icon"><Bot aria-hidden="true" /></span>
       <div className="ask-typing" role="status" aria-label="Assistant is thinking">
-        <span /><span /><span /><small>Thinking through the portfolio</small>
+        <span /><span /><span /><small>Preparing a concise answer</small>
       </div>
     </motion.div>
   )
@@ -223,7 +301,7 @@ export default function AskSection() {
                   {message.role === "assistant" && <span className="ask-bot-icon"><Bot aria-hidden="true" /></span>}
                   <div className="ask-message-content">
                     <p>{message.text}</p>
-                    {message.role === "assistant" && message.source && <a className="ask-source-link" href={message.source.href}>{message.source.label}<ExternalLink aria-hidden="true" /></a>}
+                    {message.role === "assistant" && message.source && <a className="ask-source-link" href={message.source.href} target={message.source.href.startsWith("http") ? "_blank" : undefined} rel={message.source.href.startsWith("http") ? "noopener noreferrer" : undefined}>{message.source.label}<ExternalLink aria-hidden="true" /></a>}
                   </div>
                 </motion.div>
               ))}

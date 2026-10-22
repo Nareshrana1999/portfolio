@@ -3858,3 +3858,42 @@ html.light #home .hero-contact-links .hero-contact-phone { border-color:rgba(92,
   #home .hero-contact-links a:hover { transform:none; }
 }
 
+/* Mobile hero: scale the portrait and type up, and center the composition in the available viewport. */
+@media (max-width:639px) {
+  #home.hero-section {
+    min-height:100svh !important;
+    min-height:100dvh !important;
+    justify-content:center !important;
+    padding:calc(4.25rem + env(safe-area-inset-top)) 1rem max(.85rem,env(safe-area-inset-bottom)) !important;
+  }
+  #home .hero-shell {
+    width:min(100%,34rem) !important;
+    grid-template-columns:minmax(0,1fr) minmax(7.5rem,35vw) !important;
+    column-gap:clamp(.65rem,3vw,1rem) !important;
+    row-gap:clamp(.45rem,1.8svh,.85rem) !important;
+    align-content:center;
+  }
+  #home .hero-heading-group { gap:clamp(.4rem,2vw,.7rem) !important; }
+  #home .hero-heading-group .hero-title { font-size:clamp(3.45rem,15.5vw,4.8rem) !important; line-height:.9 !important; }
+  #home .hero-heading-group .hero-role { font-size:clamp(.88rem,3.7vw,1.08rem) !important; line-height:1.42 !important; }
+  #home .hero-visual {
+    grid-row:3 / span 2 !important;
+    width:100% !important;
+    max-width:min(11rem,36vw) !important;
+    align-self:center !important;
+    margin:0 auto !important;
+    padding:.1rem .25rem .45rem !important;
+  }
+  #home .hero-copy .hero-description { font-size:clamp(.88rem,3.2vw,1rem) !important; line-height:1.65 !important; }
+  #home .hero-actions { margin-top:.55rem !important; }
+  #home .hero-link-row { margin-top:.4rem !important; }
+  #home .hero-bottomline { margin-top:clamp(.75rem,2svh,1.15rem) !important; }
+}
+
+@media (max-width:850px) and (orientation:landscape) {
+  #home.hero-section { min-height:100svh !important; min-height:100dvh !important; padding-top:4.5rem !important; padding-bottom:.75rem !important; }
+  #home .hero-shell { row-gap:.25rem !important; }
+  #home .hero-visual { max-width:min(8.5rem,25vw) !important; }
+  #home .hero-bottomline { margin-top:.55rem !important; }
+}
+
